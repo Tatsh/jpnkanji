@@ -12,6 +12,8 @@ include '/WWW/headers.php';
 include_once 'deconjfun.php';
 include_once 'kanjisqlfun.php';
 
+$hdrs .= '<meta name="robots" content="nofollow">';
+
 $stylext .= 'TH.jpoz{background:#CCCCCC}'.
             'TD.jpdat{background:#EEEEEE}'.
             'SPAN.debug{color:#60C0EE;font-size:80%}'.

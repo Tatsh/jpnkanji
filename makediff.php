@@ -4,7 +4,7 @@
 # The same program is used in many different projects to create
 # a diff file version history (patches).
 #
-# makediff.php version 3.0.3
+# makediff.php version 3.0.4
 
 # Copyright (C) 2000,2002 Bisqwit (http://bisqwit.iki.fi/)
 
@@ -12,7 +12,7 @@
 
 # argv[1]: Newest archive if any
 # argv[2]: Archive directory if any
-# argv[3]: Disable /WWW/src linking if set
+# argv[3]: Disable /WWW/src/arch linking if set
 
 function ShellFix($s)
 {
@@ -341,7 +341,7 @@ function MakePatch($progname, $v1, $v2, $paks1, $paks2)
   global $argv;
   if(!$argv[3])
   {
-    $cmd = 'ln -f '.shellfix($patchname).'.{gz,bz2} /WWW/src/';
+    $cmd = 'ln -f '.shellfix($patchname).'.{gz,bz2} /WWW/src/arch/';
     print "\t$cmd\n";
     exec($cmd);
   }

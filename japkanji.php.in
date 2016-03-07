@@ -188,32 +188,35 @@ function DispSearchFailure($s)
   global $REQUEST_URI;
   
   echo "Search '", htmlspecialchars($s), "' caused no hits.<br>";
-  echo '<p>';
-  echo 'The word must be the basic form. Are you sure it is? ',
-       'Try to <a href="http://kanjidict.stc.cx/deconj=',
-           urlencode($s), '">deconjugate it</a>.';
   if(ereg(' [^ ]+ ', $s))
   {
-    print '<p>This is a <em>dictionary</em>, not a translator.
-              This program does not anything about the grammar rules of
-              English or Japanese, and can not translate sentences.
-              Input only words in their dictionary form.';
+    echo '<p class="whatisdict">',
+         'This is a <em>dictionary</em>, not a translator.
+         This program does not know anything about the grammar rules
+         of English or Japanese, and can not translate sentences.
+         Input only words in their dictionary form.</p>';
   }
+
+  echo '<p class="mustbebasic">',
+       'The word must be the basic form. Are you sure it is? ',
+       'Try to <a href="http://kanjidict.stc.cx/deconj=',
+           urlencode($s), '">deconjugate it</a>.</p>';
+
   if(strlen($s) && ord($s[0]) >= 0xA0)
   {
-    echo '<p>';
-    echo 'Is ', htmlspecialchars($s), ' kanji? ',
+    echo '<p class="isitkanji">',
+         'Is ', htmlspecialchars($s), ' kanji? ',
          'Perhaps there is some ',
          '<a href="',urlencode($s),'">',
          'information</a> available of it in ',
-         '<a href="search">Kanjisearch</a>.';
+         '<a href="search">Kanjisearch</a>.</p>';
   }
   if(!$inset && ereg_replace('[a-zA-Z]', '', $s) != '')
   {
-    echo '<p>';
-    echo 'If you copypasted the link parameters from a web page of non-utf8-coding, ',
+    echo '<p class="perhapscoding">',
+         'If you copypasted the link parameters from a web page of non-utf8-coding, ',
          'this could be because of a character set conflict. ',
-         'Please select your input character set:<p>';
+         'Please select your input character set:</p>';
     print '<ul>';
     foreach(array('unihtml'   => '&#-codes',
                   'shift_jis' => 'Microsoft JIS coding',

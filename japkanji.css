@@ -79,3 +79,18 @@ TD.english {background:#C0C0C0;horizontal-align:left}
 TABLE.korealist {border:1px dashed black;background:#A0A0A0}
 TH.korealist {background:#E0E0E0;horizontal-align:right}
 TD.korealist {background:#C0C0C0;horizontal-align:left}
+
+P.whatisdict
+{
+  font-size:110%;
+  color:#A00
+}
+P.mustbebasic
+{
+}
+P.isitkanji
+{
+}
+P.perhapscoding
+{
+}

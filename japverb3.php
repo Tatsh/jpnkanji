@@ -16,6 +16,8 @@ $stylext .= 'TH.jpoz{background:#CCCCCC}'.
             'SPAN.info{font-size:75%}'.
             'SPAN.fail{color:#A00070}';
 
+$hdrs .= '<meta name="robots" content="nofollow">';
+
 require 'deconjfun.php';
 require 'kanjisqlfun.php';
 

@@ -26,7 +26,7 @@ require 'unique2.php';
 include '/WWW/headers.php';
 
 $hdrs .= '<meta http-equiv="Content-Type" content="text-html; charset=utf-8">'.
-         '<meta name="robots" content="nofollow">';
+         '<meta name="robots" content="nofollow,noindex">';
 
 $pagetitle = 'Kanjisearch';
 
