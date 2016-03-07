@@ -91,9 +91,10 @@ function StartSlowLoading()
 
 function EndSlowLoading()
 {
+  global $SLOWLOADING_MAGIC;
   $file = $_SERVER['SCRIPT_FILENAME'];
   $req  = $_SERVER['REQUEST_URI'];
-  $key = sprintf('%08X', crc32($req));
+  $key = sprintf('%08X%08X', crc32($req), crc32(serialize($SLOWLOADING_MAGIC)));
   $fn = '/dev/shm/slowloading/'.$key;
   
   $headers = null;

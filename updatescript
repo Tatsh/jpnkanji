@@ -13,7 +13,10 @@ done
 # GZIP-files
 for gzfile in edict enamdict kanjidic engscidic j_places geodic compverb 4jwords compdic; do
 
-    wget "$SITE"/"$gzfile".gz -O"$gzfile".new && gzip -d < "$gzfile".new > "$gzfile" && rm -f "$gzfile".new
+    wget "$SITE"/"$gzfile".gz -O"$gzfile".new && \
+    gzip -d < "$gzfile".new > "$gzfile" && \
+    touch "$gzfile" -r"$gzfile".new && \
+    rm -f "$gzfile".new
 
 done
 
@@ -29,9 +32,8 @@ done
 for s in aviation classical concrete ediclsd3 findic \
          geodic lawgledt mktdic pandpdic; do
 
-  unzip -o "$s".zip.new "$s" '*.txt' '*.html' '*.euc' '*.doc' '*.inf' \
-     && rm -f "$s".zip.new
-
+  unzip -o "$s".zip.new "$s" '*.txt' '*.html' '*.euc' '*.doc' '*.inf'
+  rm -f "$s".zip.new
 done
 
 #Copyrights of zip-files:

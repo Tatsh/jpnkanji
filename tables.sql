@@ -158,10 +158,11 @@ CREATE TABLE kanjiradstrokes
   strokes  TINYINT(2) UNSIGNED NOT NULL
   ,KEY strokes(strokes)
 
-  ,FOREIGN KEY(partcode)REFERENCES kanjiparts(partcode)ON DELETE CASCADE ON UPDATE CASCADE
+  #,FOREIGN KEY(partcode)REFERENCES kanjiparts(partcode)ON DELETE CASCADE ON UPDATE CASCADE
 ) type=innodb;
 
 
+# Do not make this table InnoDB - it'll eat 400 MB of space!!! MyISAM takes 97 MB.
 CREATE TABLE kanjisimilarity
 (
   jiscode1 SMALLINT(5) UNSIGNED NOT NULL,
@@ -170,11 +171,6 @@ CREATE TABLE kanjisimilarity
   ,PRIMARY KEY(jiscode1,jiscode2)
   ,KEY jiscode2(jiscode2)
   ,KEY unsimilarity(unsimilarity)
-  
-  # Do not make this table InnoDB - it'll eat 400 MB of space!!! MyISAM takes 97 MB.
-
-  #,FOREIGN KEY(jiscode1)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
-  #,FOREIGN KEY(jiscode2)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 # Note: Max 3 per japkanji (appears so)
@@ -190,7 +186,7 @@ CREATE TABLE kanjikorea
   , KEY jiscode(jiscode)
   , KEY romaji(romaji(5))
 
-  ,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+  #,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
 ) type=innodb;
 
 # Note: Max 7 per japkanji (appears so)
@@ -206,7 +202,7 @@ CREATE TABLE kanjichina
   , KEY jiscode(jiscode)
   , KEY romaji(romaji(5))
 
-  ,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+  #,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
 ) type=innodb;
 
 # Note: Max 19 per japkaji (appears so)
@@ -228,7 +224,7 @@ CREATE TABLE kanjijapan
   , KEY kana(kana(16)), KEY kanar(kanar(8))
   , KEY type(type)
 
-  ,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+  #,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
 ) type=innodb;
 
 # Translations for each kanji
@@ -245,7 +241,7 @@ CREATE TABLE kanjitrans
   , KEY jiscode(jiscode)
   , KEY name(name(12))
 
-  ,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+  #,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
 ) type=innodb;
 
 # Logging

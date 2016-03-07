@@ -128,7 +128,8 @@ bisqinstallchecks: templatechecks $(SEARCHFILES) $(BISQINSTUTILS)
 BISQINSTFILES=japkanji.php japkanjilist.php kanjisearch.php \
               unicodemap.php kanjisqlfun.php jislist.php \
               japverb.php japverb3.php .htaccess \
-              japkanji.css masut.php session.php unicodemrk.php
+              japkanji.css masut.php session.php unicodemrk.php \
+              attrlist.php
 
 bisqinstall: bisqinstallchecks $(BISQINSTFILES)
 	for s in $(BISQINSTFILES);do rm -f $(BISQINSTALLDIR)/$$s && cp -vp "$$s" $(BISQINSTALLDIR)/;done

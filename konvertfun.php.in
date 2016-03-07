@@ -18,68 +18,81 @@ function mysql_insert($sql, $needresult=1)
   return $tmp2[0];
 }
 
-$bgsql = '';
-$bgfds = array();
-function mysql_insert_background($sql)
+class BackgroundSQL
 {
-  global $bgsql, $bgfds;
-  $bgsql .= $sql . ';';
-  if(strlen($bgsql) >= 32768)
+  private $sqlbuf;
+  private $pipes;
+  private $proc;
+
+  public function mysql_get_commandline()
   {
-    $s='echo '.shellfix($bgsql).
-         '|'.shellfix('@MYSQL@').
-         ' '.shellfix('-u@SQLUSER@');
+    $s=shellfix('@MYSQL@');
+    $s .= ' '.shellfix('-u@SQLUSER@');
     if(strlen('@SQLHOST@') > 0)$s .= ' '.shellfix('-h@SQLHOST@');
     if(strlen('@SQLPASS@') > 0)$s .= ' '.shellfix('-p@SQLPASS@');
     $s .= ' '.shellfix('@SQLBASE@');
-    #print "$s\n";
-    $bgfds[] = array('time'=>time(), 'fd'=>popen($s, 'r'));
-    $bgsql = '';
+    return $s;
   }
-  $mintime = (32-count($bgfds));
-  foreach($bgfds as $id=>$tab)
+  
+  public function Write($SQL)
   {
-    if($tab['time'] < time()-$mintime)
+    $this->Open();
+    
+    if(strlen($this->sqlbuf) > 32768)
     {
-      $s = fgets($tab['fd'], 4096);
-      if($s === FALSE)
-      {
-        pclose($tab['fd']);
-        unset($bgfds[$id]);
-      }
-      else
-      {
-        print "Hmm: '$s'\n";
-      }
+      stream_set_blocking($this->pipes[0], 1);
+      $num = fwrite($this->pipes[0], $this->sqlbuf);
+      $this->sqlbuf = substr($this->sqlbuf, $num);
+      fflush($this->pipes[0]);
+      stream_set_blocking($this->pipes[0], 0);
+    }
+    
+    $app = "$SQL;\n";
+    $sql = "{$this->sqlbuf}$app";
+    
+    $num = (int)fwrite($this->pipes[0], $sql);
+    if($num == 0)
+      $this->sqlbuf .= $app;
+    else
+      $this->sqlbuf = substr($sql, $num);
+  }
+  
+  public function Flush()
+  {
+    $this->Open();
+
+    stream_set_blocking($this->pipes[0], 1);
+    fwrite($this->pipes[0], $this->sqlbuf);
+    fflush($this->pipes[0]);
+  }
+  
+  private function Open()
+  {
+    if(!$this->proc)
+    {
+      $this->proc = proc_open(
+        $this->mysql_get_commandline(),
+        Array(0 => Array('pipe', 'r'),
+              1 => Array('file', '/dev/null', 'w'),
+              2 => Array('file', '/tmp/mysql-konverto.log', 'a')),
+        $this->pipes);
+      stream_set_write_buffer($this->pipes[0], 8192);
+      stream_set_blocking($this->pipes[0], 0);
+      
+      $this->sqlbuf = '';
     }
   }
+};
+
+$bgsql = new BackgroundSQL;
+
+function mysql_insert_background($sql)
+{
+  global $bgsql;
+  $bgsql->Write($sql);
 }
 function mysql_background_end()
 {
-  global $bgsql, $bgfds;
-  if(strlen($bgsql) > 0)
-  {
-    $s='echo '.shellfix($bgsql).
-         '|'.shellfix('@MYSQL@').
-         ' '.shellfix('-u@SQLUSER@');
-    if(strlen('@SQLHOST@') > 0)$s .= ' '.shellfix('-h@SQLHOST@');
-    if(strlen('@SQLPASS@') > 0)$s .= ' '.shellfix('-p@SQLPASS@');
-    $s .= ' '.shellfix('@SQLBASE@');
-    #print "$s\n";
-    $bgfds[] = array('time'=>time(), 'fd'=>popen($s, 'r'));
-    $bgsql = '';
-  }
-  foreach($bgfds as $id=>$tab)
-  {
-    $s = fgets($tab['fd'], 4096);
-    if($s === FALSE)
-    {
-      pclose($tab['fd']);
-      unset($bgfds[$id]);
-    }
-    else
-    {
-      print "Hmm: '$s'\n";
-    }
-  }
+  global $bgsql;
+  $bgsql->Flush();
 }

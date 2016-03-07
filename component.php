@@ -42,9 +42,10 @@ class ComponentSearch extends SearchMethod
     $tables = array();
     $tablesrows = array();
     $tablelinks = array();
-    $tmp = mysql_query("select k.utf8kanji, b.partcode, k.strokecount1 as strokes, k.partcount, count(b.jiscode) as count from "
+    // queries for the list of components.
+    $tmp = mysql_query("select k.utf8kanji, b.partcode, c.strokes as strokes, (k.strokecount1-c.strokes)=0 as inaccuracy, count(b.jiscode) as count from "
                       ."japkanji k,kanjiparts b,kanjiradstrokes c where b.partcode=k.jiscode and b.partcode=c.partcode "
-                      ."group by k.jiscode order by strokes, partcount, count desc;");
+                      ."group by k.jiscode order by strokes, inaccuracy desc, count desc;");
     while ($data = mysql_fetch_row($tmp)) {
       if ($i == 5 || $data[2] != $strokes) { 
         while ($i < 5) { $i++; $tables[$strokes] .= '<td bgcolor="#f0f0f0">&nbsp;';}

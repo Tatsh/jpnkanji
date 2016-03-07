@@ -3,6 +3,7 @@
 error_reporting  (E_ERROR | E_WARNING | E_PARSE);
 
 # This php program generates the kanji similarity tables.
+# It must be run after kanjikonverto.php
 
 include 'konvertfun.php';
 

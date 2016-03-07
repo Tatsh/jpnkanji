@@ -49,74 +49,76 @@ function Table($s)
   }
 }
 
-$entryjob = array();
-$entrycount = 0;
+$insert_records = Array();
+$insert_n       = 0;
+function BackgroundInsert($table, $fields, $values)
+{
+  global $insert_records, $insert_n;
+  $insert_records[$table][$fields][] = $values;
+  if(++$insert_n >= 5000) BackgroundInsertFlush();
+}
+function BackgroundInsertFlush()
+{
+  global $insert_records, $insert_n;
+  $insert_n = 0;
+  foreach($insert_records as $table => $types)
+    foreach($types as $type => $records)
+    {
+      $SQL = 'insert into '.Table($table)." ($type)values".join(',', $records);
+      #print "\n$SQL\n";
+      mysql_insert_background($SQL);
+    }
+  $insert_records = Array();
+}
+
 function AddEntry($dict_id, $kanji, $kana, $transql, $attrsql)
 {
-  global $entryjob, $entrycount;
-  $entryjob[$entrycount++] = array('dictid'=>$dict_id, 'kanji'=>$kanji, 'kana'=>$kana, 'trans'=>$transql, 'attrs'=>$attrsql);
-  if($entrycount >= 2048)
-  {
-    # This grouping makes kakasi / recode calls occur not so often.
-    
-    EntryFlush();
-  }
-}
-function EntryFlush()
-{
-  global $entryjob, $entrycount, $cset;
+  static $pipes, $proc;
+  global $cset;
   global $dataid;
-  
-  $f = fopen('/tmp/edict-konverto.tmp', 'w');
 
-  for($c=0; $c<$entrycount; $c++)
-    fwrite($f, $entryjob[$c]['kanji'] . "\n" . $entryjob[$c]['kana'] . "\n");
-  
-  fclose($f);
-  
-  $f1 = popen('kakasi -Ha -Ka -Ja -Ea -s </tmp/edict-konverto.tmp', 'r');
-  $f2 = popen('recode -f '.$cset.'..utf8 </tmp/edict-konverto.tmp', 'r');
-
-  for($c=0; $c<$entrycount; $c++)
+  if(!$pipes)
   {
-    $kanjir= fgets($f1, 256);
-    $kanar = fgets($f1, 256);
-    $kanji = fgets($f2, 256);
-    $kana  = fgets($f2, 256);
-    
-    $dataid++;
-    
-    mysql_insert_background(str_replace('\n','',
-       'insert into '.Table('japdata').' set id='.$dataid
-      .',dict_id='.$entryjob[$c]['dictid']
-      .',kanjir='.sqlfix($kanjir)
-      .',kanar='.sqlfix($kanar)
-      .',kanji='.sqlfix($kanji)
-      .',kana='.sqlfix($kana)
-       ));
-    
-    if(count($entryjob[$c]['trans']))
-    {
-      $s = 'insert into '.Table('japtrans').'(trans_id,name)values';
-      while(list($dummy, $trans) = each($entryjob[$c]['trans']))
-        $s .= ',('.$dataid.','.sqlfix($trans).')';
-      
-      mysql_insert_background(str_replace('values,(', 'values(', $s));
-    }
+    $pipes = Array();
+    $proc = proc_open('kakasi -u -Ha -Ka -Ja -Ea -s',
+      Array(0 => Array('pipe', 'r'),
+            1 => Array('pipe', 'w'),
+            2 => Array('file', '/tmp/edict-konverto.log', 'a')
+           ), $pipes);
 
-    if(count($entryjob[$c]['attrs']))
-    {
-      $s = 'insert into '.Table('japattr').'(trans_id,name)values';
-      while(list($dummy, $attr) = each($entryjob[$c]['attrs']))
-        $s .= ',('.$dataid.','.sqlfix($attr).')';
-      
-      mysql_insert_background(str_replace('values,(', 'values(', $s));
-    }
+    stream_set_write_buffer($pipes[0], 0);
   }
-  pclose($f1);
-  pclose($f2);
-  unlink('/tmp/edict-konverto.tmp');
-  $entrycount = 0;
+  
+  fwrite($pipes[0], "$kanji\n");
+  fwrite($pipes[0], "$kana\n");
+  fflush($pipes[0]);
+  
+  $kanjir= fgets($pipes[1], 256);
+  $kanar = fgets($pipes[1], 256);
+  
+  $kanji = recode_string("{$cset}..utf8", $kanji);
+  $kana  = recode_string("{$cset}..utf8", $kana);
+  
+  ++$dataid;
+  
+  BackgroundInsert('japdata', 'id,dict_id,kanjir,kanar,kanji,kana',
+    "($dataid,$dict_id,".sqlfix($kanjir).','
+                        .sqlfix($kanar).','
+                        .sqlfix($kanji).','
+                        .sqlfix($kana).')');
+  
+  if(!empty($transql))
+  {
+    foreach($transql as $trans)
+      BackgroundInsert('japtrans', 'trans_id,name',
+        "($dataid,".sqlfix(recode_string("{$cset}..utf8", $trans)).")");
+  }
+
+  if(!empty($attrsql))
+  {
+    foreach($attrsql as $attr)
+      BackgroundInsert('japattr', 'trans_id,name', "($dataid,".sqlfix($attr).")");
+  }
 }
 
 $tmp = mysql_query('select max(id)from '.Table('japdata'));
@@ -128,7 +130,7 @@ foreach($dicts as $filename => $desc)
 {
   $dict_id = mysql_insert(
     'insert into '.Table('japdict').
-     ' set name='.sqlfix($filename).',description='.sqlfix($desc));
+    ' set name='.sqlfix($filename).',description='.sqlfix($desc));
   
   $cset = 'eucjp';
   
@@ -197,5 +199,5 @@ foreach($dicts as $filename => $desc)
   print "\n";
 }
 
-EntryFlush();
+BackgroundInsertFlush();
 mysql_background_end();

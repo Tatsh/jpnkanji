@@ -16,6 +16,10 @@
  *
  */
 
+if(function_exists('GetCacheObj')) return;
+else
+{
+
 function GetCacheObj()
 {
   static $obj;
@@ -121,3 +125,5 @@ class BinKeyCache extends Cache
     return Cache::Cache(md5($key), $initversion, $maxage);
   }
 };
+
+}
