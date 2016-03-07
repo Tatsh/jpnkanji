@@ -25,7 +25,7 @@ ARCHFILES=$(DICTFILES) kanjidic radkfile simgen.php \
           unique2.php japverb.php japverb3.php .htaccess \
           settings.mak.in templates.mak \
           japkanji.css jislist.php \
-          masu.php \
+          session.php masu.php unicodemrk.php \
           $(SEARCHMODULES)
 
 INSTALL=install
@@ -122,7 +122,7 @@ bisqinstallchecks: templatechecks $(SEARCHFILES) $(BISQINSTUTILS)
 BISQINSTFILES=japkanji.php japkanjilist.php kanjisearch.php \
               unicodemap.php kanjisqlfun.php jislist.php \
               japverb.php japverb3.php .htaccess \
-              japkanji.css masut.php
+              japkanji.css masut.php session.php unicodemrk.php
 
 bisqinstall: bisqinstallchecks $(BISQINSTFILES)
 	for s in $(BISQINSTFILES);do rm -f $(BISQINSTALLDIR)/$$s && cp -vp "$$s" $(BISQINSTALLDIR)/;done

@@ -65,24 +65,32 @@ function dump($tree, $ind=0)
 
 include_once 'deconjfun.php';
 
-$ret = Array(Array('', ''));
 function Add($p)
 {
+  global $ret;
   $p = Tsu($p);
+  if(ereg('^[^hi]', $p))$ret[] = explode(' ', $p);
   $cmd = "/WWW/hiragana '".$p."'|charconv unihtml utf8 2>/dev/null";
   $k = explode(' ', exec($cmd));
-  global $ret;
   $ret[] = $k;
 }
-$s = 'kgszntdmrhbp';
-for($a=0;$a<10;$a++)
+
+$ret = Array();
+function Handle($masu, $pref)
 {
-  $c = $s[$a];
-  Add(str_replace('x', $c, 'ximasu xu'));
-  Add(str_replace('x', $c, 'xemasu xeru'));
-  Add(str_replace('x', $c, 'ximasu xiru'));
+  global $ret;
+  $ret[] = Array('', '');
+  $s = 'kgszn'.'tdmrh'.'bp';
+  for($a=0; $a<12; ++$a)
+  {
+    $c = $s[$a];
+    Add(str_replace('x', $c, 'xi'.$masu.' xu'));
+    Add(str_replace('x', $c, 'xe'.$masu.' xeru'));
+    Add(str_replace('x', $c, 'xi'.$masu.' xiru'));
+  }
+  Add('i'.$masu.' u');
 }
-Add('imasu u');
+Handle('masu', '');
 
 print '<? $masut = ';
 Dump($ret);

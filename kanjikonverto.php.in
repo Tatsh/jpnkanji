@@ -2,13 +2,6 @@
 
 include 'konvertfun.php';
 
-$fp = fopen('kanjidic', 'r');
-if(!$fp)
-{
-  print "required file missing. error. stop.\n";
-  exit;
-}
-
 function Table($s)
 {
   switch($s)
@@ -28,6 +21,7 @@ function Table($s)
 
 mysql_query('delete from '.Table('japkanji'));
 mysql_query('delete from '.Table('kanjiparts'));
+mysql_query('delete from '.Table('kanjiradstrokes'));
 mysql_query('delete from '.Table('kanjikorea'));
 mysql_query('delete from '.Table('kanjichina'));
 mysql_query('delete from '.Table('kanjijapan'));
@@ -69,7 +63,8 @@ function EntryFlush()
     $dataid++;
     
     mysql_insert_background(str_replace('\n','',
-       'insert into '.Table('kanjijapan').' set jiscode='.$entryjob[$c]['jiscode']
+       'insert into '.Table('kanjijapan').
+       ' set jiscode='.$entryjob[$c]['jiscode']
       .',kanar='.sqlfix($kanar)
       .',kana='.sqlfix($kana)
       .',type='.sqlfix($entryjob[$c]['type'])
@@ -79,6 +74,13 @@ function EntryFlush()
   pclose($f2);
   unlink('/tmp/edict-konverto.tmp');
   $entrycount = 0;
+}
+
+$fp = fopen('kanjidic', 'r');
+if(!$fp)
+{
+  print "required file 'kanjidic' missing. error. stop.\n";
+  exit;
 }
 
 fgets($fp, 512);
@@ -232,7 +234,10 @@ while(($s = fgets($fp, 4096)))
        // FIXME FIXME - tästä jatkuu.
       default:
         if(strlen($f))
+        {
+          $f = trim(str_replace("\n", '', $f));
           $japans[] = array('kana'=>$f, 'type'=>$japantype);
+        }
     }
   }
   
@@ -263,7 +268,6 @@ while(($s = fgets($fp, 4096)))
   }
 }
 fclose($fp);
-
 EntryFlush();
 
 $fp = fopen('radkfile', 'r');

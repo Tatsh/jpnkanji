@@ -1,9 +1,24 @@
 <?php
 
+# This php program generates the kanji similarity tables.
+
 include 'konvertfun.php';
 
 mysql_connect('chii', 'root', '');
 mysql_select_db('japdict');
+
+function Table($s)
+{
+  switch($s)
+  {
+    case 'kanjiparts':
+    case 'kanjiradstrokes':
+    case 'kanjisimilarity':
+      return $s;
+    default:
+      return $s;
+  }
+}
 
 function CompareKanji($jis1, $jis2)
 {
@@ -44,7 +59,7 @@ function CompareKanji($jis1, $jis2)
 print "Loading data...\n"; ob_end_flush(); flush();
 
 $tmp = mysql_query('select a.partcode,jiscode,strokes'.
-                   ' from kanjiparts a,kanjiradstrokes b'.
+                   ' from '.Table('kanjiparts').' a,'.Table('kanjiradstrokes').' b'.
                    ' where a.partcode=b.partcode');
 $alljis = array();
 $parts = array();
@@ -70,7 +85,7 @@ $prositer = 100 / $max;
 $pros = 0;
 
 $fo = fopen('simgen.sql', 'w');
-mysql_query('delete from kanjisimilarity');
+mysql_query('delete from '.Table('kanjisimilarity'));
 $c=0;
 $start = time();
 for($a=0; $a<$max; $a++)
@@ -88,7 +103,7 @@ for($a=0; $a<$max; $a++)
     {
       $code = 255 - (int)(255*($res-0.2)/(1-0.2));
       
-      if(!$c)$SQL = 'insert into kanjisimilarity(jiscode1,jiscode2,unsimilarity)values';
+      if(!$c)$SQL = 'insert into '.Table('kanjisimilarity').'(jiscode1,jiscode2,unsimilarity)values';
       $SQL .= ',('.$aa.','.$ab.",$code)";
       if($c++ > 200)
       {
@@ -103,6 +118,7 @@ for($a=0; $a<$max; $a++)
 }
 if($c)
 {
+  // Fix the last entry
   $SQL = str_replace('values,(', 'values(', $SQL);
   fwrite($fo, "$SQL\n");
   #mysql_insert_background($SQL);

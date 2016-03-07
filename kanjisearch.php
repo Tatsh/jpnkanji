@@ -573,7 +573,7 @@ function Show($tmp2)
   print $content;
   
   foreach($similarclasses as $field => $desc)
-    if($tmp2[$field])
+    if($tmp2[$field] || $field=='similarity')
     {
       $orderby = $preferences['similars'][$field];
       if($orderby)
@@ -582,15 +582,17 @@ function Show($tmp2)
         echo '<SPAN CLASS=similar>';
         if($field == 'similarity')
         {
-          $SQL = 'select jiscode,utf8kanji,similarity'.
+          $SQL = 'select jiscode,utf8kanji,unsimilarity'.
                 ' from kanjisimilarity,japkanji'.
                 ' where jiscode1='.$tmp2['jiscode'].
+                ' and japkanji.jiscode<>'.$tmp2['jiscode'].
                 ' and jiscode2=japkanji.jiscode'.
                 ' order by '.$orderby.
                 ' limit 150';
         }
         else
-          $SQL = 'select jiscode,utf8kanji from japkanji where '.$field.'='.$tmp2[$field].' and jiscode<>'.$tmp2['jiscode'].' order by '.$orderby.',jiscode';
+          $SQL = 'select jiscode,utf8kanji from japkanji where '.$field.'='.$tmp2[$field].' and jiscode<>'.$tmp2['jiscode'].
+                 ' order by '.$orderby.',jiscode';
         ShowSimilars($SQL);
         print '</SPAN><br>';
       }

@@ -34,7 +34,7 @@ masut.php: masu.php
 
 configure: configure.in
 	@echo '*** $< is more recent than $@. Regenerating $@...'
-	autoconf
+	autoconf2.50
 	@sed s/^cache_file=.*/cache_file=config.cache/ <$@ >$@.tmp && mv -f $@.tmp $@ && chmod a+x $@
 	@echo '*** Please rerun ./configure'
 	@false

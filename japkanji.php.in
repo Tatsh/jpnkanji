@@ -97,13 +97,15 @@ function kanjilinkprint($s)
            | ((ord($k[1]) & 63) << 6)
            | ((ord($k[0]) & 31) << 12);
       
-      // unicode range U+3040..U+3100 are katakana+hiragana.
-      // everything else is assumed to be kanji.
-      // FIXME: this also means fixed width alphabets...
-      if($val < 0x3040 || $val >= 0x3100)
+      if( ($val >= 0x3400 && $val <= 0x9FFF)
+       || ($val >= 0xF900 && $val <= 0xFAFF)
+        )
       {
+        $l = $k;
+        $eucjp = recode_string('utf8..eucjp', $l);
+        if($eucjp)$l = sprintf('%02X%02X', ord($eucjp[0])-128, ord($eucjp[1])-128);
         $res .= '<a href="';
-        $res .= urlencode($k);
+        $res .= urlencode($l);
         $res .= '">';
         $k .= '</a>';
       }
@@ -204,7 +206,7 @@ function DispSearchFailure($s)
          'information</a> available of it in ',
          '<a href="search">Kanjisearch</a>.';
   }
-  if(!$inset)
+  if(!$inset && ereg_replace('[a-zA-Z]', '', $s) != '')
   {
     echo '<p>';
     echo 'If you copypasted the link parameters from a web page of non-utf8-coding, ',
@@ -460,6 +462,13 @@ function DoQuery($s, $max)
       
       $stmp2 = $stmp1 . $masutmp2;
       
+      if(strlen($masutmp))
+      {
+        // Replaced tries are always "exact"
+        $oldexact = $exact;
+        $exact = 1;
+      }
+      
       $kanjit = DoSearch($stmp2, $left, $forbidlist);
       $data = GetKanjiData($kanjit);
       
@@ -469,6 +478,11 @@ function DoQuery($s, $max)
              ' with ', htmlspecialchars($masutmp2), '...<br>';
       }
 
+      if(strlen($masutmp))
+      {
+        $exact = $oldexact;
+      }
+      
       $results = array();
       foreach($data as $result)
       {

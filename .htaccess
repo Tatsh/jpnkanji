@@ -40,3 +40,5 @@ RewriteRule ^deconj=(.*)$ /japtools/japverb3.php?s=$1
 
 # The list
 RewriteRule ^list$ / [R=permanent]
+
+RewriteRule ^U\+([0-9a-fA-F]+)$ /japtools/unicodemrk.php?c=$1
