@@ -1,0 +1,808 @@
+<?php
+
+/* This file is maintained in ~/src/japkanji/ - do not modify otherwhere */
+
+#print '<h1>DICTIONARY DATABASE UNDER RECONSTRUCTION, COME BACK IN 24 HOURS</h1>Message left Wed Apr 24 06:07:32 EEST 2002';
+#exit;
+
+putenv('PATH=/usr/local/bin:'.getenv('PATH'));
+
+if(!$REMOTE_ADDR)
+{
+  foreach(explode('&', $_SERVER['argv']) as $var=>$value)
+    $$var=$value;
+  $REQUEST_URI .= $_SERVER['argv'];
+}
+
+if(!$outset)
+  $outset = 'utf-8';
+
+if(!$noctheader)
+  header('Content-type: text/html; charset='.$outset);
+
+include '/WWW/cache.php';
+if($outset == 'utf-8')
+{
+  if(cache_init(36000, array('uri'=> $REQUEST_URI,'time'=>filemtime('japkanji.php'))))
+    cache_dump_exit();
+}
+
+require 'kanjisqlfun.php';
+
+if($outset != 'utf-8')
+{
+  ob_start();
+}
+
+print "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n";
+
+include '/WWW/headers.php';
+
+$hdrs .= '<meta http-equiv="Content-Type" content="text-html; charset='.$outset.'">'.
+         '<meta name="robots" content="nofollow">'.
+         '<link href="css" rel="stylesheet" type="text/css">';
+
+function txtsearchtitle() { return 'Dictionary search'; }
+function txtjapeng()      { return 'Japanese to English'; }
+function txtexact()       { return 'Exact'; }
+function txtnoromaji()    { return '&#x5426;&#12525;&#12540;&#12510;&#23383;'; }
+function txtsubmitjaen()  { return 'Search JA&rarr;EN'; }
+function txtsubmitenja()  { return 'Search EN&rarr;JA'; }
+function txtsubmitany()   { return '!'; }
+function txtusedict()     { return 'Use EDICT dictionaries'; }
+function txtpagetitle()   { return 'Kanjidict @VERSION@'; }
+
+$omitmenu=1;
+
+$title = txtpagetitle();
+if($s)$title .= ' - '.$s;
+if($enja)$title .= ' (EN->JA)';
+if($jaen)$title .= ' (JA->EN)';
+Headers($title);
+echo '<h1>', str_replace('-&gt;', '&rarr;', htmlspecialchars($title)), '</h1>';
+
+NavBar('');
+
+#print '<h1>WARNING: SERVICE BREAKOUTS DUE TO DEVELOPMENT</h1>';
+
+/* BEGIN */
+
+/* Prints an utf8 encoded kanji string so that each kanji character is linked */
+function kanjilinkprint($s)
+{
+  global $HTTP_HOST;
+  $b = strlen($s);
+  $res = '';
+  for($a=0; $a<$b; )
+  {
+    $c = ord($s[$a]);
+    if($c < 0x80)
+    {
+      // ascii
+      $res .= $s[$a++];
+    }
+    elseif($c < 0xE0)
+    {
+      // two byte utf8 -- these are never kanji
+      $res .= $s[$a++];
+      $res .= $s[$a++];
+    }
+    else
+    {
+      // three byte utf8, check it.
+      $k = substr($s, $a, 3);
+      $a += 3;
+      
+      $val = (ord($k[2]) & 63)
+           | ((ord($k[1]) & 63) << 6)
+           | ((ord($k[0]) & 31) << 12);
+      
+      // unicode range U+3040..U+3100 are katakana+hiragana.
+      // everything else is assumed to be kanji.
+      // FIXME: this also means fixed width alphabets...
+      if($val < 0x3040 || $val >= 0x3100)
+      {
+        $res .= '<a href="';
+        $res .= urlencode($k);
+        $res .= '">';
+        $k .= '</a>';
+      }
+      $res .= $k;
+      // kanjidict never outputs four+ byte utf8.
+    }
+  }
+  return $res;
+}
+
+function targetscript()
+{
+  global $HTTP_HOST;
+  if($HTTP_HOST=='kanjidict.stc.cx')
+    return '/';
+  return 'japkanji.php';
+}
+
+function DictSelect()
+{
+  global $s, $exact, $max, $dir, $noromaji;
+  
+  $tmp = mysql_query('select id,name,description from japdict');
+  $dictlist = mysql_fetch_all($tmp);
+  #print '<pre>';print_r($dictlist);print '</pre>';
+  echo '<form method=GET action="' . targetscript() . '" style="margin:0px">';
+  print '<table cellspacing=0 cellpadding=0>';
+  echo '<tr><td align=right valign=top>', txtusedict(), ':</td>';
+  $c=0;
+  $k=0;
+  foreach($dictlist as $tab)
+  {
+    if($c && !$k)print '<tr>';
+    if($c++ == 2)
+    {
+      echo '<td rowspan=', (int)(count($dictlist)/2-0.5), ' valign=top class="dictdialog">';
+       echo '<span class="dicttitle">', txtsearchtitle(), '</span><br>';
+       echo '<input class=dictinput type=text size=20 name=s value="',htmlspecialchars($s),'">';
+       echo ' <input type=submit class=dicttinysubmit name=btnS value="', txtsubmitany(), '">';
+       echo '<br>';
+       echo 'Display max. <select name=max class=dictmaxsel>';
+       foreach(array(10,20,30,40,50,75,100,120,150,200,250) as $sel)
+       {
+         echo '<option value=',$sel; if($max==$sel)echo ' selected'; echo '>',$sel,'</option>';
+       }
+       echo '</select> results';
+       echo ' &nbsp; <input type=checkbox class=dictcbox name=exact'; if($exact)echo ' checked'; echo '>', txtexact(),
+            '<br>';
+       echo '<input type=submit class=dictsubmit name=btnE value="', txtsubmitenja(), '">',
+            '<input type=submit class=dictsubmit name=btnJ value="', txtsubmitjaen(), '">';
+       echo '<br>&nbsp;<br>';
+       echo '<input type=checkbox class=dictcbox name=noromaji'; if($noromaji)echo ' checked'; echo '>', txtnoromaji();
+      echo '</td>';
+    }
+    print '<td style="padding-left:6px">';
+    $dname = 'd'.$tab['id'];
+    echo '<input type=checkbox class=dictcbox name=', $dname;
+    global $$dname;
+    if($$dname)echo ' checked';
+    echo '>', htmlspecialchars($tab['description']), '</td>';
+    if(!$k)
+      $k = 1;
+    else
+    {
+      print '</tr>';
+      $k = 0;
+    }
+  }
+  if($k)print '</tr>';
+  print '</table>';
+  echo '</form>';
+}
+
+function DispSearchFailure($s)
+{
+  global $inset;
+  global $HTTP_HOST;
+  global $REQUEST_URI;
+  
+  echo "Search '", htmlspecialchars($s), "' caused no hits.<br>";
+  echo '<p>';
+  echo 'The word must be the basic form. Are you sure it is? ',
+       'Try to <a href="http://kanjidict.stc.cx/deconj=',
+           urlencode($s), '">deconjugate it</a>.';
+  if(ereg(' [^ ]+ ', $s))
+  {
+    print '<p>This is a <em>dictionary</em>, not a translator.
+              This program does not anything about the grammar rules of
+              English or Japanese, and can not translate sentences.
+              Input only words in their dictionary form.';
+  }
+  if(strlen($s) && ord($s[0]) >= 0xA0)
+  {
+    echo '<p>';
+    echo 'Is ', htmlspecialchars($s), ' kanji? ',
+         'Perhaps there is some ',
+         '<a href="',urlencode($s),'">',
+         'information</a> available of it in ',
+         '<a href="search">Kanjisearch</a>.';
+  }
+  if(!$inset)
+  {
+    echo '<p>';
+    echo 'If you copypasted the link parameters from a web page of non-utf8-coding, ',
+         'this could be because of a character set conflict. ',
+         'Please select your input character set:<p>';
+    print '<ul>';
+    foreach(array('unihtml'   => '&#-codes',
+                  'shift_jis' => 'Microsoft JIS coding',
+                  'euc-jp'    => 'Unix JIS coding'
+                 ) as $cset=>$text)
+      echo '<li><a href="http://',
+              htmlspecialchars($HTTP_HOST.$REQUEST_URI.'&inset='.$cset),
+           '">', htmlspecialchars($cset.' ('.$text.')'),
+           '</a></li>';
+    print '</ul>';
+  }
+}
+
+function IsConjugatable(&$attrlist)
+{
+  return
+    ($attrlist['v1'] || $attrlist['v2']
+  || $attrlist['v5u']
+  || $attrlist['v5k']
+  || $attrlist['v5g']
+  || $attrlist['v5s']
+  || $attrlist['v5t']
+  || $attrlist['v5n']
+  || $attrlist['v5r']
+  || $attrlist['v5b']
+  || $attrlist['v5m']
+  || $attrlist['v5uru']
+  || $attrlist['vs-s']
+  || $attrlist['vk']
+  || $attrlist['adj']);
+}
+
+function GetKanjiData($idlist)
+{
+  if(!count($idlist)) return Array();
+  
+  $SQL = 'select japdata.id as id,kanji,kanjir,kana,kanar from japdata where ';
+  $c = 0;
+  $SQL .= 'id in(';
+  foreach($idlist as $id)
+  {
+    if($c++)$SQL .= ',';
+    $SQL .= $id;
+  }
+  $SQL .= ')';
+  #echo '<font color=blue>', htmlspecialchars($SQL), '</font><br>';
+  $tmp = mysql_query($SQL);
+  $results = array();
+  $SQL1 = 'select trans_id,name from japattr where trans_id in(';
+  $SQL2 = 'select trans_id,name,id from japtrans where trans_id in(';
+  $c=0;
+  while(($result = mysql_fetch_assoc($tmp)))
+  {
+    $id = $result['id'];
+    $result['attrs'] = Array();
+    $result['trans'] = Array();
+    $results[$id] = $result;
+    if($c++) { $SQL1 .= ','; $SQL2 .= ','; }
+    $SQL1 .= $id;
+    $SQL2 .= $id;
+  }
+  $SQL1 .= ')order by trans_id,name';
+  $SQL2 .= ')order by trans_id,name';
+
+  $tmp = mysql_query($SQL1);
+  while(($result = mysql_fetch_assoc($tmp)))
+    $results[$result['trans_id']]['attrs'][$result['name']] = $result['name'];
+ 
+  $tmp = mysql_query($SQL2);
+  while(($result = mysql_fetch_assoc($tmp)))
+    $results[$result['trans_id']]['trans'][$result['id']] = $result['name'];
+  
+  return $results;
+}
+
+function kanjiresultsorter(&$a, &$b)
+{
+  global $dir;
+  
+  if($dir == 'engjap')
+    $order = Array('transkey', 'kanji', 'kana');
+  else
+    $order = Array('kanji', 'kana', 'transkey');
+    
+  foreach($order as $field)
+  {
+    if($a[$field] < $b[$field])return -1;
+    if($a[$field] > $b[$field])return 1;
+  }
+  return 0;
+}
+
+function ShowResults(&$results, $max)
+{
+  global $noromaji; // Option (false/true)
+  
+  $numshown = 0;
+  
+  print '<table border=1>';
+  
+  $keys = Array();
+  $oldkey = '';
+  reset($results);
+  for($last=0;!$last;)
+  {
+    if($numshown >= $max || (!(list($dummy, $result) = each($results))))
+    {
+      $last = 1;
+      $result = Array('transkey' => '');
+    }
+    if(!$last)
+      $numshown++;
+    
+    $key = $result['transkey'];
+    if($key != $oldkey)
+    {
+      if($oldkey != '')
+      {
+        $c = 0;
+        foreach($keys as $k)
+        {
+          print '<tr>';
+          /* Display the kanji/kana */
+          echo '<td valign=top>', $k, '</td>';
+          if(!$c)
+          {
+            /* Display the translations */
+            echo '<td';
+            if(count($keys) > 1)echo ' rowspan=', count($keys);
+            echo ' valign=top>', $translationtext, '</td>';
+            $c++;
+          }
+          print '</tr>';
+        }
+      }
+
+      if($last)break;
+
+      // Build $translationtext
+      
+      $translationtext = '';
+      foreach($result['trans'] as $translation)
+        $translationtext .= '- '. htmlspecialchars($translation) . '<br>';
+      
+      $oldkey = $key;
+      $keys = Array();
+    }
+    
+    if($last)break;
+    
+    $conjugatable = IsConjugatable($result['attrs']);
+    $keytext = '';
+    
+    ## $keytext .= '<small>'.$result['id'].')</small>';
+    if($noromaji)
+    {
+      if(strlen($result['kanji']))
+        $keytext .= '<span class=kanjires>' . kanjilinkprint($result['kanji']) . '</span> (';
+
+      if($conjugatable)
+      {
+        $keytext .=
+          '<a href="'.htmlspecialchars(verblink($result['kanar'])).'" title="conjugate">';
+      }
+      
+      $keytext .= '<span class=kanares> '. $result['kana'] . '</span>';
+      if($conjugatable)
+        $keytext .= '</a>';
+      if(strlen($result['kanji']))
+        $keytext .= ')';
+    }
+    else
+    {
+      if(strlen($result['kanji']))
+      {
+        $keytext .= '<span class=kanjires>' . kanjilinkprint($result['kanji']) . '</span> (';
+        $keytext .= $result['kanjir'] . ')<br>';
+      }
+      $keytext .= '<span class=kanares> '. $result['kana'] . '</span>';
+      $keytext .= ' (';
+      if($conjugatable)
+      {
+        $keytext .=
+          '<a href="'.htmlspecialchars(verblink($result['kanar'])).'" title="conjugate">';
+      }
+      $keytext .= $result['kanar'];
+      if($conjugatable)
+        $keytext .= '</a>';
+      $keytext .= ')';
+    }
+    foreach($result['attrs'] as $name)
+    {
+      $keytext .= ' (<a href="#d' . $name . '">' . $name . '</a>)';
+    }
+
+    $keys[] = $keytext;
+  }
+  print '</table>';
+  return $numshown;
+}
+
+function DoQuery($s, $max)
+{
+  global $dir;   // engjap or japeng or other (both)
+  global $exact; // Is exact -flag
+  global $attrs;
+  
+  include 'masut.php';
+  
+  $usedattrs = array();
+
+  $forbidlist = Array();
+  
+  ob_start();
+
+  echo 'Searching <em>', htmlspecialchars($s), '...</em><br>';
+  
+  $originalword = $s;
+  
+  $retrycount=0;
+
+  if($dir == 'engjap')
+    print '<em>Disclaimer: This is a japanese-to-english dictionary.
+           English-to-japanese is provided as a reverse lookup only,
+           so not all English words have a translation.</em>';
+
+  $left = $max;
+  while($left > 0)
+  {
+    $masumax = count($masut);
+    if($exact)$masumax = 1;
+    for($masunum=0; $masunum<$masumax; ++$masunum)
+    {
+      $masutmp = $masut[$masunum][0];
+      $masutmp2 = $masut[$masunum][1];
+      if(strlen($masutmp) > strlen($s))
+      {
+        continue;
+      }
+      
+      $stmp1 = substr($s, 0, strlen($s)-strlen($masutmp));
+      $stmp2 = substr($s, strlen($s)-strlen($masutmp));
+      
+      if($stmp2 != $masutmp)
+      {
+        continue;
+      }
+      
+      $stmp2 = $stmp1 . $masutmp2;
+      
+      $kanjit = DoSearch($stmp2, $left, $forbidlist);
+      $data = GetKanjiData($kanjit);
+      
+      if(count(data) && strlen($masutmp))
+      {
+        echo 'You gave me a polite word! Replacing ', htmlspecialchars($masutmp),
+             ' with ', htmlspecialchars($masutmp2), '...<br>';
+      }
+
+      $results = array();
+      foreach($data as $result)
+      {
+        if(!$noattrs)
+        {
+          foreach($result['attrs'] as $attr)
+            $usedattrs[$attr] = $attr;
+        }
+        
+        // Don't allow the same data be queried twice
+        $forbidlist[$result['id']] = $result['id'];
+        
+        $tmp = $result;
+        $transkey='';
+        foreach($tmp['trans'] as $translation)
+          $transkey .= $translation.chr(255);
+        $tmp['transkey'] = $transkey;
+        
+        $results[] = $tmp;
+      }
+
+      usort($results, kanjiresultsorter);
+      
+      $numshown = ShowResults($results, $max);
+      
+      $left -= $numshown;
+    }
+
+    $retrycount++;
+    
+    if($exact || $left <= 0 || $retrycount >= 3)break;
+    
+    while(($len = strlen($s)) > 0)
+    {
+      $new_s = substr($s, 0, --$len);
+      if(!ereg('A$', utf8_decode($new_s . 'A')))
+      {
+        $s = $new_s;
+        // broken, can't break here!
+        continue;
+      }
+      $s = $new_s;
+      break;
+    }
+    if($len <= 0)break;
+    echo 'Trying <em>', htmlspecialchars($s), '...</em><br>';
+  }
+  
+  /* If nothing was said */
+  if($left == $max)
+  {
+    DispSearchFailure($originalword);
+  }
+  
+  $trans = ob_get_contents();
+  ob_end_clean();
+
+  /* Explain the used attributes at end */
+  
+  if(count($usedattrs))
+  {
+    print '<div class=abbrnotes>';
+
+    echo '<small>';
+    print "Abbreviations used:<br>\n";
+    foreach($usedattrs as $attr => $dummy)
+    {
+      echo '&nbsp; <a name="#d', $attr, '">';
+      echo htmlspecialchars($attr), ': <em>', htmlspecialchars($attrs[$attr]), '</em>';
+      echo '</a><br>';
+    }
+    echo '</small>';
+    
+    print '</div>';
+  }
+  
+  print $trans;
+}
+
+/* Search for $s, but exclude the results in $forbidlist (id keys) */
+function DoSearch($s, $max, $forbidlist = Array())
+{
+  global $dir;   // engjap or japeng or other(both)
+  global $exact; // Option: false/true
+  
+  // TODO: Jos haku oli romajilla kirjoitettuna ja tarkkaa osumaa
+  // ei löydy, suoritetaan tarkistus k/g ja muiden yleisten typojen
+  // varalle, ja jos löytyy silloin tarkka, tarjotaan se.
+  
+  /* Generate the rule for matching only allowed dictionaries */
+  $dictehto='';
+  $c=0;
+  foreach($_GET as $var => $value)
+    if(ereg('^d[0-9]', $var))
+    {
+      $dictehto .= $c++ ? ',' : 'dict_id in(';
+      $dictehto .= ((int)substr($var,1));
+    }
+  if($c)$dictehto .= ')';
+
+  /* Generate the query */
+  $query = '';
+  if(strlen($dictehto))$query .= '('.$dictehto.')';
+  if(count($forbidlist))
+  {
+    if(strlen($query))$query .= 'and';
+    $query .= '(d.id not in(';
+    $c=0;
+    foreach($forbidlist as $id)
+    {
+      if($c++)$query .= ',';
+      $query .= (int)$id;
+    }
+    $query .= '))';
+  }
+  
+  $queries = Array();
+  
+  if($dir != 'japeng' && !(ord($s[0]) >= 0x80))
+  {
+    if($exact)$queries[] = 'name='.sqlfix($s);
+    else $queries[] = "name like '".sqlfixlike($s)."%'";
+  }
+  if($dir != 'engjap')
+  {
+    if(ord($s[0]) >= 0x80)
+    {
+      if($exact)$queries[] = 'kanji='.sqlfix($s);
+      else $queries[] = "kanji like '".sqlfixlike($s)."%'";
+      
+      if($exact)$queries[] = 'kana='.sqlfix($s);
+      else $queries[] = "kana like '".sqlfixlike($s)."%'";
+    }
+    else
+    {
+      if($exact)$queries[] = 'kanar='.sqlfix($s);
+      else $queries[] = "kanar like '".sqlfixlike($s)."%'";
+    }
+  }
+  
+  /* Process each query separately, because MySQL
+   * doesn't optimize properly queries containing "OR".
+   *
+   * Note: MySQL handles "kanar='watashi' or kanar='watakushi'" poorly,
+   *       but "kanar in('watashi','watakushi')" adequately.
+   *       Could this be used somehow?
+   *       Answer: No, because we don't look for many values of the same field.
+   */
+  
+  /* Result set */
+  $kanjit = array();
+  foreach($queries as $subquery)
+  {
+    $SQL = 'select d.id from japdata d';
+    if(ereg('^name', $subquery))$SQL .= ',japtrans t';
+    $SQL .= ' where ';
+    $SQL .= $query;
+    if(strlen($query))$SQL .= ' and ';
+    $SQL .= '(' . $subquery . ')';
+    if(ereg('^name', $subquery))$SQL .= 'and(t.trans_id=d.id)group by d.id';
+    $SQL .= ' limit '.(int)$max;
+    
+    #echo '<p><font color=blue>',htmlspecialchars($SQL),'</font><p>';
+    
+    $tmp = mysql_query($SQL);
+    while(($tmp2 = mysql_fetch_row($tmp)))
+      $kanjit[$tmp2[0]] = $tmp2[0];
+  }
+  return $kanjit;
+}
+
+/* Ensure all query variables are now globals */
+foreach($_GET as $var=>$value)
+  $$var = $value;
+
+/* Take the query string and convert it to utf-8. */
+/* krxvt compatibility: */
+if(substr($s, 0, 4) == "\33\$(B")
+{
+  $inset = 'iso-2022-jp';
+  $s = "\33\$B" . substr($s, 4);
+}
+elseif(ereg('&#[0-9]', $s))
+{
+  // Appears to be html encoded...
+  $inset = 'unihtml';
+}
+
+if(isset($inset))
+{
+  # GNU recode can't decode HTML entities.
+  # Sorry for requiring the use of two programs of same purpose...
+  
+  $cmd = 'echo '.shellfix($s).'|charconv '.shellfix($inset).' utf8';
+  $s = exec($cmd);
+}
+
+/* Now $s = input string in (hopefully) utf-8 encoding */
+
+if($btnE)$dir='engjap';
+elseif($btnJ)$dir='japeng';
+elseif($btnS)$dir='1';
+else $dir='0';
+
+if(!$dir)
+{
+  /* If none of the search buttons were pressed, set default settings */
+  
+  /* Default dictionaries (these are keys to japdict -table) */
+  foreach(array(1,3,9,15)as $d){$var='d'.$d;$$var=$_GET[$var]=1;}
+  
+  /* Exact searches, unless "noexact" parameter given */
+  if(!$noexact)$exact=1;
+
+  /* If the keyword appears to be kanji/kana, set result count to 50 */
+  if(ord($s[0]) > 128)$max = 50;
+}
+
+/* Remove whitespace from the search string */
+$s = trim($s);
+
+/* Ensure the max is within reasonable ranges */
+if($max < 10)$max = 10;
+elseif($max > 250)$max = 250;
+
+
+/* Define the static array of explanatios of all attributes */
+$attrs = array
+(
+@ATTRLIST@
+  'loc' => 'location',
+  'city'=> 'city'
+);
+
+/* Unless "no dialogs" was requested, generate the query box */
+if(!$nodialog)
+{
+  DictSelect();
+}
+
+/* Log the query */
+$addr = $REMOTE_ADDR;
+if($REMOTE_HOST)$addr = "$REMOTE_HOST [$addr]";
+if($HTTP_X_FORWARDED_FOR)$addr = "$HTTP_X_FORWARDED_FOR (Using $addr)";
+if($HTTP_CLIENT_IP)$addr .= " (client: $HTTP_CLIENT_IP)";
+mysql_query('insert into dictlog set search='.sqlfix($s)
+            .',stype='.sqlfix($dir)
+            .',date='.time()
+            .',hostname='.sqlfix($addr)
+           );
+
+if(strlen($s))
+{
+  DoQuery($s, $max);
+}
+
+/* END */
+Epilogue();
+if(!$noepilog)
+{ ?>
+<div id=foot>
+<table cellspacing=0 cellpadding=0 border=0 width="100%">
+ <tr>
+  <td valign=top style="font-size:70%;padding-right:10px">
+Service provided by: <a href="http://bisqwit.iki.fi/">Joel Yliluoma</a> (Bisqwit)
+   <p style="font-size:50%">
+    You can also
+    <a href="http://bisqwit.iki.fi/source/japkanji.html">download</a>
+    a local copy of the dictionary.
+   </p>
+  </td>
+  <td valign=top style="border-left:2px solid gray;padding-left:10px">
+   <table border=0 cellspacing=0 width="100%">
+    <tr>
+     <td valign=top align=center style="font-size:70%">
+  Japanese wordlist (E&nbsp;D&nbsp;I&nbsp;C&nbsp;T) : Copyright (C) 1994 - 2001 James&nbsp;William&nbsp;Breen<br>
+  <a href="http://www.csse.monash.edu.au/groups/edrdg/">Electronic Dictionary
+  Research and Development Group Web site</a>
+  </td><td valign=top align=right>
+    <input
+      type=button
+      onclick="javascript:poptoggle()"
+      style="border:1px dotted #C0C0C0;padding:3px;color:#909090;background:white"
+      value="&darr;">
+     </td>
+    </tr>
+   </table>
+   <p align=center style="font-size:70%">
+    This server uses information drawn from the EDICT file, however
+    Jim Breen, the creator of that file, is in no way responsible for
+    the operation of the server or the way information is presented.
+   </p>
+  </td>
+ </tr>
+</table>
+<small style="color:#401010">Btw, you can copypaste kanji or kana to
+the input line and it could be translated also (known to work at least
+with Mozilla and IE).</small>
+</div>
+<div id=footmp style="visibility:hidden;position:absolute;top:0px;left:0px"></div>
+<div id=fooswap style="visibility:hidden;position:absolute;top:0px;left:0px">
+<table width="100%" cellspacing=0 cellpadding=0><tr><td align=right>
+ <input
+   type=button
+   onclick="javascript:poptoggle()"
+   style="border:1px dotted #C0C0C0;padding:3px;color:#909090;background:white"
+   value="&uarr;">
+  </td>
+</td></tr></table>
+</div>
+<script language="Javascript" type="text/javascript"><!--
+function poptoggle()
+{
+  document.getElementById("footmp").innerHTML=
+  document.getElementById("foot").innerHTML;
+  document.getElementById("foot").innerHTML=
+  document.getElementById("fooswap").innerHTML;
+  document.getElementById("fooswap").innerHTML=
+  document.getElementById("footmp").innerHTML;
+  //document.write("gruu");
+}
+//--></script>
+<?
+}
+Footers();
+
+if($outset == 'utf-8')
+{
+  cache_end();
+}
+
+if($outset != 'utf-8')
+{
+  $s = ob_get_contents();
+  ob_end_clean();
+  passthru('echo '.shellfix($s).'|recode utf8..'.shellfix($outset).' 2>&1');
+}

@@ -1,0 +1,81 @@
+.dictdialog {background:#E0D0B4;
+             border:3px ridge gray;
+             border-left:none;
+             padding:10px}
+.dicttitle  {border:1px solid gray;
+             border-top:2px solid gray;
+             background:#D0C8B8;
+             font-family:verdana,arial;
+             font-weight:bold;
+             font-size:80%;
+             width:100%;
+             padding:3px}
+.dictinput  {font-size:130%;
+             border-right: 1px dotted #606060;
+             border-top:   1px dotted #A0A0A0;
+             border-bottom:1px dotted #606060;
+             border-left:  1px dotted #A0A0A0;
+             margin-top:   3px;
+             margin-bottom:5px;
+             font-family:verdana,gothic,arial}
+.dictdirsel {}
+.dictmaxsel {}
+.dictsubmit {border:3px groove #909090;
+             background:#D8D0C0;
+             width:50%;
+             color:black}
+.dicttinysubmit {border:3px groove #909090;
+                 background:#D8D0C0;
+                 width:30px;height:20px;
+                 color:black}
+.dictcbox   {border:2px outset}
+.toollist   {margin:0px;margin-left:20px}
+SPAN.kanjires   {font-size:150%;font-family:ms gothic,sans-serif}
+SPAN.kanares    {font-size:120%;font-family:ms mincho,watanabe,sans-serif}
+
+DIV.abbrnotes {float:right;padding:2px;border:1px dashed #CCC}
+
+TD.kana {font-family:ms mincho,watanabe,serif}
+TD.romaji {font-size:110%}
+TD.type {font-weight:bold}
+
+DIV.right {float:right;clear:right}
+DIV.left {float:left;clear:left}
+
+DIV.kanji {padding:5px; border:2px solid #A0A0A0;background:#C0C0C0}
+SPAN.kanji {font-size:400%;font-family:ms song,ms mincho,watanabe,serif;
+            background:#E0E0E0;color:#FFFFE0;
+            border:1px dashed #A0A0A0}
+SPAN.parts {font-size:70%;font-family:ms gothic,gothic,sans-serif}
+
+SPAN.similar {font-size:130%;      font-family:ms gothic,gothic,sans-serif}
+SPAN.searchresults {font-size:130%;font-family:ms gothic,gothic,sans-serif}
+SPAN.printkanji {font-size:200%;   font-family:ms song,ms mincho,watabane,serif}
+
+PRE.skip1 {border:1px solid blue;font-size:20%}
+SPAN.b {background:black;color:black}
+SPAN.w {background:white;color:white}
+
+TABLE.ind {border:1px dashed black;background:#A0A0A0}
+TH.ind {background:#E0E0E0;horizontal-align:right; font-size:80%}
+TD.ind {background:#C0C0C0;horizontal-align:left;  font-size:80%}
+
+TABLE.misc {border:1px dashed black;background:#A0A0A0}
+TH.misc {background:#E0E0E0;horizontal-align:right}
+TD.misc {background:#C0C0C0;horizontal-align:left}
+
+TABLE.kanalist {border:1px dashed black;background:#A0A0A0}
+TH.kanalist {background:#E0E0E0;horizontal-align:right}
+TD.kanalist {background:#C0C0C0;horizontal-align:left;font-size:90%}
+
+TABLE.chinalist {border:1px dashed black;background:#A0A0A0}
+TH.chinalist {background:#E0E0E0;horizontal-align:right}
+TD.chinalist {background:#C0C0C0;horizontal-align:left}
+
+TABLE.english {border:1px dashed black;background:#A0A0A0}
+TH.english {background:#E0E0E0;horizontal-align:right}
+TD.english {background:#C0C0C0;horizontal-align:left}
+
+TABLE.korealist {border:1px dashed black;background:#A0A0A0}
+TH.korealist {background:#E0E0E0;horizontal-align:right}
+TD.korealist {background:#C0C0C0;horizontal-align:left}

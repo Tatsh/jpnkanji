@@ -1,0 +1,42 @@
+# This file is maintained in ~/src/japkanji/ - do not modify otherwhere
+
+RewriteEngine on
+
+# The stylesheet
+# Example: http://kanjidict.stc.cx/css
+RewriteRule ^css$ /japtools/japkanji.css
+
+# Kanjisearch
+# Example: http://kanjidict.stc.cx/search
+RewriteRule ^search$ /japtools/kanjisearch.php
+
+# Kanjisearch search modules
+# Example: http://kanjidict.stc.cx/skipsearch
+RewriteRule ^([a-z0-9]+)search$ /japtools/kanjisearch.php?search=$1
+
+# Kanji info (by jis code in hex)
+# Example: http://kanjidict.stc.cx/3456
+RewriteRule ^([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])$ /japtools/kanjisearch.php?pick=$1
+
+# Kanji info (by utf-8 code)
+# Example: http://kanjidict.stc.cx/%E3%81%BB
+RewriteRule ^(...)$ /japtools/kanjisearch.php?skanji=$1
+
+# Dictionary fuzzy search
+# Example: http://kanjidict.stc.cx/find=tora
+RewriteRule ^find=(.*) /japtools/japkanji.php?s=$1&noexact=1
+
+# Dictionary main page
+# Example: http://kanjidict.stc.cx/dict
+RewriteRule ^dict$ /japtools/japkanji.php
+
+# Conjugator
+# Example: http://kanjidict.stc.cx/verb=kaeru
+RewriteRule ^verb=(.*)$ /japtools/japverb.php?s=$1
+
+# Deconjugator
+# Example: http://kanjidict.stc.cx/deconj=kaerimashita
+RewriteRule ^deconj=(.*)$ /japtools/japverb3.php?s=$1
+
+# The list
+RewriteRule ^list$ / [R=permanent]

@@ -1,0 +1,107 @@
+AC_INIT(japkanji,1.6.0,bisqwit@iki.fi)
+
+AC_SUBST(VERSION,"$PACKAGE_VERSION")
+
+#AC_CONFIG_SRCDIR(tables.sql)
+AC_PROG_CPP
+
+AC_SUBST(SQLHOST, "localhost")
+AC_ARG_WITH(sqlhost,
+[  --with-sqlhost=HOSTNAME The hostname to use in MySQL connections (default: localhost)],
+[ if test "$withval"; then
+    AC_SUBST(SQLHOST, "$withval")
+  fi
+])
+AC_SUBST(SQLUSER, "root")
+AC_ARG_WITH(sqluser,
+[  --with-sqluser=USERNAME The username to use in MySQL connections (default: root)],
+[ if test "$withval"; then
+    AC_SUBST(SQLUSER, "$withval")
+  fi
+])
+AC_SUBST(SQLPASS, "")
+AC_ARG_WITH(sqlpass,
+[  --with-sqlpass=PASSWORD The password to use in MySQL connections (default: (nothing))],
+[ if test "$withval"; then
+    AC_SUBST(SQLPASS, "$withval")
+  fi
+])
+AC_SUBST(SQLBASE, "japdict")
+AC_ARG_WITH(sqlbase,
+[  --with-sqlbase=DATABASE The e database to use in MySQL (default: japdict)],
+[ if test "$withval"; then
+    AC_SUBST(SQLBASE, "$withval")
+  fi
+])
+
+AC_ARG_WITH(phpbin,
+[  --with-phpbin=PATH      Specify the path to php standalone binary (required)],
+[ if test -x "$withval" && test ! -d "$withval"; then
+    PHP="$withval"
+    AC_MSG_CHECKING(for PHP standalone binary)
+    AC_MSG_RESULT($withval)
+  else
+    AC_CHECK_PROG(PHP,php,$as_dir/$ac_word,no,$withval)
+  fi],
+[ AC_CHECK_PROG(PHP,php,$as_dir/$ac_word,no,/usr/local/bin:/usr/bin) ])
+if test "$PHP" = no; then
+  AC_MSG_ERROR(PHP standalone binary is required to generate the database.)
+else
+  AC_SUBST(PHP,"$PHP")
+fi
+
+AC_ARG_WITH(mysql,
+[  --with-mysql=PATH      Specify the path to mysql binary (required)],
+[ if test -x "$withval" && test ! -d "$withval"; then
+    MYSQL="$withval"
+    AC_MSG_CHECKING(for MySQL binary)
+    AC_MSG_RESULT($withval)
+  else
+    AC_CHECK_PROG(MYSQL,mysql,$as_dir/$ac_word,no,$withval)
+  fi],
+[ AC_CHECK_PROG(MYSQL,mysql,$as_dir/$ac_word,no,/usr/local/bin:/usr/bin) ])
+if test "$MYSQL" = no; then
+  AC_MSG_ERROR(MYSQL binary is required to generate the database.)
+else
+  AC_SUBST(MYSQL,"$MYSQL")
+fi
+
+AC_ARG_WITH(perl,
+[  --with-perl=PATH      Specify the path to perl (required for configuration)],
+[ if test -x "$withval" && test ! -d "$withval"; then
+    PERL="$withval"
+    AC_MSG_CHECKING(for perl)
+    AC_MSG_RESULT($withval)
+  else
+    AC_CHECK_PROG(PERL,perl,$as_dir/$ac_word,no,$withval)
+  fi],
+[ AC_CHECK_PROG(PERL,perl,$as_dir/$ac_word,no,/usr/local/bin:/usr/bin) ])
+if test "$PERL" = no; then
+  AC_MSG_ERROR(Perl is required to complete the configuration. Ouch.)
+else
+  AC_SUBST(PERL,"$PERL")
+fi
+
+AC_MSG_CHECKING(which dictionary files to use)
+rm -f tmp tmp2
+head -n `grep -n 'DICT LIST END' konverto.php.in|sed s/:.*//` konverto.php.in|\
+  tail +`grep -n 'DICT LIST BEGIN' konverto.php.in|sed s/:.*//`|\
+  grep =|sed 's/=>.*//'|tr -d "' " >tmp
+echo `cat tmp` >tmp2
+AC_SUBST(DICTFILES, "`cat tmp2` edict_doc.txt enamdict_doc.txt concrete.doc lawgldoc.euc lingdic.txt")
+dictfiles_tmp="`cat tmp2`"
+AC_MSG_RESULT($dictfiles_tmp)
+rm -f tmp tmp2
+
+AC_OUTPUT(settings.mak japkanji.php kanjisqlfun.php
+          konverto.php kanjikonverto.php konvertfun.php)
+touch settings.mak.in
+mv config.status conftest.c
+(head -n $[[`wc -l<conftest.c`-1]] conftest.c
+ echo "make -sftemplates.mak 2>/dev/null"
+ tail -n 1 conftest.c
+) >config.status
+chmod a+x config.status
+rm -f conftest.c
+make -sftemplates.mak 2>/dev/null
+echo Done

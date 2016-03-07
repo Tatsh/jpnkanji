@@ -1,0 +1,311 @@
+<?php
+
+include 'konvertfun.php';
+
+$fp = fopen('kanjidic', 'r');
+if(!$fp)
+{
+  print "required file missing. error. stop.\n";
+  exit;
+}
+
+function Table($s)
+{
+  switch($s)
+  {
+    case 'japkanji':
+    case 'kanjiparts':
+    case 'kanjikorea':
+    case 'kanjichina':
+    case 'kanjijapan':
+    case 'kanjitrans':
+    case 'kanjiradstrokes':
+      return $s;
+    default:
+      return $s;
+  }
+}
+
+mysql_query('delete from '.Table('japkanji'));
+mysql_query('delete from '.Table('kanjiparts'));
+mysql_query('delete from '.Table('kanjikorea'));
+mysql_query('delete from '.Table('kanjichina'));
+mysql_query('delete from '.Table('kanjijapan'));
+mysql_query('delete from '.Table('kanjitrans'));
+
+$entryjob = array();
+$entrycount = 0;
+function AddEntry($eucjp, $type, $jiscode)
+{
+  global $entryjob, $entrycount;
+  $entryjob[$entrycount++] = array('jiscode'=>$jiscode, 'type'=>$type, 'kana'=>$eucjp);
+  if($entrycount >= 2048)
+  {
+    # This grouping makes kakasi / recode calls occur not so often.
+    EntryFlush();
+  }
+}
+function EntryFlush()
+{
+  global $entryjob, $entrycount;
+  
+  $cset = 'eucjp';
+  
+  $f = fopen('/tmp/edict-konverto.tmp', 'w');
+
+  for($c=0; $c<$entrycount; $c++)
+    fwrite($f, $entryjob[$c]['kana'] . "\n");
+  
+  fclose($f);
+  
+  $f1 = popen('kakasi -Ha -Ka -Ea </tmp/edict-konverto.tmp', 'r');
+  $f2 = popen('recode -f '.$cset.'..utf8 </tmp/edict-konverto.tmp', 'r');
+
+  for($c=0; $c<$entrycount; $c++)
+  {
+    $kanar = fgets($f1, 256);
+    $kana  = fgets($f2, 256);
+    
+    $dataid++;
+    
+    mysql_insert_background(str_replace('\n','',
+       'insert into '.Table('kanjijapan').' set jiscode='.$entryjob[$c]['jiscode']
+      .',kanar='.sqlfix($kanar)
+      .',kana='.sqlfix($kana)
+      .',type='.sqlfix($entryjob[$c]['type'])
+       ));
+  }
+  pclose($f1);
+  pclose($f2);
+  unlink('/tmp/edict-konverto.tmp');
+  $entrycount = 0;
+}
+
+fgets($fp, 512);
+while(($s = fgets($fp, 4096)))
+{
+  $kanji   = substr($s, 0,2); // eucjp
+  $jiscode = substr($s, 3,4); // hex
+  
+  $s = substr($s,8);
+  
+  $english = ereg_replace('^[^{]*', '', $s);
+  
+  $s = substr($s, 0, strlen($s) - strlen($english));
+  $fields = explode(' ', $s);
+  
+  $strokeindex = 0;
+  $cornerindex = 0;
+  $indexoindex = 0;
+  
+  $jiscode = hexdec($jiscode);
+  $SQL = 'insert into '.Table('japkanji').' set jiscode='.$jiscode;
+  $SQL .= ',origin="K"';
+  
+  $japans = array();
+  $koreas = array();
+  $chinas = array();
+  
+  $japantype = 0;
+  
+  foreach($fields as $f)
+  {
+    switch($f[0])
+    {
+      case 'B': //Bushu number (the radical number used in the Nelson
+                // "New Japanese-English Character Dictionary").
+        $SQL .= ',radb='.(int)substr($f,1);
+        break;
+      case 'C': //historical or classical radical number, as recorded
+                //in the KangXi Zidian (where this differs from Bushu number)
+        $SQL .= ',radc='.(int)substr($f,1);
+        break;
+      case 'F': //frequency rank (1..2135)
+        $SQL .= ',frequency='.(int)substr($f,1);
+        break;
+      case 'G': //the Jouyou grade level.
+                //G1 through G6 indicate Jouyou grades 1-6.
+                //G8 indicates general-use characters.
+                //G9 indicates Jinmeiyou ("for use in names") characters.
+                //If not present, it is a kanji outside these categories.
+        $SQL .= ',jouyougrade='.(int)substr($f,1);
+        break;
+      case 'H': //the index number in the
+                // "New Japanese-English Character Dictionary",
+                //edited by Jack Halpern.
+                //If not preset, the character is not in Halpern.
+        $SQL .= ',indexh='.(int)substr($f,1);
+        break;
+      case 'N': //the index number in the
+                // "Modern Reader's Japanese-English Character Dictionary",
+                //edited by Andrew Nelson.
+                //If not present, the character is not in Nelson,
+                //or is considered to be a non-standard version,
+        $SQL .= ',indexn='.(int)substr($f,1);
+        break;
+      case 'V': //the index number in
+                // "The New Nelson Japanese-English Character Dictionary",
+                //edited by John Haig.
+        $SQL .= ',indexv='.(int)substr($f,1);
+        break;
+      case 'E': //Ennnn -- the index number used in
+                // "A Guide To Remembering Japanese Characters"
+                //by Kenneth G. Henshall. There are 1945 kanji
+                //with these numbers (i.e. the Jouyou subset.)
+        $SQL .= ',indexe='.(int)substr($f,1);
+        break;
+      case 'K': //Knnnn -- the index number in the
+                //Gakken Kanji Dictionary ("A New Dictionary of Kanji Usage").
+        $SQL .= ',indexk='.(int)substr($f,1);
+        break;
+      case 'L': //the index number used in "Remembering The Kanji" by James Heisig.
+        $SQL .= ',indexl='.(int)substr($f,1);
+        break;
+      case 'O': //the index number in "Japanese Names", by P.G. O'Neill. (Weatherhill, 1972)
+        $indexoindex++;
+        $SQL .= ',indexo'.$indexoindex.'='.sqlfix(substr($f,1));
+        break;
+      case 'D': //
+        // DRnnnn: these are the codes developed by Father Joseph De Roo,
+        //         and published in his book "2001 Kanji" (Bojinsha).
+        // DKnnnn: the index numbers used by Jack Halpern in his
+        //         Kanji Learners Dictionary, published by Kodansha in 1999.
+        // DOnnnn: the index numbers used in P.G. O'Neill's Essential Kanji
+        //         (ISBN 0-8348-0222-8).
+        break;
+      case 'P': //SKIP code: num-num-num
+        $skip = explode('-', substr($f,1));
+        $SQL .= ',skip1='.$skip[0].
+                ',skip2='.$skip[1].
+                ',skip3='.$skip[2];
+        break;
+      case 'S': //Stroke count.
+                //If more than one, the first is considered the accepted
+                //count, while subsequent ones are common miscounts.
+        $strokeindex++;
+        $SQL .= ',strokecount'.$strokeindex.'='.(int)substr($f,1);
+        break;
+      case 'U': //Unicode index (nnnn hex)
+        $unicode = hexdec(substr($f,1));
+        $SQL .= ',unicode='.$unicode;
+        
+        if($unicode < 0x80)
+          $utf8 = chr($unicode);
+        elseif($unicode < 0x800)
+          $utf8 = chr(0xC0 + ($unicode >> 6)) . chr(0x80 + ($unicode & 63));
+        else
+          $utf8 = chr(0xE0 + ($unicode >> 12)) . chr(0x80 + (($unicode >> 6)&63)) . chr(0x80 + ($unicode & 63));
+        
+        //printf("utf8:%X:%X:%X\n", ord(substr($utf8,0,1)), ord(substr($utf8,1,1)), ord(substr($utf8,2,1)));
+        
+        $SQL .= ',utf8kanji='.sqlfix($utf8);
+        
+        break;
+      case 'I': //Index codes ?
+        break;
+      case 'Q': //Four corner code (nnnn.n)
+        $cornerindex++;
+        $SQL .= ',fourcorner'.$cornerindex.'='.sqlfix(substr($f,1));
+        break;
+      case 'M': //Morohashi "Daikanwajiten" code ?
+        break;
+      case 'W': //the romanized form of the Korean reading(s) of the kanji.
+                //Most of these kanji have one Korean reading, a few have
+                //two or more. The readings are in the (Republic of Korea)
+                //Ministry of Education style of romanization.
+        $koreas[] = substr($f, 1);
+        break;
+      case 'Y': //the "Pinyin" of each kanji, i.e. the (Mandarin or Beijing)
+                //Chinese romanization. About 6,000 of the kanji have these.
+                //Obviously most of the native Japanese kokuji do not have
+                //Pinyin, however at least one does as it was taken into
+                //Chinese at a later date.
+        $chinas[] = substr($f, 1);
+        break;
+      case 'X': //cross reference node ?
+        break;
+      case 'T':
+        $japantype = (int)substr($f, 1);
+        break;
+      case 'Z': //mis-classification code ?
+        break;
+       // FIXME FIXME - tästä jatkuu.
+      default:
+        if(strlen($f))
+          $japans[] = array('kana'=>$f, 'type'=>$japantype);
+    }
+  }
+  
+  mysql_insert($SQL, 0);
+  
+  if(count($chinas))
+  {
+    $SQL = 'insert into '.Table('kanjichina').'(jiscode,romaji)values';
+    foreach($chinas as $s)$SQL .= ",($jiscode,".sqlfix($s).')';
+    mysql_insert_background(str_replace('values,(', 'values(', $SQL));
+  }
+  if(count($koreas))
+  {
+    $SQL = 'insert into '.Table('kanjikorea').'(jiscode,romaji)values';
+    foreach($koreas as $s)$SQL .= ",($jiscode,".sqlfix($s).')';
+    mysql_insert_background(str_replace('values,(', 'values(', $SQL));
+  }
+  preg_match_all('|{([^}]*)}|', $english, $matches);
+  if(count($matches[1]))
+  {
+    $SQL = 'insert into '.Table('kanjitrans').'(jiscode,name)values';
+    foreach($matches[1] as $s)$SQL .= ",($jiscode,".sqlfix($s).')';
+    mysql_insert_background(str_replace('values,(', 'values(', $SQL));
+  }
+  foreach($japans as $tab)
+  {
+    AddEntry($tab['kana'], $tab['type'], $jiscode);
+  }
+}
+fclose($fp);
+
+EntryFlush();
+
+$fp = fopen('radkfile', 'r');
+if($fp)
+{
+  $c=0;
+  while(($s = fgets($fp, 256)))
+  {
+    if($s[0]=='#')continue;
+    if($s[0]=='$')
+    {
+      $partcode = ord($s[2]) * 256 + ord($s[3]) - 0x8080;
+      mysql_insert_background
+      ( 'insert into '.Table('kanjiradstrokes').' set strokes='.(int)substr($s,5).
+        ',partcode='.$partcode);
+      continue;
+    }
+    
+    if(!$c)
+      $SQL = 'insert into '.Table('kanjiparts').'(jiscode,partcode)values';
+    
+    $a=0;
+    while($a<strlen($s))
+    {
+      $jiscode = ord($s[$a]) * 256 + ord($s[$a + 1]) - 0x8080;
+      $a+=2;
+      if($jiscode >= 0)$SQL .= ",($jiscode,$partcode)";
+      $c++;
+    }
+    if($c++ > 500)
+    {
+      mysql_insert_background(str_replace('values,(', 'values(', $SQL));
+      $SQL = '';
+      $c=0;
+    }
+  }
+  if($c)
+    mysql_insert_background(str_replace('values,(', 'values(', $SQL));
+  fclose($fp);
+}
+
+mysql_background_end();
+
+mysql_query('update '.Table('japkanji').' set freqorder=frequency');
+mysql_query('update '.Table('japkanji').' set freqorder=9999 where frequency=0');

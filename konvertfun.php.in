@@ -1,0 +1,85 @@
+<?php
+
+require 'kanjisqlfun.php';
+
+function mysql_insert($sql, $needresult=1)
+{
+  //print "$sql\n";return 0;
+  $tmp = mysql_query($sql);
+  if(!$tmp)
+  {
+    echo "ERROR in '$sql'\n",
+         mysql_errno(), ' ', mysql_error(), "\n";
+    exit;
+  }
+  if(!$needresult)return;
+  $tmp = mysql_query('select last_insert_id()');
+  $tmp2 = mysql_fetch_row($tmp);
+  return $tmp2[0];
+}
+
+$bgsql = '';
+$bgfds = array();
+function mysql_insert_background($sql)
+{
+  global $bgsql, $bgfds;
+  $bgsql .= $sql . ';';
+  if(strlen($bgsql) >= 32768)
+  {
+    $s='echo '.shellfix($bgsql).
+         '|'.shellfix('@MYSQL@').
+         ' '.shellfix('-u@SQLUSER@');
+    if(strlen('@SQLHOST@') > 0)$s .= ' '.shellfix('-h@SQLHOST@');
+    if(strlen('@SQLPASS@') > 0)$s .= ' '.shellfix('-p@SQLPASS@');
+    $s .= ' '.shellfix('@SQLBASE@');
+    #print "$s\n";
+    $bgfds[] = array('time'=>time(), 'fd'=>popen($s, 'r'));
+    $bgsql = '';
+  }
+  $mintime = (32-count($bgfds));
+  foreach($bgfds as $id=>$tab)
+  {
+    if($tab['time'] < time()-$mintime)
+    {
+      $s = fgets($tab['fd'], 4096);
+      if($s === FALSE)
+      {
+        pclose($tab['fd']);
+        unset($bgfds[$id]);
+      }
+      else
+      {
+        print "Hmm: '$s'\n";
+      }
+    }
+  }
+}
+function mysql_background_end()
+{
+  global $bgsql, $bgfds;
+  if(strlen($bgsql) > 0)
+  {
+    $s='echo '.shellfix($bgsql).
+         '|'.shellfix('@MYSQL@').
+         ' '.shellfix('-u@SQLUSER@');
+    if(strlen('@SQLHOST@') > 0)$s .= ' '.shellfix('-h@SQLHOST@');
+    if(strlen('@SQLPASS@') > 0)$s .= ' '.shellfix('-p@SQLPASS@');
+    $s .= ' '.shellfix('@SQLBASE@');
+    #print "$s\n";
+    $bgfds[] = array('time'=>time(), 'fd'=>popen($s, 'r'));
+    $bgsql = '';
+  }
+  foreach($bgfds as $id=>$tab)
+  {
+    $s = fgets($tab['fd'], 4096);
+    if($s === FALSE)
+    {
+      pclose($tab['fd']);
+      unset($bgfds[$id]);
+    }
+    else
+    {
+      print "Hmm: '$s'\n";
+    }
+  }
+}

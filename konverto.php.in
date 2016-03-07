@@ -1,0 +1,200 @@
+<?php
+
+include 'konvertfun.php';
+
+$dicts = array
+(
+  # DICT LIST BEGIN
+  '4jwords'   => 'Common 4-kanji words',
+  'aviation'  => 'Flight terms (aviation)',
+  'classical' => 'Classical Japanese',
+  'compdic'   => 'Computing and Communications',
+  'concrete'  => 'Concretes',
+  'engscidic' => 'Engineering and science',
+  'findic'    => 'Financial terms',
+  'geodic'    => 'Geological terms',
+  'j_places'  => 'Japanese place names',
+  'lawgledt'  => 'Law terms',
+  'lingdic'   => 'Linguistic terms',
+  'mktdic'    => 'Business and marketing',
+  'pandpdic'  => 'Pulp & Paper Industry',
+  'stardict'  => 'Star constellations',
+  'edict'     => 'Main EDICT',
+  'enamdict'  => 'Proper names'
+  # DICT LIST END
+
+ #'ediclsd3'  => 'Life Sciences',
+ # Distributing this requires a written permission
+ # from the LSD3 project coordinator, Dr Shuji Kaneko.
+);
+$terms = array
+(
+@ATTRLIST@
+  'loc' => 'location',
+  'city'=> 'city'
+);
+
+function Table($s)
+{
+  switch($s)
+  {
+    case 'japdata':
+    case 'japtrans':
+    case 'japattr':
+    case 'japdict':
+      return $s;
+    default:
+      return $s;
+  }
+}
+
+$entryjob = array();
+$entrycount = 0;
+function AddEntry($dict_id, $kanji, $kana, $transql, $attrsql)
+{
+  global $entryjob, $entrycount;
+  $entryjob[$entrycount++] = array('dictid'=>$dict_id, 'kanji'=>$kanji, 'kana'=>$kana, 'trans'=>$transql, 'attrs'=>$attrsql);
+  if($entrycount >= 2048)
+  {
+    # This grouping makes kakasi / recode calls occur not so often.
+    
+    EntryFlush();
+  }
+}
+function EntryFlush()
+{
+  global $entryjob, $entrycount, $cset;
+  global $dataid;
+  
+  $f = fopen('/tmp/edict-konverto.tmp', 'w');
+
+  for($c=0; $c<$entrycount; $c++)
+    fwrite($f, $entryjob[$c]['kanji'] . "\n" . $entryjob[$c]['kana'] . "\n");
+  
+  fclose($f);
+  
+  $f1 = popen('kakasi -Ha -Ka -Ja -Ea -s </tmp/edict-konverto.tmp', 'r');
+  $f2 = popen('recode -f '.$cset.'..utf8 </tmp/edict-konverto.tmp', 'r');
+
+  for($c=0; $c<$entrycount; $c++)
+  {
+    $kanjir= fgets($f1, 256);
+    $kanar = fgets($f1, 256);
+    $kanji = fgets($f2, 256);
+    $kana  = fgets($f2, 256);
+    
+    $dataid++;
+    
+    mysql_insert_background(str_replace('\n','',
+       'insert into '.Table('japdata').' set id='.$dataid
+      .',dict_id='.$entryjob[$c]['dictid']
+      .',kanjir='.sqlfix($kanjir)
+      .',kanar='.sqlfix($kanar)
+      .',kanji='.sqlfix($kanji)
+      .',kana='.sqlfix($kana)
+       ));
+    
+    if(count($entryjob[$c]['trans']))
+    {
+      $s = 'insert into '.Table('japtrans').'(trans_id,name)values';
+      while(list($dummy, $trans) = each($entryjob[$c]['trans']))
+        $s .= ',('.$dataid.','.sqlfix($trans).')';
+      
+      mysql_insert_background(str_replace('values,(', 'values(', $s));
+    }
+
+    if(count($entryjob[$c]['attrs']))
+    {
+      $s = 'insert into '.Table('japattr').'(trans_id,name)values';
+      while(list($dummy, $attr) = each($entryjob[$c]['attrs']))
+        $s .= ',('.$dataid.','.sqlfix($attr).')';
+      
+      mysql_insert_background(str_replace('values,(', 'values(', $s));
+    }
+  }
+  pclose($f1);
+  pclose($f2);
+  unlink('/tmp/edict-konverto.tmp');
+  $entrycount = 0;
+}
+
+$tmp = mysql_query('select max(id)from '.Table('japdata'));
+$tmp2 = mysql_fetch_row($tmp);
+if(!$tmp2)$dataid=0;else $dataid = $tmp2[0];
+
+ob_implicit_flush(TRUE);
+foreach($dicts as $filename => $desc)
+{
+  $dict_id = mysql_insert(
+    'insert into '.Table('japdict').
+     ' set name='.sqlfix($filename).',description='.sqlfix($desc));
+  
+  $cset = 'eucjp';
+  
+  $f = fopen($filename, 'r');
+  
+  print $filename;
+  
+  for(;;)
+  {
+    $s = fgets($f, 512);
+    if($s === FALSE)break;
+    
+    $s = str_replace("\n", '', $s);
+    
+    $tab = explode('/', $s);
+    
+    $kanji = $tab[0];
+    $sels = count($tab);
+    
+    $kana = ereg_replace('.*\[(.*)\].*', '\1', $kanji);
+    if($kana == $kanji)
+      $kanji = '';
+    else
+      $kanji = trim(ereg_replace('\[.*\]', '', $kanji));
+    $kana = trim($kana);
+    
+    $transql = array();
+    $attrsql = array();
+    for($c=1; $c<$sels; $c++)
+    {
+      $trans = $tab[$c];
+      if($trans == '(P)') continue; /* (delete the 20000 most common marker) */
+      
+      preg_match_all('/\(([^)]*)\)/', $trans, $attrs);
+      
+      foreach($attrs[1] as $d=>$desc)
+        if(ereg('[a-z0-9A-Z],[a-zA-Z]', $desc))
+        {
+          $trans = str_replace($attrs[0][$d], ' ', $trans);
+          $k = explode(',', $desc);
+          unset($attrs[0][$d]);
+          unset($attrs[1][$d]);
+          foreach($k as $kk)
+            $attrs[0][] = '('.($attrs[1][] = $kk).')';
+        }
+      
+      foreach($attrs[1] as $d=>$desc)
+        if(!$terms[$desc])
+        {
+          unset($attrs[0][$d]);
+          unset($attrs[1][$d]);
+        }
+      
+      $trans = trim(str_replace($attrs[0], '', $trans));
+      if(strlen($trans))
+        $transql[] = $trans;
+      foreach($attrs[1] as $tmp)
+        $attrsql[] = $tmp;
+    }
+    if(count($transql))
+      AddEntry($dict_id, $kanji, $kana, array_unique($transql), array_unique($attrsql));
+
+    print '.';
+  }
+  fclose($f);
+  print "\n";
+}
+
+EntryFlush();
+mysql_background_end();

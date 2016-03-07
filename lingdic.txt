@@ -1,0 +1,119 @@
+L I N G D I C
+=============
+Freeware Japanese/English Dictionary of Linguistics, compiled and
+maintained by Francis Bond (bond@cslab.kecl.ntt.co.jp), formatted to
+fit the EDICT format popularized by Jim Breen.  `lingdic' is a
+Japanese/English Dictionary of Computational Linguistics, more
+specifically a list of Japanese words related to the field of
+computational linguistics and their English translations.  The list
+ranges from parts-of-speech to terms used in theoretical and
+computational linguistics.
+
+Note: in many cases, I have translated technical terms on my own, or
+with the help of friends, often there is no known correct form.  If
+any users find any errors, or can suggest any improvements, please
+email me (preferably with your suggestions instantiated as edict
+formatted entries!).
+
+For more information on the format, see the EDICT documentation  It is
+basically one of two forms:
+kana /English/English/
+kanji [kana] /English/
+
+The release of `lingdic' was inspired by Jim Breen's EDICT, a
+voluntary project to produce a freely available Japanese/English
+Dictionary in machine-readable form.  I use it with MULE and edict.el.
+
+The `lingdic' file is copyright, and is distributed in accordance with
+the LINGDIC Licence Statement included at Appendix A.
+
+History
+-------
+
+Lingdic started out as a a list of linguistic terms I kept for myself.
+I converted it to the format used by Edict, Jim Breen's excellent
+public domain dictionary, in late 1994.  I then had a mere 224
+entries (note entries are counted as one line i.e. one japanese index
+word, there are often multiple translations given).
+
+In mid 1994 I merged it with Satoru Ikehara's yougo list of 220 terms, 
+giving a final size of around 350.  
+
+It gradually grew to around 450 terms, mainly through the help of
+Minako Kamezaki.  
+
+In February 1995 I merged it with ATR's term list (1326 entries)
+giving around 1500 entries (there was a lot of overlap).  
+
+This then grew to 1777 entries, again mainly through the help of
+Minako Kamezaki.
+
+In Oct 1996, I merged this list with one given to me by Tim Baldwin
+(802 entries) giving 2333 entries.
+
+In Oct 1996, I merged this list with one given to me by Tim Baldwin
+(802 entries) giving 2333 entries.
+
+After Oct 1996, I merged this list with one given to me by Tsuneko
+"HPSG" Nakazawa (580 entries) giving 2818 entries.
+
+In September 1998 I added some more terms from Satoru Ikehara, and
+made many minor corrections in conjunction with the ANLP termbank
+project.
+
+
+
+Date	 Size	Additions		
+====	 ----	---------		
+1994.06	  224	Bond			
+1994.07	  350	Ikehara (220)		
+1995.01	  450	Bond, Kamezaki		
+1995.02	 1500	ATR (1326)		
+1996.09	 1777	Bond, Kamezaki		
+1996.10	 2333	Baldwin (802)		
+1996.10	 2818	Nakazawa (580)		
+1998.09	 2885	Ikehara (75)		
+
+The current total (lingdic) is 2885 entries.
+
+APPENDIX A: LINGDIC LICENCE STATEMENT
+=====================================
+
+Copyright (C) 1994,1995,1996,1997,1998  Francis Bond
+
+This licence statement and copyright notice applies to the LINGDIC
+Japanese/English Dictionary file, the associated documentation file
+LINGDIC.DOC, and any data files which are derived from them.
+
+COPYING AND DISTRIBUTION 
+
+Permission is granted to make and distribute verbatim copies of these
+files provided this copyright notice and permission notice is
+distributed with all copies.  Any distribution of the files must take
+place without a financial return, except a charge to cover the cost of
+the distribution medium.
+
+Permission is granted to make and distribute extracts or subsets of
+the LINGDIC file under the same conditions applying to verbatim
+copies.
+
+Permission is granted to translate the English elements of the LINGDIC
+file into other languages, and to make and distribute copies of those
+translations under the same conditions applying to verbatim copies.
+
+USAGE 
+
+These files may be freely used by individuals, and may be accessed by
+software belonging to, or operated by, such individuals.
+
+The files, extracts from the files, and translations of the files must
+not be sold as part of any commercial software package, nor must they
+be incorporated in any published dictionary or other printed document
+without the specific permission of the copyright holder.
+
+COPYRIGHT 
+
+Copyright over the documents covered by this statement is held by
+Francis Bond.
+
+

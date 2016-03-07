@@ -1,0 +1,37 @@
+<?php
+
+function PickLink($jiscode)
+{
+  return dechex($jiscode);
+}
+
+function makedictlink($s)
+{
+  $s = ereg_replace('[-. ]', '', $s);
+
+  $url = 'find='.urlencode($s);
+  return '<a href="'.htmlspecialchars($url).'">'.$s.'</a>';
+}
+
+function verblink($s)
+{
+  return 'verb='.urlencode($s);
+}
+
+@mysql_connect('@SQLHOST@', '@SQLUSER@', '@SQLPASS@');
+@mysql_select_db('@SQLBASE@');
+function shellfix($s){return "'".str_replace("'", "'\''", $s)."'";}
+function sqlfix($s) { return "'".mysql_escape_string($s)."'"; }
+function sqlfixlike($s) { return str_replace(array('\\',"'",'%','_'), array('\\\\',"''",'\%','\_'), $s); }
+function mysql_fetch_all($queryid)
+{
+  $struct = array();
+  $primary = -1;
+  while(($tmp2 = mysql_fetch_field($queryid)))
+    { if($tmp2->primary_key)$primary = count($struct); $struct[] = $tmp2; }
+  $tab = array();
+  while(($tmp2 = mysql_fetch_array($queryid)))
+    $tab[($primary<0) ? count($tab) : $tmp2[$primary]] = $tmp2;
+  return $tab;
+}
+

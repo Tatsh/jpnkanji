@@ -1,0 +1,130 @@
+<html><head><meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+ <title>Japanese/English dictionary application</title>
+ <style type="text/css"><!--
+TABLE.toc {border:0px}
+A:link,A:visited{text-decoration:none;color:#2A3B83}
+A:hover{text-decoration:underline;color:#002040}
+A:active{text-decoration:underline;color:#004060;background:#CCD8FF}
+TD.toc   {font-size:80%; font-family:Tahoma; text-align:left}
+H1       {font-size:250%; font-weight:bold} .level1 {text-align:center}
+H2       {font-size:200%; font-weight:bold} .level2 {margin-left:1%}
+H3       {font-size:160%; font-weight:bold} .level3 {margin-left:2%}
+H4       {font-size:145%; font-weight:bold} .level4 {margin-left:3%}
+H5       {font-size:130%; font-weight:bold} .level5 {margin-left:4%}
+H6       {font-size:110%; font-weight:bold} .level5 {margin-left:5%}
+BODY{background:white;color:black}
+CODE{font-family:lucida console,courier new,courier;color:#105000}
+PRE.smallerpre{font-family:lucida console,courier new,courier;font-size:80%;color:#500010;margin-left:30px}
+SMALL    {font-size:70%}
+--></style></head>
+ <body>
+  <h1>Japanese/English dictionary application</h1>
+  <h2 class=level2> 0. Contents </h2>
+  
+  This is the documentation of japkanji-1.6.0.
+<table cellspacing=0 cellpadding=0 class=toc><tr><td width="50%" valign=middle align=left nowrap class=toc>&nbsp;&nbsp;&nbsp;1. <a href="#h0">Purpose</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1. <a href="#h1">Tools</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1.1. <a href="#h2">Dictionary</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1.2. <a href="#h3">Kanji information</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1.3. <a href="#h4">Unicode map</a><br></td>
+<td width="50%" valign=middle align=left nowrap class=toc>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2. <a href="#h5">Functions</a><br>&nbsp;&nbsp;&nbsp;2. <a href="#h6">Copying</a><br>&nbsp;&nbsp;&nbsp;3. <a href="#h7">HTML code</a><br>&nbsp;&nbsp;&nbsp;4. <a href="#h8">Manual</a><br>&nbsp;&nbsp;&nbsp;5. <a href="#h9">Requirements</a><br>&nbsp;&nbsp;&nbsp;6. <a href="#download">Downloading</a><br></td>
+</tr></table><H2 class="level2"><a name="h0"></a>1. Purpose</H2><div class="level2">
+
+</div><H3 class="level3"><a name="h1"></a>1.1. Tools</H3><div class="level3">
+
+Several japanese related tools.
+
+</div><H4 class="level4"><a name="h2"></a>1.1.1. Dictionary</H4><div class="level4">
+
+See an example of the application installation working at
+<a href="http://kanjidict.stc.cx/dict">http://kanjidict.stc.cx/dict</a>.
+
+</div><H4 class="level4"><a name="h3"></a>1.1.2. Kanji information</H4><div class="level4">
+
+Provides varius information about kanji, like different book
+indices etc, and search methods. 
+<p>
+See an example of the application installation working at
+<a href="http://kanjidict.stc.cx/search">http://kanjidict.stc.cx/search</a>.
+
+</div><H4 class="level4"><a name="h4"></a>1.1.3. Unicode map</H4><div class="level4">
+
+Allows you to pick up regions of UNICODE to display in your web browser.
+<p>
+See an example of the application installation working at
+<a href="http://kanjidict.stc.cx/unicodemap">http://kanjidict.stc.cx/unicodemap</a>.
+
+</div><H3 class="level3"><a name="h5"></a>1.2. Functions</H3><div class="level3">
+
+These small features written in php are included:
+
+<ul>
+ <li>gzip compression filter</li>
+ <li>a small caching class</li>
+ <li>Shoudoka-dispatcher</li>
+ <li>Unicode to UTF8 converter</li>
+</ul>
+
+</div><H2 class="level2"><a name="h6"></a>2. Copying</H2><div class="level2">
+
+These applications
+have been written by Joel Yliluoma, a.k.a.
+<a href="http://iki.fi/bisqwit/">Bisqwit</a>,<br>
+and are being distributed under the terms of the
+<a href="http://www.gnu.org/licenses/licenses.html#GPL">General Public License</a> (GPL).<br>
+However, the dictionaries come with different licenses.
+They all have been downloaded from the
+<a href="http://www.csse.monash.edu.au/~jwb/edict.html">home page of the EDICT project</a>.<br>
+Here is a list of the dictionaries and their licenses:<ul>
+<li><em>Aviation</em>: Feel free to do anything, just don't charge anybody else for it.</li>
+<li><em>Classical</em>: Can be used, with acknowledgement, for any free software or server.</li>
+<li><em>Concrete</em>: Please include the readme and happy to receive email.</li>
+<li><em>Ediclsd3</em>: Free for personal, but public or commercial util need a written permission.</li>
+<li><em>Lawgledt</em>: Distributable, but not to be sold.</li>
+<li><em>Lingdic</em>: Distributable, but not to be sold. Publishing on paper needs a written permission.</li>
+<li><em>Findic, Geodic, Mktdic, Pandpgls, Stardict, 4jwords, Engscidich, j_places</em>: Unknown</li>
+<li><em>Compverb</em>: Subset of EDICT, see below</li>
+<li><em>Compdic, edict, enamdict, kanjidic</em>: <a href="http://www.csse.monash.edu.au/groups/edrdg/newlic.html">EDICT license</a></li>
+</ul>
+
+</div><H2 class="level2"><a name="h7"></a>3. HTML code</H2><div class="level2">
+
+If what you want is not a local copy of the dictionary application
+but just a piece of html code to put on your web page, here's some.
+Replace "unihtml" with the character set of your web page or leave
+it like it is.
+<p>
+<code>&lt;form method=GET action="http://kanjidict.stc.cx/"&gt;<br>
+&nbsp;&lt;input type=hidden name="inset" value="unihtml"&gt;<br>
+&nbsp;&lt;table cellspacing=0 cellpadding=0&gt;&lt;tr&gt; <br>
+&nbsp; &lt;td width=125&gt;&amp;#26085;&amp;#26412;&amp;#35486;&amp;#25506;&amp;#12377;&lt;br&gt;&lt;small&gt;(nihongo sagasu)&lt;/small&gt;:<br>
+&nbsp; &lt;td valign=top&gt;&lt;input type=text name=s size=20&gt;<br>
+&nbsp; &lt;td valign=top&gt;&lt;input type=submit value="Go"&gt;<br>
+&nbsp;&lt;/tr&gt;&lt;/table&gt;<br>
+&lt;/form&gt;<br></code>
+
+</div><H2 class="level2"><a name="h8"></a>4. Manual</H2><div class="level2">
+
+To be written.
+
+</div><H2 class="level2"><a name="h9"></a>5. Requirements</H2><div class="level2">
+
+Japkanji requires <a href="http://www.mysql.com/">MySQL</a>
+and <a href="http://www.php.net/">PHP</a> to run;
+<a href="http://kakasi.namazu.org/">Kakasi</a> and
+<a href="http://www.gnu.org/software/recode/">GNU Recode</a>
+for database generation,
+<a href="http://www.perl.org">Perl</a> for configuration,
+<a href="http://oktober.stc.cx/source/charconv.html">charconv</a> for optional &amp;inset -parameter handling,
+and
+<a href="http://www.gnu.org/software/wget/">wget</a> for updating
+the dictionary files from the EDICT master site.<br>
+<a href="http://www.gnu.org/software/make/">GNU Make</a> is also required.
+
+</div><H2 class="level2"><a name="download"></a>6. Downloading</H2><div class="level2">
+   The official home page of japkanji
+   is at <a href="http://bisqwit.iki.fi/source/japkanji.html">http://bisqwit.iki.fi/source/japkanji.html</a>.<br>
+   Check there for new versions.
+</div> <p align=right><small>Generated from
+       <code>progdesc.php</code> (last updated: Sat, 25 Jan 2003 16:52:56 +0200)<br>
+  with <code>docmaker.php</code> (last updated: Fri, 17 Jan 2003 03:15:53 +0200)<br>
+  at Sat, 25 Jan 2003 23:30:07 +0200</small>
+ </p>
+</body>
+</html>
