@@ -79,14 +79,15 @@ function mask_on($ending, $body)
     
     case 't': // ta, te
     
-      if($last == 'ik')         return $first.'it'.$ending; // iku -> itte, not iite
-      if(ereg('[aiueo][auo]$', $last)) return $body . 't' . $ending;
-      if(ereg(       '[mnb]$', $last)) return substr($body, 0, strlen($body)-1) . 'nd' . substr($ending, 1);
-      if(ereg(           'g$', $last)) return substr($body, 0, strlen($body)-1) . 'id' . substr($ending, 1);
-      if(ereg(           'k$', $last)) return substr($body, 0, strlen($body)-1) . 'i'  . $ending;
-      if(ereg(       '[ei]r$', $last)) return substr($body, 0, strlen($body)-1) . $ending;
-      if(ereg(           'r$', $last)) return substr($body, 0, strlen($body)-1) . 't'  . $ending;
-      if(ereg(           's$', $last)) return substr($body, 0, strlen($body)-1) . 'si' . $ending;
+      $vowel = $ending[1];
+      if($last == 'ik')         return $first.'itt'.$vowel; // iku -> itte, not iite
+      if(ereg('[aiueo][auo]$', $last)) return $body . 'tt'.$vowel;
+      if(ereg(       '[mnb]$', $last)) return substr($body, 0, strlen($body)-1) . 'nd'.$vowel;
+      if(ereg(           'g$', $last)) return substr($body, 0, strlen($body)-1) . 'id'.$vowel;
+      if(ereg(           'k$', $last)) return substr($body, 0, strlen($body)-1) . 'it'.$vowel;
+      if(ereg(       '[ei]r$', $last)) return substr($body, 0, strlen($body)-1) . 't'.$vowel;
+      if(ereg(           'r$', $last)) return substr($body, 0, strlen($body)-1) . 'tt'.$vowel;
+      if(ereg(           's$', $last)) return substr($body, 0, strlen($body)-1) . 'sit'.$vowel;
       
       break;
     
@@ -171,40 +172,57 @@ function mask_off($ending, $word)
       if(ereg('nd'.substr($ending,1).'$', $last))
       {
         $b = substr($word, 0, strlen($word) - strlen($ending)-1);
-        return array($b.'m', $b.'n', $b.'b');
+        if($b != '')
+          return array($b.'m', $b.'n', $b.'b');
       }
       #print "first='$first' last='$last' ending='$ending'<br>";
       
-      # ida, ide -> gu */
+      /* ida, ide -> gu */
       if(ereg('id'.substr($ending,1).'$', $last))
-        return substr($word, 0, strlen($word) - strlen($ending)-1) . 'g';
+      {
+        $b = substr($word, 0, strlen($word) - strlen($ending)-1);
+        if($b != '')
+          return $b . 'g';
+      }
       
       /* sita, site -> su */
       if(ereg('si'.$ending.'$', $last))
-        return substr($word, 0, strlen($word) - strlen($ending)-1);
+      {
+        $b = substr($word, 0, strlen($word) - strlen($ending)-1);
+        if($b != '')
+          return $b;
+      }
       
       /* ita, ite -> ku */
-      if(ereg('i'.$ending.'$', $last))
-        return substr($word, 0, strlen($word) - strlen($ending)-1) . 'k';
+      if(ereg('[^ms]i'.$ending.'$', $last))
+      {
+        $b = substr($word, 0, strlen($word) - strlen($ending)-1);
+        #if($b != '')
+          return $b . 'k';
+      }
       
-      /* atta,itta,utta,etta,otta, atte,itte,utte,ette,otte -> _r */
+      /* [aiueo]tta, [aiueo]tte -> _ru, _u, _tu */
       if(ereg('[aiueo]t'.$ending.'$', $last))
       {
-        return substr($word, 0, strlen($word) - strlen($ending)-1) . 'r';
+        $b = substr($word, 0, strlen($word) - strlen($ending)-1);
+        if($b != '')
+          return Array($b.'r', $b.'t', $b);
       }
       
       /* yatta, yatte -> yar, ya, yi, yu, ye, yo */
       if(ereg('t'.$ending.'$', $last))
       {
         $b = substr($word, 0, strlen($word) - strlen($ending)-1);
-        return array($b.'r', $b.'a', $b.'i', $b.'u', $b.'e', $b.'o');
+        if($b != '')
+          return array($b.'r', $b.'a', $b.'i', $b.'u', $b.'e', $b.'o');
       }
       
       /* ta,te -> r */
       if(ereg($ending.'$', $last))
       {
         $b = substr($word, 0, strlen($word) - strlen($ending));
-        return array($b . 'r', $b);
+        if($b != '')
+          return array($b . 'r', $b);
       }
       
       break;
@@ -340,8 +358,8 @@ $functions = array
              'pron' => 'Pronoun form'
                  ),
    'misc' => array(
-             '1' => 'Class I verb',
-             '2' => 'Class II verb',
+             '1' => 'Class I verb (godan)',
+             '2' => 'Class II verb (-eru/-iru, ichidan)',
              'S' => 'Suru-verb',
              'K' => 'Kuru-verb',
              'd' => 'Plain copula',
@@ -365,7 +383,7 @@ $functions = array
           //   'conj'  => 'kute',        // gerund / conjunctive   -- omit this, it's redundant
                'noun'  => 'sa'           // noun form
               ),
-  /* Class I verbs */
+  /* Class I verbs (5dan) */
   '1' => array(
   /* Intermediate */
                'pot'   => 'e:2',       // potential
@@ -388,7 +406,7 @@ $functions = array
                'noun'  => 'i',         // noun form
                'pron'  => 'u no'       // pronoun form
               ),
-  /* Class II verbs */
+  /* Class II verbs (1dan) */
   '2' => array(
   /* Intermediate */
                'pass'  => 'rare:2',    // passive

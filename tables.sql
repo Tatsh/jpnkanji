@@ -10,7 +10,7 @@ CREATE TABLE japdict
   description VARCHAR(64) NOT NULL
   
   , KEY name(name(8))
-);
+) type=innodb;
 
 # Dictionary line.
 CREATE TABLE japdata
@@ -30,7 +30,9 @@ CREATE TABLE japdata
   , KEY dict_id(dict_id)
   , KEY kanji(kanji(8)), KEY kanjir(kanjir(10))
   , KEY kana(kana(16)), KEY kanar(kanar(9))
-);
+  
+  ,FOREIGN KEY(dict_id)REFERENCES japdict(id)ON DELETE CASCADE ON UPDATE CASCADE
+) type=innodb;
 
 # Translations for each dictionary line
 CREATE TABLE japtrans
@@ -45,7 +47,9 @@ CREATE TABLE japtrans
   
   , KEY trans_id(trans_id)
   , KEY name(name(12))
-);
+  
+  ,FOREIGN KEY(trans_id)REFERENCES japdata(id)ON DELETE CASCADE ON UPDATE CASCADE
+) type=innodb;
 
 # Attributes of translation
 CREATE TABLE japattr
@@ -60,20 +64,9 @@ CREATE TABLE japattr
   
   , KEY trans_id(trans_id)
   , KEY name(name)
-);
-
-CREATE TABLE dictlog
-(
-  id       INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  search   VARCHAR(255) NOT NULL,
-  # Search type
-  stype    VARCHAR(16) NOT NULL,
   
-  date     INT(11) NOT NULL,
-  hostname VARCHAR(255) NOT NULL
-  
-  , KEY date(date)
-);
+  ,FOREIGN KEY(trans_id)REFERENCES japdata(id)ON DELETE CASCADE ON UPDATE CASCADE
+) type=innodb;
 
 # KANJI DATABASE PART
 
@@ -129,8 +122,9 @@ CREATE TABLE japkanji
   
   # From Unihan.txt: The value of the character
   # when used in the writing of accounting numerals.
-  numericvalue   INT(6)       NOT NULL DEFAULT 0
-
+  numericvalue   INT(6)       NOT NULL DEFAULT 0,
+  
+  partcount      SMALLINT     NOT NULL DEFAULT 0
   
   ,UNIQUE utf8kanji(utf8kanji)
   ,UNIQUE indexv(indexv)
@@ -143,7 +137,8 @@ CREATE TABLE japkanji
   ,KEY skip1(skip1), KEY skip2(skip2), KEY skip3(skip3)
   ,KEY frequency(frequency), KEY freqorder(freqorder)
   ,KEY fourcorner1(fourcorner1), KEY fourcorner2(fourcorner2)
-);
+  ,KEY partcount(partcount)
+) type=innodb;
 
 CREATE TABLE kanjiparts
 (
@@ -153,14 +148,18 @@ CREATE TABLE kanjiparts
   
   ,KEY jiscode(jiscode)
   ,KEY partcode(partcode)
-);
+
+  ,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+) type=innodb;
 
 CREATE TABLE kanjiradstrokes
 (
   partcode SMALLINT(5) UNSIGNED NOT NULL PRIMARY KEY,
   strokes  TINYINT(2) UNSIGNED NOT NULL
   ,KEY strokes(strokes)
-);
+
+  ,FOREIGN KEY(partcode)REFERENCES kanjiparts(partcode)ON DELETE CASCADE ON UPDATE CASCADE
+) type=innodb;
 
 
 CREATE TABLE kanjisimilarity
@@ -171,7 +170,10 @@ CREATE TABLE kanjisimilarity
   ,PRIMARY KEY(jiscode1,jiscode2)
   ,KEY jiscode2(jiscode2)
   ,KEY unsimilarity(unsimilarity)
-);
+
+  ,FOREIGN KEY(jiscode1)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+  ,FOREIGN KEY(jiscode2)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+) type=innodb;
 
 # Note: Max 3 per japkanji (appears so)
 CREATE TABLE kanjikorea
@@ -185,7 +187,9 @@ CREATE TABLE kanjikorea
 
   , KEY jiscode(jiscode)
   , KEY romaji(romaji(5))
-);
+
+  ,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+) type=innodb;
 
 # Note: Max 7 per japkanji (appears so)
 CREATE TABLE kanjichina
@@ -199,7 +203,9 @@ CREATE TABLE kanjichina
 
   , KEY jiscode(jiscode)
   , KEY romaji(romaji(5))
-);
+
+  ,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+) type=innodb;
 
 # Note: Max 19 per japkaji (appears so)
 CREATE TABLE kanjijapan
@@ -219,7 +225,9 @@ CREATE TABLE kanjijapan
   , KEY jiscode(jiscode)
   , KEY kana(kana(16)), KEY kanar(kanar(8))
   , KEY type(type)
-);
+
+  ,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+) type=innodb;
 
 # Translations for each kanji
 CREATE TABLE kanjitrans
@@ -234,4 +242,21 @@ CREATE TABLE kanjitrans
   
   , KEY jiscode(jiscode)
   , KEY name(name(12))
+
+  ,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+) type=innodb;
+
+# Logging
+
+CREATE TABLE dictlog
+(
+  id       INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  search   VARCHAR(255) NOT NULL,
+  # Search type
+  stype    VARCHAR(16) NOT NULL,
+  
+  date     INT(11) NOT NULL,
+  hostname VARCHAR(255) NOT NULL
+  
+  , KEY date(date)
 );

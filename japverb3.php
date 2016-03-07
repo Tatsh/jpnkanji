@@ -2,12 +2,12 @@
 
 /* This file is maintained in ~/src/japkanji/ - do not modify otherwhere */
 
-if($dump)header('Content-type: text/html; charset='.$dump);
-include '/WWW/cache.php';
-cache_init(0);
+include_once '/WWW/slowloading.php';
+
+if($dump)AddHTTPheader('Content-type: text/html; charset='.$dump);
 
 #$omitmenu=1;
-include '/WWW/headers.php';
+include_once '/WWW/headers.php';
 
 $stylext .= 'TH.jpoz{background:#CCCCCC}'.
             'TD.jpdat{background:#EEEEEE}'.
@@ -288,7 +288,7 @@ if($s)
 
 ?>
 <p><small>Written by Bisqwit (<a href="http://bisqwit.iki.fi/">http://bisqwit.iki.fi/</a>)</small>
-<p>See also: <a href="http://www.geom.umn.edu/~burchard/nihongo/">Paul Burchard's verb tables</a>
+<p>See also: <a href="http://www.geom.uiuc.edu/~burchard/nihongo/">Paul Burchard's verb tables</a>
 
 <?
 Epilogue();
@@ -299,4 +299,5 @@ strictly limited to the progress of my Japanese studies.
 
 <?
 Footers();
-cache_end();
+
+EndSlowLoading();

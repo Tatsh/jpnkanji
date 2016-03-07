@@ -1,5 +1,7 @@
 <?php
 
+error_reporting  (E_ERROR | E_WARNING | E_PARSE);
+
 function dump($tree, $ind=0)
 {
   $c=0;
@@ -70,7 +72,7 @@ function Add($p)
   global $ret;
   $p = Tsu($p);
   if(ereg('^[^hi]', $p))$ret[] = explode(' ', $p);
-  $cmd = "/WWW/hiragana '".$p."'|charconv unihtml utf8 2>/dev/null";
+  $cmd = "/WWW/hiragana '".$p."'|recode html..utf8 2>/dev/null";
   $k = explode(' ', exec($cmd));
   $ret[] = $k;
 }

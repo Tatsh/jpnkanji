@@ -1,7 +1,7 @@
 <?php
-//TITLE=Japanese/English dictionary application
+//TITLE=Japanese/English web dictionary application
 
-$title = 'Japanese/English dictionary application';
+$title = 'Japanese/English web dictionary application';
 $progname = 'japkanji';
 
 $text = array(
@@ -97,6 +97,12 @@ and
 <a href=\"http://www.gnu.org/software/wget/\">wget</a> for updating
 the dictionary files from the EDICT master site.<br>
 <a href=\"http://www.gnu.org/software/make/\">GNU Make</a> is also required.
+
+", '1. How to install' => "
+
+From what feedback I have got, this package is not easy to install.<br>
+Which is not really a surprise to me....<br>
+But some have succeeded. Ganbatte kudasai :)
 
 ");
 include '/WWW/progdesc.php';

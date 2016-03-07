@@ -1,9 +1,11 @@
-AC_INIT(japkanji,1.6.4,bisqwit@iki.fi)
+AC_INIT(japkanji,1.7.0,bisqwit@iki.fi)
 
 AC_SUBST(VERSION,"$PACKAGE_VERSION")
 
 #AC_CONFIG_SRCDIR(tables.sql)
 AC_PROG_CPP
+
+# Use autoconf 2.50
 
 AC_SUBST(SQLHOST, "localhost")
 AC_ARG_WITH(sqlhost,

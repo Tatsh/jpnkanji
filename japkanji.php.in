@@ -2,7 +2,7 @@
 
 /* This file is maintained in ~/src/japkanji/ - do not modify otherwhere */
 
-#print '<h1>DICTIONARY DATABASE UNDER RECONSTRUCTION, COME BACK IN 24 HOURS</h1>Message left Wed Apr 24 06:07:32 EEST 2002';
+#print '<h1>DICTIONARY DATABASE UNDER RECONSTRUCTION, COME BACK IN 24 HOURS</h1>Message left Fri Mar 18 14:05:26 EET 2005';
 #exit;
 
 putenv('PATH=/usr/local/bin:'.getenv('PATH'));
@@ -17,26 +17,21 @@ if(!$REMOTE_ADDR)
 if(!$outset)
   $outset = 'utf-8';
 
-if(!$noctheader)
-  header('Content-type: text/html; charset='.$outset);
+include_once '/WWW/slowloading.php';
 
-include '/WWW/cache.php';
-if($outset == 'utf-8')
-{
-  if(cache_init(36000, array('uri'=> $REQUEST_URI,'time'=>filemtime('japkanji.php'))))
-    cache_dump_exit();
-}
+if(!$noctheader)
+  AddHTTPheader('Content-type: text/html; charset='.$outset);
 
 require 'kanjisqlfun.php';
 
 if($outset != 'utf-8')
 {
-  ob_start();
+  include_once '/WWW/japcharset.php';
 }
 
 print "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n";
 
-include '/WWW/headers.php';
+include_once '/WWW/headers.php';
 
 $hdrs .= '<meta http-equiv="Content-Type" content="text-html; charset='.$outset.'">'.
          '<meta name="robots" content="nofollow">'.
@@ -838,14 +833,10 @@ function poptoggle()
 }
 Footers();
 
-if($outset == 'utf-8')
-{
-  cache_end();
-}
-
 if($outset != 'utf-8')
 {
-  $s = ob_get_contents();
-  ob_end_clean();
-  passthru('echo '.shellfix($s).'|recode utf8..'.shellfix($outset).' 2>&1');
+  CharSetEnd('utf8', $outset);
 }
+
+EndSlowLoading();
+

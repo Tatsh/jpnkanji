@@ -2,6 +2,9 @@
 
 /* This file is maintained in ~/src/japkanji/ - do not modify otherwhere */
 
+#print '<h1>DICTIONARY DATABASE UNDER RECONSTRUCTION, COME BACK IN 24 HOURS</h1>Message left Fri Mar 18 14:05:26 EET 2005';
+#exit;
+
 if(!$REMOTE_ADDR)
 {
   foreach(explode('&', $_SERVER['argv']) as $var=>$value)

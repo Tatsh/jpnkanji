@@ -1,5 +1,7 @@
 <?php
 
+error_reporting  (E_ERROR | E_WARNING | E_PARSE);
+
 include 'konvertfun.php';
 
 $dicts = array
@@ -26,6 +28,9 @@ $dicts = array
  #'ediclsd3'  => 'Life Sciences',
  # Distributing this requires a written permission
  # from the LSD3 project coordinator, Dr Shuji Kaneko.
+ 
+ #'compverb'  => 'Compound verbs'
+ # All of them are already in EDICT 
 );
 $terms = array
 (

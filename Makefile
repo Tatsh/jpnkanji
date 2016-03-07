@@ -11,17 +11,24 @@ SEARCHFILES= \
           searchmodules/strokecount.php \
           searchmodules/customize.php
 
+UTILITYINCLUDES= \
+          headers.php cache.php gzcompress.php \
+          slowloading.php headerfun.php japcharset.php \
+          utf8.php smallcache.php shodouka.php
+
 ARCHDIR=archives/
 ARCHNAME=japkanji-$(VERSION)
 ARCHFILES=$(DICTFILES) kanjidic radkfile simgen.php \
-          cache.php gzcompress.php deconjfun.php \
-          headers.php makediff.php progdesc.php \
+	  \
+	  $(UTILITYINCLUDES) \
+          \
+          deconjfun.php \
+          makediff.php progdesc.php \
           tables.sql COPYING edict_license.html \
           configure configure.in updatescript \
           japkanji.php.in japkanjilist.php kanjisearch.php \
           konverto.php.in kanjikonverto.php.in konvertfun.php.in \
           kanjisqlfun.php.in \
-          smallcache.php utf8.php shodouka.php \
           unique2.php japverb.php japverb3.php .htaccess \
           settings.mak.in templates.mak \
           japkanji.css jislist.php \
@@ -44,8 +51,8 @@ default all: templatechecks
 
 sql: templatechecks tables.sql $(MYSQL)
 	-echo create database "$(SQLBASE)" | $(RUNSQL)
-	(echo use "$(SQLBASE);";grep -v "KEY " tables.sql) | $(RUNSQL)
-	echo use "$(SQLBASE);" `sed 's/#.*//'<tables.sql|grep .`|tr ';' '\012'|"$(PERL)" -pe 's/CREATE TABLE/ALTER TABLE/;s/PRIMARY KEY/foo/;s/\(.*?KEY/KEY/;s/KEY/ADD INDEX/g;s/\)$$/;/' | $(RUNSQL)
+	(echo use "$(SQLBASE);";egrep -v "KEY |FOREIGN KEY" tables.sql) | $(RUNSQL)
+	#echo use "$(SQLBASE);" `sed 's/#.*//'<tables.sql|grep .`|tr ';' '\012'|"$(PERL)" -pe 's/CREATE TABLE/ALTER TABLE/;s/PRIMARY KEY/foo/;s/\(.*?KEY/KEY/;s/KEY/ADD INDEX/g;s/\)$$/;/' | $(RUNSQL)
 	#-(echo use "$(SQLBASE);";cat tables.sql) | $(RUNSQL)
 
 data: FORCE templatechecks konverto.php konvertfun.php $(PHP)
@@ -59,7 +66,7 @@ kanjidata: FORCE templatechecks kanjikonverto.php konvertfun.php $(PHP)
 Unihan.txt: FORCE
 	wget "ftp://ftp.unicode.org/Public/UNIDATA/Unihan.txt"
 
-install: templatechecks
+install: templatechecks masut.php
 	@echo '*** There is no installation method provided.'
 	@echo '***   Try "$(MAKE)" to see what you should do / have done first.'
 	@echo '***   When it is done, you can copy these files to a directory'
@@ -113,9 +120,7 @@ cancelwait: FORCE
 	@sleep 1
 	@echo 0
 
-# Utilityt jotka asennetaan /WWW -hakemistoon ja symlinkataan japtoolsiin
-BISQINSTUTILS=utf8.php smallcache.php gzcompress.php shodouka.php \
-              unique2.php deconjfun.php
+BISQINSTUTILS=unique2.php deconjfun.php
 bisqinstallchecks: templatechecks $(SEARCHFILES) $(BISQINSTUTILS)
 
 # Tiedostot jotka asennetaan japtoolsiin

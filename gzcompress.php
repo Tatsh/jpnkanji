@@ -6,6 +6,8 @@
  *   Copyright (C) 1992,2002 Bisqwit (http://bisqwit.iki.fi/)
  */
 
+include_once '/WWW/headerfun.php';
+
 function GzCompressStart()
 {
   global $cache_encoding;
@@ -29,8 +31,8 @@ function GzCompressEnd()
     $crcp = pack('V', crc32($s));
     $lenp = pack('V', strlen($s));
 
-    header('Content-Encoding: '.$cache_encoding);
-    header('Vary: Accept-Encoding');
+    AddHTTPheader('Content-Encoding: '.$cache_encoding);
+    AddHTTPheader('Vary: Accept-Encoding');
     echo "\x1f\x8b\x08\x00\x00\x00\x00\x00", // gzip header
          substr($c, 0, strlen($c)-4), $crcp, $lenp;
     flush();

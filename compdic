@@ -1,4 +1,4 @@
-？？？？ /COMPDIC 24OCT02 V02-001/Computing and Communications Dictionary File/Copyright J.W. Breen - 2002/
+？？？？ /COMPDIC 13MAR04 V04-001/Computing and Communications Dictionary File/Copyright J.W. Breen - 2004/
 AT互換機 [エーティーごかんき] /AT-compatible/
 １０個１組 [１０こ１くみ] /decade/
 １０進 [１０しん] /decimal/
@@ -303,7 +303,6 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 アソシエーション応答側応用エンティティ [アソシエーションおうとうがわおうようエンティティ] /association-responding-application-entity/association-responder/
 アソシエーション起動側 [アソシエーションきどうがわ] /association-initiator/
 アソシエーション起動側応用エンティティ [アソシエーションきどうがわおうようエンティティ] /association-initiating-application-entity/association-initiator/
-アソシエーション制御サービス要素 [アソシエーションせいぎょサービスようそ] /Association Control Service Element/
 アソシエーション制御プロトコル機械 [アソシエーションせいぎょプロトコルきかい] /Association Control Protocol Machine/
 アタックパターン /attack pattern/
 アタッチメント /attachment/
@@ -331,7 +330,8 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 アップルデスクトップバス /Apple Desktop Bus/
 アップルメニュー /Apple menu/
 アップル拡張キーボード [アップルかくちょうキーボード] /Apple Extended Keyboard/
-アップロード /upload/
+アップロード /(vs) upload/
+アップ /(vs,abbr) upload/
 アップワードコンパチブル /upward compatibility/upward compatibile/
 アト /atto represents 10^-18/
 アトリビューション /attribution/
@@ -1945,7 +1945,7 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 コマンド駆動型システム [コマンドくどうがたシステム] /command driven method/command-driven system/
 コマンド検索パス [コマンドけんさくパス] /command search path/
 コマンド行 [コマンドぎょう] /command line/
-コマンド行引数 [コマンドぎょういんすう] /command line argument/
+コマンド行引数 [コマンドぎょうひきすう] /command line argument/
 コマンド待ち状態 [コマンドまちじょうたい] /command state/
 コマンド入力 [コマンドにゅうりょく] /command input/
 コマンド入力型インタフェース [コマンドにゅうりょくがたインタフェース] /command-oriented user interface/
@@ -2061,7 +2061,6 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 コンピュータウィルス /computer virus/
 コンピュータグラフィクスのメタファイル /Computer Graphics Metafile: CGM/
 コンピュータグラフィクスインタフェース /Computer Graphics Interface: CGI/
-コンピュータグラフィックス /computer graphics/
 コンピュータゲーム /computer game/
 コンピュータサイエンス /computer-science/
 コンピュータソフトウェア /computer-software/
@@ -2333,7 +2332,6 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 システムアーキテクチャ /system architecture/
 システムアクティビティ /system activity/
 システムイニ /SYSTEM.INI/
-システムインテグレーション /system integration/
 システムインテグレータ /system integrator/
 システムエラー /system error/
 システムエンジニア /system engineer/
@@ -2774,7 +2772,7 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 セション生存期間 [せしょんせいぞんきかん] /session lifetime/
 セス /CES/
 セッション /session/
-セット /set  (vs) (e.g. a counter)/
+セット /set (vs) (e.g. a counter)/
 セットアップ /setup (vs)/
 セットアップエグゼ /setup.exe/
 セットアップメッセージ /SETUP message/
@@ -3630,7 +3628,6 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 ドーターカード /daughter card/
 ドータカード /daughter card/
 ドゥーム /Doom/
-ドキュメンテーション /documentation/
 ドキュメンテーションセンタ /information centre/documentation centre/
 ドキュメンテーション言語 [ドキュメンテーションげんご] /documentary language/
 ドキュメント /document/
@@ -4083,7 +4080,6 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 パーセンタイル /percentile/
 パーセント /percentage/
 パーセント記号 [パーセントきごう] /percent sign/
-パーソナルコンピュータ /PC/personal computer/
 パーソナルコンピューター /personal computer/
 パーソナルデジタルアシスタント /personal digital assistant (PDA)/
 パーツ /parts (as in computer parts)/
@@ -5128,7 +5124,6 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 ポイントツーポイントプロトコル /point to point protocol (PPP)/
 ポイントツーポイント接続 [ポイントツーポイントせつぞく] /point-to-point connection/
 ポケット /pocket/
-ポケットコンピュータ /pocket computer/
 ポケットコンピューター /pocket computer/
 ポケット計算器 [ぽけっとけいさんき] /pocket calculator/hand-held calculator/
 ポケベル /pager/
@@ -6153,21 +6148,20 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 印字欄 [いんじらん] /print zone/
 因子集合 [いんししゅうごう] /factor set/
 因子分析 [いんしぶんせき] /factor analysis/
-因数 [いいんすう] /factor/
 因数 [いんすう] /factor/
-因数分解 [いいんすうびんかい] /factorization/
+因数分解 [いんすうびんかい] /factorization/
 引き数 [ひきすう] /argument (e.g. function, program)/
 引込みケーブル [ひきこみケーブル] /drop cable/
-引数 [いんすう] /argument/
-引数 [ひきすう] /parameter/
-引数キーワード [いんすうキーワード] /argument keyword/
-引数リスト [いんすうリスト] /argument list/
-引数結合 [いんすうけつごう] /argument association/
+引数 [いんすう] /(non-standard reading) argument/parameter/
+引数 [ひきすう] /argument/parameter/
+引数キーワード [ひきすうキーワード] /argument keyword/
+引数リスト [ひきすうリスト] /argument list/
+引数結合 [ひきすうけつごう] /argument association/
 引数実体 [ひきすうじったい] /parameter entity/
 引数実体参照 [ひきすうじったいさんしょう] /parameter entity reference/
 引数表記 [ひきすうひょうき] /parameter literal/
 引数分離子 [ひきすうぶんりし] /parameter separator/
-引数領域 [いんすうりょういき] /argument range/
+引数領域 [ひきすうりょういき] /argument range/
 引用 [いんよう] /citation/reference/
 引用索引 [いんようさくいん] /citation index/
 引用仕様 [いんようしよう] /interface/
@@ -6383,7 +6377,6 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 化けチェック [ばけチェック] /parity check (data, memory, etc.)/
 仮パラメタ [かりパラメタ] /(formal) parameter/dummy argument/
 仮ポインタ [かりポインタ] /dummy pointer/
-仮引数 [かりいんすう] /dummy argument/parameter/
 仮引数 [かりひきすう] /(formal) parameter/dummy argument/
 仮原文 [かりげんぶん] /pseudo-text/
 仮原文区切り記号 [かりげんぶんくぎりきごう] /pseudo-text delimiter/
@@ -7220,7 +7213,6 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 共通因数 [きょうつういんすう] /common factor/
 共通化 [きゅうつうか] /collaboration/
 共通割付け構造 [きょうつうわりつけこうぞう] /generic layout structure/
-共通管理情報サービス [きょうつうかんりじょうほうサービス] /Common Management Information Services/CMIS/
 共通管理情報サービス要素 [きょうつうかんりじょうほうサービスようそ] /Common Management Information Service Element/CMISE/
 共通業務 [きょうつぎょうむ] /common task/
 共通細目 [きょうつうさいもく] /common subdivision/
@@ -7956,7 +7948,7 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 高帯域 [こうたいいき] /wide area/
 高帯域ネットワーク [こうたいきねっとわあく] /wide area network/WAN/
 高度サービス [こうどサービス] /enhanced service/
-高度化 [ぽうどか] /to increase speed (vs)/
+高度化 [こうどか] /to increase speed (vs)/
 高度技術 [こうどぎじゅつ] /high-tech (a-no)/high-technology/
 高度交通システム [こうどこうつうしすてむ] /ITS/intelligent transportation systems/
 高度通信システム相互接続 [こうそくつうしんシステムそうごせつぞく] /HATS/Harmonization of Advanced Telecommunication Systems/
@@ -8561,8 +8553,7 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 実パラメタ [じつパラメタ] /actual parameter/(actual) argument/
 実ファイル [じつファイル] /real file/
 実ファイルストア [じつファイルすとあ] /real filestore/
-実引き数 [じつひきすう] /actual argument/
-実引数 [じついんすう] /actual argument/
+実引き数 [じつひきすう] /actual parameter/(actual) argument/
 実引数 [じつひきすう] /actual parameter/(actual) argument/
 実開放型システム [じつかいほうがたシステム] /real open system/
 実記憶 [じつきおく] /real storage/
@@ -10485,7 +10476,6 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 定義可能 [ていぎかのう] /definable/
 定義済み [ていぎずみ] /built-in/predefined/
 定義済み関数 [ていぎずみかんすう] /predefined function/
-定義済み変数 [ていぎぐみいんすう] /predefined variable/
 定義済み変数 [ていぎすみへんすう] /built-in variable/predefined variable/
 定義文字実体集合 [ていぎもじじったいしゅうごう] /definitional character entity set/
 定形郵便ＯＲアドレス [ていけいゆうびんＯＲアドレス] /formatted postal OR address/
@@ -12236,7 +12226,7 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 輸出権 [ゆしゅつけん] /export license, permit/
 輸送問題 [ゆそうもんだい] /transportation problem/
 優先 [ゆうせん] /precedence (vs)/
-優先Ｎサービスデータ単位 [ゆうせんＮサービスデータたんい] /expedited (N)-service-data-unit/〈N〉expedited-data-unit/
+優先Ｎサービスデータ単位 [ゆうせんＮサービスデータたんい] /expedited (N)-service-data-unit/(N)-expedited-data-unit/
 優先リンクセット [ゆうせんリンクセット] /priority link set/
 優先語 [ゆうせんご] /preferred term/
 優先使用語 [ゆうせんしようご] /preferred term/
@@ -12572,3 +12562,1598 @@ AT互換機 [エーティーごかんき] /AT-compatible/
 輻輳状態 [ふくそうじょたい] /congestion condition/congestion state/
 輻輳制御 [ふくそうせいぎょ] /(collision) congestion control/
 鉤括弧 [かぎかっこ] /square bracket/
+コンポーネントトランザクションモニター /(n) component transaction monitor (CTM)/
+アーケードゲーム /(n) arcade game/
+アービトレーション /(n) arbitration/
+アイビームポインタ /(n) I-beam pointer/
+あいまい検索 [あいまいけんさく] /(n) fuzzy reference/
+アイマックス /(n) IMAX/
+アウトオブオーダー実行 [アウトオブオーダーじっこう] /(n) out of order execution/
+アウトプット /(n) output/
+アクションゲーム /(n) action game/
+アクセサリ /(n) accessory/
+アクセスコントロールリスト /(n) access control list (ACL)/
+アクセスタイム /(n) access time/
+アクセスチャージ /(n) access charge/
+アクティブサーバーページ /(n) Active Server Page (ASP)/
+アクティブセル /(n) active cell/
+アクティブターミネータ /(n) active-terminaor/
+アクティブマトリクス方式 [アクティブマトリクスほうしき] /(n) active matrix/
+アジマス角 [アジマスかく] /(n) azimuth angle/
+アスキーネット /(n) ASCII Net/
+アスキーファイル /(n) ASCII file/
+アスペクト比 [アスペクトひ] /(n) aspect ratio/
+アスペクトレシオ /(n) aspect ratio/
+アセンダ /(n) ascender/
+アセンブル編集 [アセンブルへんしゅう] /(n) assemble edit/
+アソシエーション制御サービス要素 [アソシエーションせいぎょサービスようそ] /(n) association control service element (ACSE)/
+圧縮アーカイバ [あっしゅくアーカイバ] /(n) data compression archivor/
+圧縮アルゴリズム [あっしゅくアルゴリズム] /(n) compression algorithm/
+アット /(n) at/
+アップデート /(n) update/
+アップルトーク /(n) AppleTalk/
+アドインソフトウェア /(n) add-in software/
+アドベンチャーゲーム /(n) adventure game/
+アドレス帳 [アドレスちょう] /(n) address book/
+アドレスマスク /(n) address mask/
+アドレッシング /(n) addressing/
+アナログRGB /(n) analog RGB (red green blue)/
+アナログコンピュータ /(n) analog computer/
+アナログ-デジタル変換器 [アナログ-デジタルへんかんき] /(n) analog-to-digital converter (A/D converter, ADC)/
+アニメーション /(n) animation/
+アニメーテッドGIF /(n) Animated Graphics Interchange Format/
+アパーチャグリル /(n) aperture grille/
+アフィン変換 [アフィンへんかん] /(n) affine transformation/
+アプリケーションキー /(n) application key/
+アプリケーションソフト /(n) application software/
+アフレコ /(n) after recording/
+網掛(け) [あみかけ] /(n) half-tone dot meshing/
+網点 [あみてん] /(n) dot/
+誤り検出符合 [あやまりけんしゅつふごう] /(n) Error-Detecting Code (EDC)/
+アラーム /(n) alarm/
+アルファデータ /(n) Alpha Data/
+アルファニューメリック /(n) alphanumeric/
+アルファ版 [アルファばん] /(n) alpha version/
+アレイ処理機構 [アレイしょりしょりきこう] /(n) array processor/
+アンサーモード /(n) answer mode/
+暗証 [あんしょう] /(n) password/
+アンダーフロー /(n) underflow/
+アンダーライン /(n) underline/
+アンビエント光 [アンビエントこう] /(n) ambient light/
+アンフェノール /(n) Amphenol/
+アンフォーマット /(n) unformat/
+イーサネットアドレス /(n) Ethernet address/
+イースタエッグ /(n) Easter egging/
+イエローブック /(n) yellow book/
+イコライザ /(n) equalizer (EQ)/
+移植 [いしょく] /(n) porting/
+イタリック /(n) Italic/
+イタリック体 [イタリックたい] /(n) Italic/
+一次キャッシュ [いちじキャッシュ] /(n) primary cache/
+一次群速度インターフェース [いちじぐんそくどインターフェース] /(n) primary rate interfase (PRI)/
+一太郎 [いちたろう] /(n) Ichitaro/
+一貫性 [いっかんせい] /(n) consistency/
+一般保護違反 [いっぱんほごいはん] /(n) general protection fault (GPF)/
+遺伝的アルゴリズム [いでんてきアルゴリズム] /(n) genetic algorithm (GA)/
+イネーブラ /(n) enabler/
+イベント駆動 [イベントくどう] /(n) event driven/
+イベントドリブン /(n) event driven/
+イメージスキャナ /(n) image scanner/
+イメージマップ /(n) imagemap/
+イラストレーター /(n) Adobe Illustrator/
+イリジウム計画 [イリジウムけいかく] /(n) IRIDIUM project/
+入れ子 [いれこ] /(n) nesting/
+色温度 [いろおんど] /(n) color temperature/
+色分解 [いろぶんかい] /(n) color separation/
+インアクティブウィンドウ /(n) inactive window (IAW)/
+インクジェット方式 [インクジェットほうしき] /(n) ink-jet method/
+インクルード /(n) include/
+インサート /(n) insert/
+インサート編集 [インサートへんしゅう] /(n) insert edit/
+印刷方式 [いんさつほうしき] /(n) printinng formulas/
+印字解像度 [いんじかいぞうど] /(n) print resolution/
+インストラクション /(n) instruction/
+隠線消去 [いんせんしょうきょ] /(n) hidden-line elimination/
+陰線処理 [いんせんしょり] /(n) hidden line elimination/
+インターキャスト /(n) Intercast/
+インターネットアドレス /(n) Internet address/
+インターネット学会 [インターネットがっかい] /(n) Internet Society (ISOC)/
+インターネットカフェ /(n) Internet cafe/
+インターネット技術推進グループ [インターネットぎじゅつすいしんグループ] /(n) Internet Engineering Steering Group (IESG)/
+インターネット技術特別調査委員会 [インターネットぎじゅつとくべつちょうさいいんかい] /(n) Internet Engineering Task Force (IETF)/
+インターネット研究推進グループ [インターネットけんきゅうすいしんグループ] /(n) Internet Research Steering Group (IRSG)/
+インターネット研究特別調査委員会 [インターネットけんきゅうとくべつちょうさいいんかい] /(n) Internet Research Task Force (IRTF)/
+インターネットサービスプロバイダ /(n) Internet service provider (ISP)/
+インターネットテレビ /(n) Internet television/
+インターネット電話 [インターネットでんわ] /(n) internet phone/
+インターネットプロバイダ /(n) internet provider/
+インターネットワーキング /(n) internetworking/
+インターネットワーク /(n) internetwork/
+インターフェイス /(n) interface/
+インタープリター /(n) interpreter/
+インターリーブ /(n) interleave/
+インターレース /(n) interlace/
+インターレースGIF /(n) interlaced GIF/
+インタラクティブテレビ /(n) interactive television/
+インタラプト /(n) interrupt/
+インチ /(n) inch/
+インテリジェントターミナル /(n) intelligent terminal/
+インテリジェントネットワーク /(n) intelligent netowrk/
+イントロパック /(n) intro-pack/
+インフォテイメント /(n) infortainment/
+インプットメソッド /(n) input method (IM)/
+インプレッション /(n) impressions/
+陰面消去 [いんめんしょうきょ] /(n) hidden surface removal/
+インラインイメージ /(n) inline image/
+ウィンドウズアクセラレータ /(n) Windows accelerator/
+ウィンドウマネージャ /(n) window manager/
+ウエイト /(n) wait/weight/
+ウェットストーン /(n) Whetstone/
+ウェハー /(n) wafer/
+ウェブデザイナ /(n) web designer/
+ウェブページ /(n) web page/
+ウェブベース企業管理 [ウェブベースきぎょうかんり] /(n) Web-Based Enterprise Management (WBEM)/
+ウェブマスター /(n) Web master/
+埋め込み [うめこみ] /(n) embedding/
+裏技 [うらわざ] /(n) exceptional operation/
+上付き文字 [うわつきもじ] /(n) superscript/
+エアブラシ /(n) airbrush/
+英国規格協会 [えいこくきかくきょうかい] /(n) British Standards Institute (BSI)/
+英国電気通信株式会社 [えいこくでんきつうしんかぶしきがいしゃ] /(n) British Telecom (BT)/
+英語モード [えいごモード] /(n) English mode/
+映写機 [えいしゃき] /(n) film projector/
+衛星通信 [えいせいつうしん] /(n) satellite communications/
+エイリアシング /(n) aliasing/
+エージェント指向 [エージェントしこう] /(n) agent oriented/
+液晶 [えきしょう] /(n) liquid crystal/
+液晶パネル [えきしょうパネル] /(n) liquid crystal panel/
+液晶プロジェクタ [えきしょうプロジェクタ] /(n) liquid crystal projector/
+エキスパンドブック /(n) Expand Book/
+エクサ /(n) exa-/
+エコーバック /(n) echo back/
+エッジ /(n) edge/
+エディタ /(n) editor/
+エデュテインメント /(n) edutainment/
+エネルギースター /(n) Energy Star/
+エフェクタ /(n) effector/
+エフェクト /(n) effect/
+エム /(n) em/
+エリア /(n) area/
+エリート /(n) elite/
+エレガント /(n) elegant/
+エレクトロニックカフェ /(n) electronic cafe/
+エレクトロニックバンキング /(n) Electronic Banking (EB)/
+エレクトロルミネッセンス /(n) Electronic Luminescence (EL)/
+エン /(n) en/
+遠隔端末装置 [えんかくたんまつそうち] /(n) remote terminal/
+演算論理装置 [えんざんろんりそうち] /(n) arithmetic and logic unit (ALU)/
+エンジェル /(n) angels/
+エンジニアリングワークステーション /(n) engineering workstation (EWS)/
+エンドユーザー /(n) end user/
+エンドユーザーコンピューティング /(n) end user computing (EUC)/
+エントリモデル /(n) entry model/
+エンハンスドCD /(n) Enhanced Compact Disc/
+エンハンスドモード /(n) enhanced mode/
+欧州電気通信標準化機構 [おうしゅうでんきつうしんひょうじゅんかきこう] /(n) European Telecommunications Standards Institute (ETSI)/
+欧州電子計算機工業会 [おうしゅうでんしけいさんきこうぎょうかい] /(n) European Computer Manufactures Association (ECMA)/
+欧文フォント [おうぶんフォント] /(n) Latin font/
+オーサリングソフト /(n) authoring software/
+オーサリングソフトウェア /(n) authoring software/
+オートパイロット /(n) auto pilot/
+オートホワイトバランス /(n) auto white balance (AWB)/
+オーバードライブ /(n) Overdrive/
+オーバードライブプロセッサ /(n) over drive processor (ODP)/
+オーバーラップ /(n) overwrap/
+オープン /(n) open/
+オープンアーキテクチャ /(n) open architecture/
+オープン価格 [オープンかかく] /(n) open price/
+オープンコンピュータネットワーク /(n) Open Computer Network (OCN)/
+大文字/小文字を区別 [おおもじこもじをくべつ] /(n) case-sensitive/
+オールインワン /(n) all in one/
+オストワルト表色系 [オストワルトひょうじしょくけい] /(n) Ostwald color system/
+落とす [おとす] /(n) download/
+オフィスオートメーション /(n) office automation (OA)/
+オフィスコンピュータ /(n) office computer/
+オフ会 [オフかい] /(n) off-line meeting/
+オブジェクト指向データベース [オブジェクトしこうデータベース] /(n) object-oriented database (OODB)/
+オブジェクトプログラム /(n) object program/
+オプションボタン /(n) option button/
+オフセット印刷 [オフセットいんさつ] /(n) offset printing/
+オプティカルプリンタ /(n) optical printer/
+オプティマイズ /(n) optimize/
+オフフック /(n) off hook (OH)/
+オペレーション /(n) operation/
+オペレーションズリサーチ /(n) operations research (OR)/
+オペレータ /(n) operator/
+オムニマックス /(n) OMNIMAX/
+重い [おもい] /(n) heavy/
+親指シフト [おやゆびシフト] /(n) thumb shift/
+親指シフトキーボード [おやゆびシフトキーボード] /(n) thumb shift keyboard/
+音楽ソフト [おんがくソフト] /(n) music software/
+音源モジュール [おんげんモジュール] /(n) tone generator module/
+音色 [おんしょく] /(n) timbre/
+音声メール [おんせいメール] /(n) voice mail/
+オンフック /(n) on hook/
+オンボード /(n) on-board/
+オンラインシステム /(n) online system/
+オンラインソフト /(n) online software/
+オンライン分析処理 [オンラインぶんせきしょり] /(n) On-Line Analytical Processing (OLAP)/
+オンラインマガジン /(n) online magazine/
+ガード /(n) guard/
+ガードバンド /(n) guard band/
+カーナビゲーション /(n) car navigation/
+ガーベッジ /(n) garbage/
+ガーベッジコレクション /(n) garbage collection (GC)/
+開始ビット [かいしビット] /(n) start bit/
+外字ファイル [がいじファイル] /(n) external character file/
+回線リセール [かいせんリセール] /(n) communications line resale/
+回送 [かいそう] /(n) forwarding/
+階層型ファイルシステム [かいそうがたファイルシステム] /(n) hierarchical file system/
+階層ディレクトリ [かいそうディレクトリ] /(n) layered directory/
+階層メニュー [かいそうメニュー] /(n) hierarchical menu/
+階調 [かいちょう] /(n) gradation/
+外部キー [がいぶキー] /(n) external key/
+外部ゲートウエイプロトコル [がいぶゲートウエイプロトコル] /(n) Exterior Gateway Protocol (EGP)/
+外部結合 [がいぶけつごう] /(n) outer join/
+外部コマンド [がいぶコマンド] /(n) external command/
+開放型文書体系 [かいほうがたぶんしょたいけい] /(n) Open Document Architecture (ODA)/
+解放する [かいほうする] /(n) release/
+カオス /(n) chaos/
+画角 [がかく] /(n) angle of view/
+書き込み [かきこみ] /(n) write/posting/
+可逆圧縮 [かぎゃくあっしゅく] /(n) lossless compression/
+隠し機能 [かくしきのう] /(n) easter egg/
+隠し属性 [かくしぞくせい] /(n) hidden attribute/
+学習機能 [がくしゅうきのう] /(n) learning function/
+拡張スロット [かくちょうスロット] /(n) expansion slot/
+拡張バス [かくちょうバス] /(n) expansion bus/
+拡張メモリー [かくちょうメモリー] /(n) expanded memory/
+仮数部 [かすうぶ] /(n) mantissa/
+カスタムIC /(n) custom IC/
+仮想8086モード [かそう8086モード] /(n) virtual 8086 mode/
+仮想86モード [かそう86モード] /(n) virtual 86 mode/
+仮想回線 [かそうかいせん] /(n) virtual circuit (VC)/
+仮想回路 [かそうかいろ] /(n) virtual circuit (VC)/
+仮想機械 [かそうきかい] /(n) virtual machine (VM)/
+仮想企業 [かそうきぎょう] /(n) virtual corporation (VC)/
+仮想現実感 [かそうげんじつかん] /(n) virtural reality (VR)/
+仮想工場 [かそうこうじょう] /(n) virtual factory/
+仮想デバイスドライバ [かそうデバイスドライバ] /(n) virtual device driver/
+仮想ドライブ [かそうドライブ] /(n) virtual disk drive/
+画像ファイル [がぞうファイル] /(n) graphics file/
+仮想メモリー [かそうメモリー] /(n) virtual memory/
+活字 [かつじ] /(n) type/
+カット&ペースト /(n) cut and paste/
+カット紙 [カットし] /(n) cut paper/
+カットシートフィーダ /(n) cut-sheet feeder/
+かな漢字変換 [かなかんじへんかん] /(n) kana-kanji transformation/
+かな入力 [かなにゅうりょく] /(n) kana input/
+壁紙 [かべがみ] /(n) wallpaper/
+加法混色 [かほうこんしょく] /(n) additive mixture of colors/
+カメラワーク /(n) camerawork/
+画面分割 [がめんぶんかつ] /(n) screen separation/
+カラーセパレーション /(n) color separation/
+カラーチャート /(n) color chart/
+カラーパレット /(n) color pallet/
+カラーマネジメントシステム /(n) color management system/
+カライダ /(n) Kaleida/
+カルク /(n) calc/
+カレンダ /(n) calendar/
+カレンダクロック /(n) calendar clock/
+カレントドライブ /(n) current drive/
+カレントレコード /(n) current record/
+簡易言語 [かんいげんご] /(n) simplified language/
+環境光 [かんきょうこう] /(n) ambient light/
+環境設定 [かんきょうせってい] /(n) configuration/
+関係 [かんけい] /(n) relation/
+漢字ROM [かんじROM] /(n) kanji ROM/
+漢字Talk [かんじTalk] /(n) kanji Talk/
+関数型プログラミング [かんすうがたプログラミング] /(n) functional programming (FP)/
+関数ライブラリ [かんすうライブラリ] /(n) function library (FL)/
+完全修飾ドメイン名 [かんぜんしゅうしょくドメインめい] /(n) fully qualified domain name (FQDN)/
+カントリコード /(n) country code/
+感熱紙 [かんねつし] /(n) thermal paper/
+ガンマ /(n) gamma/
+ガンマ補正 [ガンマほせい] /(n) gamma correction/
+慣用暗号システム [かんようあんごうシステム] /(n) conventional cryptosystem/
+慣用暗号方式 [かんようあんごうほうしき] /(n) conventional cryptosystem/
+関連付け [かんれんづけ] /(n) association/
+キーストローク /(n) key stroke/
+キートップ /(n) keytop/
+キー入力 [キーにゅうりょく] /(n) key-in/
+キーパッド /(n) keypad/
+キーバッファ /(n) key buffer/
+キーフレーム /(n) key frame/
+機械翻訳 [きかいほんやく] /(n) mechanical translation/
+ギガビットイーサネット /(n) Gigabit Ethernet/
+木構造 [きこうぞう] /(n) tree structure/
+疑似SRAM [ぎじSRAM] /(n) pseudo static Random Access Memory (PSRAM)/
+疑似マルチタスク [ぎじマルチタスク] /(n) non-preemptive multitasking/
+疑似命令 [ぎじめいれい] /(n) pseudo instruction/
+基底クラス [きていクラス] /(n) base class/
+基底レジスタ [きていレジスタ] /(n) base resister/
+起動項目 [きどうこうもく] /(n) startup items/
+起動ディスク [きどうディスク] /(n) startup disk/
+輝度信号 [きどしんごう] /(n) luminance signal/
+揮発性メモリー [きはつせいメモリー] /(n) volatile memory/
+基盤 [きばん] /(n) infrastructure/
+基本インターフェース [きほんインターフェース] /(n) basic interface/
+基本ソフト [きほんソフト] /(n) basic software/
+基本ソフトウェア [きほんソフトウェア] /(n) basic software/
+逆ポーランド記法 [ぎゃくポーランドきほう] /(n) reverse Polish notation (RPN)/
+キャッシュメモリー /(n) cache memory/
+キャップハイト /(n) cap height/
+キャディ /(n) caddy/
+キャラクタディスプレイ /(n) character display/
+キャリアディテクト /(n) carrier detect (CD)/
+キャリー /(n) carry/
+キャリブレーション /(n) calibration/
+キャレット /(n) caret/
+キャンセル /(n) cancel/
+旧JIS漢字コード [きゅうJISかんじコード] /(n) old JIS kanji character code/
+行送リ [ぎょうおくり] /(n) linefeed/
+境界表現 [きょうかいひょうげん] /(n) boundary representation/
+行間 [ぎょうかん] /(n) leading/
+強制終了 [きょうせいしゅうりょう] /(n) forced termination/
+行揃え [ぎょうそろえ] /(n) justify/
+行端揃え [ぎょうたんぞろえ] /(n) justification/
+協調的マルチタスク [きょうちょうてきマルチタスク] /(n) cooperative multitasking/
+共通オブジェクトリクエストブローカアーキテクチャ [きょうつうオブジェクトリクエストブローカアーキテクチャ] /(n) Common Object Request Broker Architecture (CORBA)/
+共通管理情報サービス [きょうつうかんりじょうほうサービス] /(n) Common Management Information Services (CMIS)/
+共通フォーマット [きょうつうフォーマット] /(n) compatible format/
+共有ディスク [きょうゆうディスク] /(n) shared disk/
+共有メモリー [きょうゆうメモリー] /(n) shared memory/
+キロビット /(n) kilobit/
+金属酸化物半導体 [きんぞくさんかぶつはんどうたい] /(n) metal oxide semiconductor (MOS)/
+禁則処理 [きんそくしょり] /(n) Japanese hyphenation/
+均等割(り)付(け) [きんとうわりつけ] /(n) equal space/
+クイックソート /(n) quick sort/
+グーローシェーディング /(n) Gouraud shading/
+クォンタイズ /(n) quantize/
+草の根BBS [くさのねBBS] /(n) grassroots bulletin board/
+草の根ネット [くさのねネット] /(n) grassroots network/
+区点コード [くてんコード] /(n) KuTen code/
+組(み)合(わ)せ回路 [くみあわせかいろ] /(n) combinational circuit/
+クライアントサーバー /(n) client-server/
+クライアントサーバーシステム /(n) client-server system (CSS)/
+クライアント-サーバーモデル [クライアントサーバーモデル] /(n) client-server model/
+クラス /(n) class/
+クラスタリング /(n) clustering/
+クラスライブラリ /(n) class library/
+クラッカ /(n) cracker/
+クラッキング /(n) cracking/
+グラデーション /(n) gradation/
+グラバーハンド /(n) grabber hand/
+グラフィックエンジン /(n) graphic engine/
+グラフィックスアクセラレータ /(n) graphics accelerator/
+グラフィックスカード /(n) graphics card/
+グラフィックスワークステーション /(n) graphics workstation (GWS)/
+グラフィックソフトウェア /(n) graphics software/
+クリアー /(n) clear/
+クリアビジョン /(n) clearvision/
+グリーキング /(n) greeking/
+グリーンPC /(n) Green Personal Computer/
+グリーンブック /(n) Green Book/
+クリーンルーム /(n) clean room/
+クリーンルーム /(n) clean room/
+クリエータ /(n) creator/
+クリッカブルイメージマップ /(n) clickable imagemap/
+クリッカブルマップ /(n) clickable map/
+グループID /(n) group identifier (GID)/
+グレア /(n) glare/
+グレーコード /(n) gray code/
+クローズボックス /(n) close box/
+クロマクリア管 [クロマクリアかん] /(n) CromaClear Tube/
+計算機図形処理 [けいさんきずけいしょり] /(n) computer graphics (CG)/
+計算機センター [けいさんきセンター] /(n) computer center/
+形状モデル [けいじょうモデル] /(n) geometric model/
+ゲームソフト /(n) game software/
+ゲーム理論 [ゲームりろん] /(n) theory of games/
+ゲストID /(n) guest ID/
+検証 [けんしょう] /(n) verification/
+減法混色 [げんぽうこんしょく] /(n) subtractive mixture colors/
+コアキシャルケーブル /(n) coaxial cable/
+コアダンプ /(n) core dump/
+高域通過フィルタ [こういきつうかフィルタ] /(n) high pass filter (HPF)/
+公開鍵暗号方式 [こうかいかぎあんごうほうしき] /(n) public key cryptosystem/
+光学式マウス [こうがくしきマウス] /(n) optical mouse/
+光学式文字認識 [こうがくしきもじにんしき] /(n) optical character recognition (OCR)/
+光学式文字読み取り装置 [こうがくしきもじよみとりそうち] /(n) optical character reader (OCR)/
+更新 [こうしん] /(n) update/
+高速イーサネット [こうそくイーサネット] /(n) Fast Ethernet/
+高速パケット [こうそくパケット] /(n) fast packet/
+高速ページモード [こうそくページモード] /(n) fast page mode (FPM)/
+高速ページモードDRAM [こうそくページモードDRAM] /(n) Fast Page Mode Dynamic Random Access Memory (FPM DRAM)/
+構内通信網 [こうないつうしんもう] /(n) local area network (LAN)/
+高品位テレビ [こうひんいテレビ] /(n) high-definition television/
+構文規則 [こうぶんきそく] /(n) syntax/
+後方一致 [こうほういっち] /(n) backward match/
+コーラス /(n) chorus/
+国際化 [こくさいか] /(n) internationalisation/
+国際照明委員会 [こくさいしょうめいいいんかい] /(n) Commission Internationale de I'Eclairage (CIE)/
+国際単位系 [こくさいたんいけい] /(n) Systee Internationale d'Unites/
+国際符号化文字集合 [こくさいふごうかもじしゅうごう] /(n) Universal Character Set (UCS)/
+誤差拡散法 [ごさかくさんほう] /(n) random dither/
+ゴシック体 [ゴシックたい] /(n) Gothic/
+コストパフォーマンス /(n) cost performance/
+固体撮像デバイス [こたいさつぞうデバイス] /(n) solid-state imaging device/
+固定ディスク [こていディスク] /(n) hard disk (HD)/
+固定幅フォント [こていはばフォント] /(n) fixed-width font/
+コネクション /(n) connection/
+コネクト /(n) connect/
+コピーレフト /(n) copyleft/
+コプロ /(n) coprocessor/
+コマースサーバー /(n) commerce server/
+コマンドインタープリター /(n) command interpreter/
+コマンドキー /(n) command key/
+ごみ箱 [ごみばこ] /(n) trash/
+コメントアウト /(n) comment out/
+コモンキャリア /(n) common carrier/
+コラム /(n) column/
+コリジョン /(n) collision/
+コンシューマ製品 [コンシューマせいひん] /(n) consumer product/
+コンスタントシェーディング /(n) constant shading/
+コンストラクタ /(n) constructor/
+コンテキスト /(n) context/
+コンテナ /(n) container/
+コンテンツ /(n) content/
+コントローラ /(n) controller/
+コントロールS /(n) Control S/
+コンバージェンス /(n) convergence/
+コンバート /(n) convert/
+コンパイラ言語 [コンパイラげんご] /(n) compiler languages/
+コンパイラコンパイラ /(n) compiler-compiler/
+コンパクトHTML /(n) Compact HTML/
+コンパクトフラッシュ /(n) Compact Flash/
+コンパチビリティ /(n) compatibility/
+コンパチブル /(n) compatible/
+コンピュータアート /(n) computer art/
+コンピュータウイルス /(n) computer virus/
+コンピュータ緊急対応センター [コンピュータきんきゅうたいおうセンター] /(n) JP Computer Emergency Response Term (JPCERT/CC)/
+コンピュータグラフィックス /(n) computer graphics (CG)/
+コンピュータ支援協調作業 [コンピュータしえんきょうちょうさぎょう] /(n) computer supported cooperative work (CSCW)/
+コンピュータセキュリティ /(n) computer security/
+コンピュータソフトウェア著作権協会 [コンピュータソフトウェアちょさくけんきょうかい] /(n) Association of Copyright for Computer Software (ACCS)/
+コンピュータネットワーク /(n) computer network/
+コンピュータ媒介言語 [コンピュータばいかいげんご] /(n) Computer Mediated Communication (CMC)/
+コンピュータ犯罪 [コンピュータはんざい] /(n) computer crime/
+コンピュータリテラシ /(n) computer literacy/
+コンピュータワーム /(n) computer worm/
+コンプレッサ /(n) compressor/
+コンペティティブアップグレード /(n) competitive upgrade/
+コンベンショナルメモリー /(n) conventional memory/
+コンポーネント /(n) component/
+コンポーネント信号 [コンポーネントしんごう] /(n) component signal/
+コンポーネントソフト /(n) Component software/
+コンポジット /(n) composite/
+コンポジット信号 [コンポジットしんごう] /(n) composite signal/
+サーチタイム /(n) search time/
+サーチャー /(n) searcher/
+サードパーティ /(n) third party/
+サービスアクセス点 [サービスアクセスてん] /(n) service access point (SAP)/
+サービスビューロー /(n) Service Bureau/
+サーフィン /(n) surfing/
+サーフェイスモデル /(n) surface model/
+最小化ボタン [さいしょうかボタン] /(n) minimize button/
+最大化ボタン [さいだいかボタン] /(n) maximize button/
+彩度 [さいど] /(n) saturation/
+サイトライセンス /(n) site license/
+サイドライト /(n) sidelit/
+サイバーカフェ /(n) cybercafe/
+サイバーキャッシュ /(n) cybercash/
+サイバーパンク /(n) cyberpunk/
+サイバーモール /(n) cyber mall/
+再配置可能 [さいはいちかのう] /(n) relocatable/
+サイバネティックス /(n) cybernetics/
+再描画 [さいびょうが] /(n) redraw/
+サウンド機能 [サウンドきのう] /(n) sound function/
+サウンドボード /(n) sound board/
+索引順編成ファイル [さくいんじゅんへんせいファイル] /(n) Indexed Sequential Access Method file (ISAM file)/
+差し込み印刷 [さしこみいんさつ] /(n) merge print/
+サスペンド /(n) suspend/
+サターン /(n) Saturn/
+撮像管 [さつぞうかん] /(n) camera tube/
+サッドマック /(n) Sad Mac/
+ザップ /(n) zap/
+サテライトオフィス /(n) satellite office/
+サブスクリプト /(n) subscript/
+サブネット /(n) subnet/
+サブノート /(n) subnotebook/
+サブノート型パソコン [サブノートがたパソコン] /(n) subnotebook personal computer/
+サブリミナル /(n) subliminal/
+差分ファイル [さぶんファイル] /(n) difference file/
+サポート /(n) support/
+サムネイル /(n) thumbnail/
+三原色 [さんげんしょく] /(n) trichromatic/
+残像 [ざんぞう] /(n) afterimage/
+サンプラ /(n) sampler/
+サンプリングキーボード /(n) sampling keyboad/
+サンプリング周波数 [サンプリングしゅうはすう] /(n) sampling frequency/
+シーク /(n) seek/
+シークタイム /(n) seek time/
+シーケンシャルアクセス /(n) sequential access/
+シーケンシャルファイル /(n) sequential file/
+シーケンス /(n) sequence/
+シーケンスソフト /(n) sequence soft/
+シード /(n) seed/
+シェアードメモリー /(n) shared memory/
+シェアードライブラリ /(n) shared library/
+シェーディング /(n) shading/
+色相 [しきそう] /(n) hue/
+色度信号 [しきどしんごう] /(n) chrominance signal/
+磁気バブル記憶装置 [じきバブルきおくそうち] /(n) bubble memory/
+磁気バブルメモリー [じきバブルメモリー] /(n) bubble memory/
+磁気メディア [じきメディア] /(n) magnetic media/
+字句解析 [じくかいせき] /(n) lexical analysis/
+指向性 [しこうせい] /(n) directivity/
+自己解凍 [じこかいとう] /(n) self extract/
+自己解凍ファイル [じこかいとうファイル] /(n) self extract file/
+自己結合 [じこけつごう] /(n) self-association/
+自己展開ファイル [じこてんかいファイル] /(n) self-expanding file/
+システムアドミニストレータ /(n) system administrator/
+システムアプリケーションアーキテクチャ /(n) System Application Architecture (SAA)/
+システムインテグレーション /(n) system integration (SI)/
+システムエリア /(n) system area/
+システムオペレータ /(n) system operator (sysop)/
+システム監査 [システムかんさ] /(n) system auditing/
+システムディスク /(n) system disk/
+システムネットワークアーキテクチャ /(n) Systems Network Architecture (SNA)/
+システムハウス /(n) system house/
+システムフォルダ /(n) system folder/
+システム領域 [システムりょういき] /(n) system area/
+下付き文字 [したつきもじ] /(n) subscript/
+始端部 [したんぶ] /(n) leader/
+実効値 [じっこうち] /(n) root mean squared value/
+実装 [じっそう] /(n) implementation/
+ジッター /(n) jitter/
+失敗 [しっぱい] /(n) failure/
+自動再計算 [じどうさいけいさん] /(n) auto recalculation/
+自動着信 [じどうちゃくしん] /(n) auto answer/
+自動保存 [じどうほぞん] /(n) automatic saving/
+死ぬ [しぬ] /(n) die/
+シフトJIS /(n) shift JIS (SJIS)/
+絞り [しぼり] /(n) iris/
+シミュレーションゲーム /(n) simulation game/
+シミュレータ /(n) simulator/
+事務機械化 [じむきかいか] /(n) office automation (OA)/
+射影 [しゃえい] /(n) projection/
+写植 [しゃしょく] /(n) phototypesetting/
+写真植字 [しゃしんしょくじ] /(n) phototypesetting/
+写真製版 [しゃしんせいはん] /(n) photo mechanical process/
+ジャスティフィケーション /(n) justification/
+ジャストウィンドウ /(n) Just Window/
+ジャダー /(n) judder/
+斜体 [しゃたい] /(n) slant/
+シャドウRAM /(n) shadow Random Access Memory/
+シャドウマスク /(n) shadow mask/
+シャノンの理論 [シャノンのりろん] /(n) shannon's low/
+ジャバー /(n) jabber/
+遮蔽 [しゃへい] /(n) shielding/
+自由曲線 [じゆうきょくせん] /(n) freeform curve/
+集積回路メモリー [しゅうせきかいろメモリー] /(n) integrated circuit memory/
+終端部 [しゅうたんぶ] /(n) trailer/
+シューティングゲーム /(n) shooting game/
+周辺機器 [しゅうへんきき] /(n) peripheral equipment/
+主キー [しゅキー] /(n) master key/
+出力デバイス [しゅつりょくデバイス] /(n) output device/
+巡回セールスマンの問題 [じゅんかいセールスマンのもんだい] /(n) travelling salesman problem (TSP)/
+準拠 [じゅんきょ] /(n) conform/
+順次走査 [じゅんじそうさ] /(n) sequential scanning/
+純正品 [じゅんせいひん] /(n) genuine products/
+昇華型熱転写方式 [しょうかがたねつてんしゃほうしき] /(n) thermal wax transfer/
+消磁 [しょうじ] /(n) degauss/
+常駐型プログラム [じょうちゅうがたプログラム] /(n) terminate and stay resident program/
+常駐終了プログラム [じょうちゅうしゅうりょうプログラム] /(n) terminate and stay resident program/
+照度 [しょうど] /(n) illuminance/
+衝突検出 [しょうとつけんしゅつ] /(n) collision detection (CD)/
+情報管理 [じょうほうかんり] /(n) information management/
+情報処理技術者試験 [じょうほうしょりぎじゅつしゃしけん] /(n) National Examination for Information Processing Technicians (NEIPT)/
+情報処理振興事業協会 [じょうほうしょりしんこうじぎょうきょうかい] /(n) Information-technology Promotion Agency, Japan (IPA)/
+情報リテラシ [じょうほうリテラシ] /(n) information literacy/
+ショートカットキー /(n) shortcut key/
+書簡箱 [しょかんばこ] /(n) electronic mailbox/
+初期故障 [しょきこしょう] /(n) initial failure/
+書庫 [しょこ] /(n) archives/
+ジョセフソン素子 [ジョセフソンそし] /(n) Josephson device/
+書体 [しょたい] /(n) typeface/
+ショット /(n) shot/
+ジョブスケジューラ /(n) job scheduler/
+署名 [しょめい] /(n) signature/
+書類 [しょるい] /(n) document/
+シリアル /(n) serial/
+シリアルインターフェース /(n) serial interface/
+シリアル転送 [シリアルてんそう] /(n) serial transfer/
+シリアルラインインターネットプロトコル /(n) Serial Line Internet Protocol (SLIP)/
+シリーズレギュレータ /(n) series regulator/
+シリコングラフィックス /(n) Silicon Graphics, Inc. (SGI)/
+シリコンディスク /(n) silicon disk/
+シリコンバレー /(n) Silicon Valley/
+シルク形式 [シルクけいしき] /(n) Symbolic LinK format/
+新JIS漢字コード [しんJISかんじコード] /(n) new JIS kanji character code/
+シンク /(n) SYNChronous/
+シングルエンド /(n) single ended/
+シングルスペース /(n) single space/
+シングルセッション /(n) single-session/
+シングルタスク /(n) single task/
+シングルユーザー /(n) single user/
+シングルユーザーシステム /(n) single-user system/
+シンクロ /(n) synchronize/
+シンクロナスDRAM /(n) Synchronous Dynamic Random Access Memory (SDRAM)/
+人工環境 [じんこうかんきょう] /(n) artificial environment/
+人工現実感 [じんこうげんじつかん] /(n) artificial reality/
+信号雑音比 [しんごうざつおんひ] /(n) signal-to-noise ratio/
+スイープ /(n) sweep/
+垂直走査周波数 [すいちょくそうさしゅうはすう] /(n) vertical scan frequency/
+垂直同期信号 [すいちょくどうきしんごう] /(n) vertical synchronizing signal (VSYNC)/
+垂直方向書式送り [すいちょくほうこうしょしきおくり] /(n) vertical tabulation (VT)/
+スイッチャ /(n) switcher/
+スイッチング電源 [スイッチングでんげん] /(n) switching regulator/
+スイッチングレギュレータ /(n) switching regulator/
+水平走査周波数 [すいへいそうさしゅうはすう] /(n) horizontal scanning frequency/
+水平ローディング [すいへいローディング] /(n) horizontal loading/
+数値 [すうち] /(n) numeric/
+数値演算プロセッサ [すうちえんざんプロセッサ] /(n) numeric data processor/
+スーパーインポーズ /(n) superimpose/
+スーパーコンピュータ /(n) supercomputer/
+スーパースカラー /(n) superscalar/
+スーパースクリプト /(n) super script/
+スーパースケーラ /(n) superscalar/
+スーパードライブ /(n) SuperDrive/
+スーパーバイザー /(n) supervisor/
+スーパーファミコン /(n) SUPER FAMICOM/
+スーパーユーザー /(n) superuser/
+ズームボックス /(n) zoom box/
+スカラー /(n) scalar/
+スキャンコンバータ /(n) scan converter/
+スキャンライン法 [スキャンラインほう] /(n) scanline algorithm/
+スクリーンセーバー /(n) screen saver/
+スクリプト言語 [スクリプトげんご] /(n) script language/
+スケルトン /(n) skeleton/
+スコープ /(n) scope/
+スター型ネットワーク [スターがたネットワーク] /(n) star network/
+スターターキット /(n) starters kit/
+スタートアップ /(n) startup/
+スタートアップスクリーン /(n) startup screen/
+スタイルシート /(n) style sheet/
+スタックウェア /(n) stackware/
+スタティックRAM /(n) static Random Access Memory (SRAM)/
+スタンダードMIDIファイル /(n) Standard MIDI File (SMF)/
+スタンダードモード /(n) standard mode/
+ステータスバー /(n) status bar/
+ステータスレジスタ /(n) status register/
+ステート /(n) state/
+ステップスカルプチャ /(n) step scarpcher/
+ストア /(n) store/
+ストライピング /(n) striping/
+ストリーミング /(n) streaming/
+ストレートケーブル /(n) straight cable/
+スナップショット /(n) snapshot/
+スパイク /(n) spike/
+スパゲッティコード /(n) spaghetti code/
+スプライト /(n) sprite/
+スプライン曲線 [スプラインきょくせん] /(n) spline curve/
+スプライン曲面 [スプラインきょくめん] /(n) spline surface/
+スプライン補完 [スプラインほかん] /(n) spline interpolation/
+スペクトラム拡散通信 [スペクトラムかくさんつうしん] /(n) spread spectrum communication/
+スペルチェッカ /(n) spelling checker/
+スポットカラー /(n) spot color/
+スポットライト /(n) spotlight/
+スマートメディア /(n) SmartMedia/
+スマイリー /(n) smiley/
+スマイリーフェイス /(n) smiley faces/
+スムージング /(n) smoothing/
+スムーズシェーディング /(n) smooth shading/
+スムーズスクロール /(n) smooth scroll/
+スモールキャピタル /(n) small capital/
+スライドショー /(n) slide show/
+スリープ /(n) sleep/
+スワップアウト /(n) swapped out/
+スワップイン /(n) swapped in/
+正規ユーザー [せいきユーザー] /(n) registered user/
+制御コード [せいぎょコード] /(n) control code/
+正弦波 [せいげんぱ] /(n) sine wave/
+セカンドソース /(n) second source/
+セカンドバッテリ /(n) second battery/
+セキュリティホール /(n) security hole/
+セグメントアドレッシング /(n) segment addressing/
+セッション層 [セッションそう] /(n) session layer/
+セパレータ /(n) separator/
+セルアニメーション /(n) cell animation/
+セルポインタ /(n) cell pointer/
+セルラー方式 [セルラーほうしき] /(n) cellular system/
+セレクタ /(n) selector/
+ゼロサプレス /(n) zero suppression/
+宣言型言語 [せんげんがたげんご] /(n) declarative language/
+宣言の有効範囲 [せんげんのゆうこうはんい] /(n) scope of declaration/
+宣言文 [せんげんぶん] /(n) declarative statement/
+穿孔済カード [せんこうずみカード] /(n) punched card/
+センサー /(n) sensor/
+センタリング /(n) centering/
+セントロニクス /(n) Centronics/
+セントロニクスインターフェース /(n) centronics interface/
+全二重通信 [ぜんにじゅうつうしん] /(n) full-duplex communication/
+全文検索 [ぜんぶんけんさく] /(n) full-text search/
+全米科学財団 [ぜんべいかがくざいだん] /(n) National Science Foundation (NSF)/
+全米情報インフラストラクチャ [ぜんべいじょうほうインフラストラクチャ] /(n) National Information Infrastructure (NII)/
+専門辞書 [せんもんじしょ] /(n) specified dictionary/
+走査周波数 [そうさしゅうはすう] /(n) scanning frequency/
+挿入モード [そうにゅうモード] /(n) insert mode/
+相変化型光ディスク [そうへんかがたひかりディスク] /(n) phase change optical disk/
+双方向CATV [そうほうこうCATV] /(n) bi-directional CATV/
+ゾーン /(n) zone/
+外付(け) [そとづけ] /(n) external/
+ソフトウェアエンジニアリング /(n) software engineering (SE)/
+ソフトウェアキーボード /(n) software keyboard/
+ソフトウェア使用許諾契約 [ソフトウェアしようきょだくけいやく] /(n) software product license/
+ソフトウェアスクロール /(n) software scroll/
+ソフトウェアハウス /(n) software house/
+ソフトウェアモデム /(n) software modem/
+ソフトウェア割り込み [ソフトウェアわりこみ] /(n) software interrupt/
+ソフトハウス /(n) software house/
+ソリューションプロバイダ /(n) solution provider/
+ソルバー /(n) solver/
+タートル /(n) turtle/
+ターミナルアダプタ /(n) terminal adapter (TA)/
+ターミナルエミュレーション /(n) terminal emulation/
+ターミナルエミュレータ /(n) terminal emulator/
+第4世代言語 [だい4せだいげんご] /(n) fourth generation language (4GL)/
+第5世代コンピュータ [だい5せだいコンピュータ] /(n) Fifth Generation Computer System (FGCS)/
+ダイアルアップIP接続 [ダイアルアップIPせつぞく] /(n) dial-up IP connection/
+ダイアルアップ接続 [ダイアルアップせつぞく] /(n) dial-up connection/
+ダイアルイン /(n) dial-in/
+帯域通過フィルタ [たいいきつうかフィルタ] /(n) band pass filter (BPF)/
+第一種電気通信事業者 [だいいっしゅでんきつうしんじぎょうしゃ] /(n) type I carriers/
+ダイクロイックミラー /(n) dichroic mirror/
+対称型マルチプロセッサ [たいしょうがたマルチプロセッサ] /(n) symmetric multiprocessor (SMP)/
+対称型マルチプロセッシング [たいしょうがたマルチプロセッシング] /(n) symmetric multiprocessing (SMP)/
+ダイナセット /(n) dynamic set/
+ダイナミックRAM /(n) dynamic Random Access Memory (dynamic RAM, DRAM)/
+ダイナミックアロケーション /(n) dynamic allocation/
+ダイナミックデータエクスチェンジ /(n) dynamic data exchange (DDE)/
+ダイナミックリロケーション /(n) dynamic relocation/
+ダイナミックリンク /(n) dynamic link/
+ダイナミックリンクライブラリ /(n) dynamic linking library (DLL)/
+ダイナミックレンジ /(n) dynamic range/
+第二種電気通信事業者 [だいにしゅでんきつうしんじぎょうしゃ] /(n) type II carriers/
+タイプ /(n) type/
+タイプスタイル /(n) type style/
+タイプセッター /(n) typesetter/
+タイプファミリ /(n) type family/
+タイプフェース /(n) typeface/
+タイマー /(n) timer/
+タイムコード /(n) time code/
+タイムシェアリングシステム /(n) time sharing system (TSS)/
+ダイヤモンドカーソル /(n) diamond cursor/
+ダイヤルQ2 /(n) Dial Q2/
+代理サーバー [だいりサーバー] /(n) proxy server/
+タイリング /(n) tiling/
+タイル /(n) tile/
+ダイレクトアクセス /(n) direct access/
+ダイレクトメモリーアクセス /(n) direct memory access (DMA)/
+対話型 [たいわがた] /(n) interactive/
+ダウン /(n) down/
+タグRAM /(n) Tag Random Access Memory/
+タグジャンプ /(n) tag jump/
+卓上出版 [たくじょうしゅっぱん] /(n) desktop publishing (DTP)/
+タスクスイッチ /(n) task switching/
+タスクバー /(n) task bar/
+タスクマネージャ /(n) task manager/
+多態性 [たたいせい] /(n) polymorphism/
+立ち上げ [たちあげ] /(n) startup/
+タックシール /(n) tack seal/
+タッチタイピング /(n) touch typing/
+タッチタイプ /(n) touch typing/
+タップ /(n) tap/
+ダビング /(n) dubbing/
+タブキー /(n) tab key/
+タブ区切り [タブくぎり] /(n) tab delimited/
+タブコード /(n) tab code/
+ダムターミナル /(n) dumb terminal/
+ダム端末 [ダムたんまつ] /(n) dumb terminal/
+タワー型 [タワーがた] /(n) tower configuration/
+段組み [だんぐみ] /(n) column setting/
+単語カウント [たんごカウント] /(n) word count/
+単純マトリックス方式 [たんじゅんマトリックスほうしき] /(n) passive matrix LCD/
+ダンプリスト /(n) dump list/
+端末エミュレータ [たんまつエミュレータ] /(n) terminal emulator/
+端末サーバー [たんまつサーバー] /(n) terminal server/
+チェーンメール /(n) chain mail/
+知的財産権 [ちてきざいさんけん] /(n) intellectual property right/
+知的所有権 [ちてきしょゆうけん] /(n) intellectual property right/
+知的端末 [ちてきたんまつ] /(n) intelligent terminal/
+チャート /(n) chart/
+チャールズバベイジ /(n) Charles Babbage/
+中央処理装置 [ちゅうおうしょりそうち] /(n) central processing unit (CPU)/
+中央揃え [ちゅうおうぞろえ] /(n) centering/
+中間システム [ちゅうかんシステム] /(n) intermediate system (IS)/
+抽出条件 [ちゅうしゅつじょうけん] /(n) extraction condition/
+チューニング /(n) tuning/
+チューリングマシン /(n) Turing machine (TM)/
+調歩同期式 [ちょうほどうきしき] /(n) start-stop system/
+著作権 [ちょさくけん] /(n) copyright/
+地理情報システム [ちりじょうほうシステム] /(n) Geographic Information System (GIS)/
+チルト /(n) tilt/
+追記型光ディスク [ついきがたひかりディスク] /(n) direct read after write optical disk/
+ツイストペアケーブル /(n) twisted pair cable/
+通信回線 [つうしんかいせん] /(n) communication line/
+通信カラオケ [つうしんカラオケ] /(n) Karaoke on demand/
+通信システム [つうしんシステム] /(n) communication system/
+通信条件 [つうしんじょうけん] /(n) communications protocol/
+通信ソフト [つうしんソフト] /(n) communication software/
+通信品位法 [つうしんひんいほう] /(n) Communications Decency Act (CDA)/
+ツリー構造 [ツリーこうぞう] /(n) tree structure/
+低域通過フィルタ [ていいきつうかフィルタ] /(n) low pass filter (LPF)/
+ディーラー /(n) dealer/
+ディザ法 [ディザほう] /(n) dither method/
+低周波発振器 [ていしゅうははっしんき] /(n) Low Frequency Oscillator (LFO)/
+ディスアセンブル /(n) disassemble/
+ディスクコントローラ /(n) disk controller/
+ディスク二重化 [ディスクにじゅうか] /(n) disk duplexing/
+ディスクミラーリング /(n) disk mirroring/
+ディスプレイ /(n) display/
+ディスプレイアダプタ /(n) display adapter/
+ディスプレイカード /(n) display card/
+ディスプレイポストスクリプト /(n) Display PostScript (DPS)/
+ディセンダ /(n) descender/
+ディゾルブ /(n) dissolve (DS)/
+ディレイ /(n) delay/
+ディレクタ /(n) Director/
+データ暗号化規格 [データあんごうかきかく] /(n) Data Encryption Standard (DES)/
+データコンバータ /(n) data converter/
+データパケット /(n) data packet/
+データフォーク /(n) data fork/
+データベース管理 [データベースかんり] /(n) database management/
+データベース管理システム [データベースかんりシステム] /(n) database management system (DBMS)/
+データベースサーバー /(n) database server/
+データベースソフト /(n) database software/
+データベースソフトウェア /(n) database software/
+データ変換器 [データへんかんき] /(n) data converter/
+データ放送 [データほうそう] /(n) data broadcasting/
+テープ駆動機構 [テープくどうきこう] /(n) tape drive/
+テーブルルックアップ /(n) table lookup/
+デーモン /(n) daemon/
+テキスト画面 [テキストがめん] /(n) text plane/
+テキスト形式 [テキストけいしき] /(n) text format/
+テキストデータ /(n) character data/
+適用業務ソフトウェア [てきようぎょうむソフトウェア] /(n) application software/
+テクスチャ /(n) texture/
+テクスチャマッピング /(n) texture mapping/
+デクリメント /(n) decrement/
+デジタルPBX /(n) digital Private Branch eXchange (DPBX)/
+デジタルRGB /(n) digital RGB/
+デジタルVTR /(n) digital Video Tape Recorder/
+デジタル-アナログ変換器 [デジタル-アナログへんかんき] /(n) digital-to-analog converter (D/A converter, DAC)/
+デジタル衛星放送 [デジタルえいせいほうそう] /(n) Digital Satellite Service (DSS)/
+デジタルオーディオ /(n) digital audio (DA)/
+デジタルキャッシュ /(n) digital cash/
+デジタルコンピュータ /(n) digital computer/
+デジタルシグナルプロセッサ /(n) Digital Signal Processor (DSP)/
+デジタル署名 [デジタルしょめい] /(n) digital signature/
+デジタルスチルカメラ /(n) digital still camera/
+デジタルテレビ /(n) Digital TV/
+デジタルビデオカメラ /(n) Digital Video camera/
+デジタルブック /(n) digital book/
+デスクアクセサリ /(n) desk accessory (DA)/
+デスクトップパターン /(n) desktop pattern/
+デスクトッププレゼンテーション /(n) desktop presentation/
+デスクトップミュージック /(n) desktop music (DTM)/
+デストラクタ /(n) destructor/
+手続きの入口 [てつづきのいりぐち] /(n) entry of a procedure/
+手続き向き言語 [てつづきむきげんご] /(n) procedural language/
+手続き呼(び)出(し) [てつづきよびだし] /(n) procedure call/
+デモ /(n) demonstration (demo)/
+デモ版 [デモばん] /(n) demo version/
+デュアル /(n) dual/
+デュアルポートRAM /(n) dual port Random Access Memory/
+テラ /(n) tera- (T)/
+デリート /(n) delete/
+テレコミュニケーション /(n) telecommunication/
+テレックス /(n) telex/
+テレテキスト /(n) teletext/
+テレテル /(n) Teletel/
+テレビ会議 [テレビかいぎ] /(n) video conferencing/
+テレビパソコン /(n) PC using a TV as a monitor/
+テレビ方式 [テレビほうしき] /(n) television system/
+テレホーダイ /(n) off-peak telephone call price reduction/
+テレメディスン /(n) telemedicine/
+テレワーク /(n) telework/
+テロップ /(n) TELevision Opaque Projector (telop)/
+電子会議 [でんしかいぎ] /(n) electronic conference/
+電子雑誌 [でんしざっし] /(n) electronic magazine/
+電子新聞 [でんししんぶん] /(n) electronic newspaper/
+電子手帳 [でんしてちょう] /(n) electronic organizer/
+電磁波 [でんじは] /(n) electromagnetic wave/
+電子ファイリングシステム [でんしファイリングシステム] /(n) electronic filing system/
+電子フロンティア財団 [でんしフロンティアざいだん] /(n) Electronic Frontier Foundation (EFF)/
+電磁妨害 [でんじぼうがい] /(n) ElectroMagnetic Interference (EMI)/
+電子マネー [でんしマネー] /(n) electronic money/
+電子メールアドレス [でんしメールアドレス] /(n) electronic mail address/
+電子メールボックス [でんしメールボックス] /(n) electronic mailbox/
+伝送制御プロトコル [でんそうせいぎょプロトコル] /(n) Transmission Control Protocol (TCP)/
+伝送速度 [でんそうそくど] /(n) transmission speed/
+伝搬遅延 [でんぱんちえん] /(n) propagation delay/
+テンポラリファイル /(n) temporary file/
+電話会議 [でんわかいぎ] /(n) conference call/
+ドイツ工業規格 [ドイツこうぎょうきかく] /(n) Deutsche Institut fuer Normung (DIN)/
+銅 [どう] /(n) copper/
+総合サービスディジタル網 [とうごうサービスディジタルもう] /(n) Integrated Services Digital Network (ISDN)/
+動的資源割り振り [どうてきしげんわりふり] /(n) dynamic resource allocation/
+動的ルーティング [どうてきルーティング] /(n) dynamic routing/
+トークンバス /(n) token bus/
+ドーターボード /(n) daughter board/
+ドキュメンテーション /(n) documentation/
+ドキュメントファイル /(n) document file/
+特色 [とくしょく] /(n) specialty color/
+匿名FTP [とくめいFTP] /(n) anonymous FTP/
+ドッキングステーション /(n) docking station/
+ドットアドレス /(n) dot address/
+ドットインパクトプリンタ /(n) dot impact printer/
+ドットゲイン /(n) dot gain/
+ドットピッチ /(n) dot pitch (DP)/
+ドットフォント /(n) dot font/
+トップメニュー /(n) top for menu/
+トップレベルドメイン /(n) toplevel domain/
+トナー /(n) toner/
+ドネーション /(n) donation/
+飛び越し走査 [とびこしそうさ] /(n) interlace/
+トポロジ /(n) topology/
+ドメインネームサーバー /(n) dmain name server (DNS)/
+トラクタフィーダ /(n) tractor feeder/
+トラップ /(n) trap/
+トラブルシューティング /(n) trouble shooting/
+ドラムスキャナ /(n) drum scanner/
+トランザクション処理 [トランザクションしょり] /(n) transaction processing/
+トランスポンダ /(n) transponder/
+トランスレータ /(n) translator/
+トリガー /(n) trigger/
+トリニトロン /(n) Trinitron/
+トリミング /(n) trimming/
+ドルビーデジタル /(n) Dolby Digital/
+トレーラ /(n) trailer/
+トロイの木馬 [トロイのもくば] /(n) Trojan horse/
+ドローソフトウェア /(n) drawing software/
+ドロップダウンメニュー /(n) drop down menu/
+ドングル /(n) dongle/
+トンボ /(n) register mark/
+内部記憶装置 [ないぶきおくそうち] /(n) internal storage device/
+内部コマンド [ないぶコマンド] /(n) internal command/
+長いファイル名 [ながいファイルめい] /(n) long file name/
+名前解決 [なまえかいけつ] /(n) name resolution/
+並べ替え [ならべかえ] /(n) sort/
+ナレッジナビゲータ /(n) knowledge navigator/
+二次キャッシュ [にじキャッシュ] /(n) secondary cache/
+日経MIX [にっけいMIX] /(n) Nikkei Mix Information eXchange/
+ニッケルカドミウム電池 [ニッケルカドミウムでんち] /(n) Nickel Cadmium battery/
+ニッケル水素電池 [ニッケルすいそでんち] /(n) Nickel-Metal Hydride battery (NiMH battery)/
+日本語環境 [にほんごかんきょう] /(n) Japanese environment/
+日本語入力FEP [にほんごにゅうりょくFEP] /(n) Japanese text entry front-end program/
+日本語モード [にほんごモード] /(n) Japanese mode/
+日本語ワードプロセッサ [にほんごワードプロセッサ] /(n) Japanese word processor/
+日本電気 [にほんでんき] /(n) Nippon Electronic Corp./
+日本電子機械工業会 [にほんでんしきかいこうぎょうかい] /(n) Electronic Industries Association of Japan (EIAJ)/
+日本電信電話株式会社 [にほんでんしんでんわかぶしきがいしゃ] /(n) Nippon Telegraph and Telephone Corp. (NTT)/
+ニュースオンデマンド /(n) news on demand/
+ニュースサーバー /(n) news server/
+ニュースリーダー /(n) newsreader/
+ニューラルネットワーク /(n) neural network (NN)/
+入力デバイス [にゅうりょくデバイス] /(n) input device/
+認証局 [にんしょうきょく] /(n) Certificate Authority/
+認知科学 [にんちかがく] /(n) cognitive science/
+ニンテンドー64 /(n) Nintenndo 64/
+塗りつぶし [ぬりつぶし] /(n) fill/
+ネームサーバー /(n) name server/
+熱転写プリンタ [ねつてんしゃプリンタ] /(n) thermal wax transfer printer/
+ネット /(n) net/
+ネットサーファ /(n) net surfer/
+ネットスケープコミュニケーションズ /(n) Netscape Communications Crop./
+ネットワーカー /(n) networker/
+ネットワークOS /(n) network operating system (NOS)/
+ネットワークインターフェースカード /(n) network interface card (NIC)/
+ネットワークサービスプロバイダ /(n) network service provider (NSP)/
+ネットワークドライブ /(n) network drive/
+ノイズリダクション /(n) Noise Reduction (NR)/
+ノイマンアーキテクチャ /(n) Neuman architecture/
+ノーウエイト /(n) no wait/
+ノート型パソコン [ノートがたパソコン] /(n) notebook personal computer/
+ノートブック型パーソナルコンピュータ [ノートブックがたパーソナルコンピュータ] /(n) notebook personal computer/
+ノートンユーティリティ /(n) Norton Utilities/
+ノーマルモード /(n) normal mode/
+ノックアウト /(n) knockout/
+ノンインターレース /(n) non-interlaced/
+ノングレア処理 [ノングレアしょり] /(n) non-glare treatment/
+ノンストップコンピュータ /(n) non-stop computer/
+ノンドロップフレームタイムコード /(n) non-drop frame time code/
+ノンプリエンプティブマルチタスク /(n) non-preemptive multitasking/
+ノンブル /(n) nombre/
+ノンマスカブルインタラプト /(n) nom-maskable interrupt (NMI)/
+ノンリニア編集 [ノンリニアへんしゅう] /(n) nonlinear editing (NLE)/
+バーコードリーダー /(n) bar code reader/
+パーサー /(n) parser/
+バージョンアップ /(n) version up/
+パース /(n) perspective/
+バーストSRAM /(n) Burst SRAM/
+バースト転送 [バーストてんそう] /(n) burst transfer/
+バーストモード /(n) burst mode/
+パーソナルコンピュータ /(n) personal computer (PC)/
+バーチャルLAN /(n) virtual Local Area Network (VLAN)/
+バーチャルコーポレーション /(n) virtual corporation (VC)/
+バーチャルマシン /(n) virtual machine (VM)/
+バーチャルメモリー /(n) virtual memory/
+バーチャルモール /(n) virtual mall/
+バーチャルリアリティ /(n) virtual reality (VR)/
+パーティクル /(n) particle/
+パーティクルシステム /(n) Particle System/
+ハードウェア割り込み [ハードウェアわりこみ] /(n) hardware interrupt/
+ハードセクター /(n) hard sector/
+ハードディスクレコーディング /(n) hard disk recording (HDR)/
+ハートビート /(n) heartbeat (HB)/
+ハーフハイト /(n) half height/
+パーミッション /(n) permission/
+ハイアラーキー /(n) hierarchy/
+ハイエンド /(n) high-end/
+ハイエンド機種 [ハイエンドきしゅ] /(n) high-end machine/
+倍角 [ばいかく] /(n) double size of character/
+倍クロック技術 [ばいクロックぎじゅつ] /(n) clock-doubling technology/
+ハイシエラフォーマット /(n) High Sierra format (HSF)/
+倍速CD-ROMドイブ [ばいそくCD-ROMドライブ] /(n) double speed CD-ROM drive/
+倍速CPU [ばいそくCPU] /(n) double speed CPU/
+バイトコード /(n) bytecode/
+バイナリ互換 [バイナリごかん] /(n) binary compatible/
+バイナリファイル /(n) binary file/
+バイナリラージオブジェクト /(n) binary large object (BLOB)/
+ハイパーテキスト転送プロトコル [ハイパーテキストてんそうプロトコル] /(n) HyperText Transfer Protocol (HTTP)/
+ハイパーテキストマークアップ言語 [ハイパーテキストマークアップげんご] /(n) HyperText Markup Language (HTML)/
+ハイパーメディア /(n) hypermedia/
+ハイパスフィルタ /(n) high pass filter (HPF)/
+ハイバネーション /(n) hibernation/
+ハイパフォーマンスフォートラン /(n) High Performance Fortran (HPF)/
+ハイビジョン /(n) Hi-Vision/
+配布 [はいふ] /(n) distribution/
+パイプライン処理 [パイプラインしょり] /(n) pipeline processing/
+パイプラインバーストSRAM /(n) pipeline burst Static Random Access Memory (PB SRAM)/
+ハイブリッドIC /(n) hybrid Integrated Circuit/
+バイポーラ /(n) bipolar/
+バイポーラトランジスタ /(n) bipolar transistor/
+ハイライト /(n) highlight/
+ハイレゾ /(n) high resolution/
+ハイレゾリューション /(n) high resolution/
+ハイレゾリューションモード /(n) high resolution mode/
+爆弾 [ばくだん] /(n) bomb/
+爆弾マーク [ばくだんマーク] /(n) bomb/
+バグフィックス /(n) bug fix/
+パケット交換網 [パケットこうかんもう] /(n) packet exchange network/
+パケット通信 [パケットつうしん] /(n) packet transfer communication/
+バスエラー /(n) bus error/
+バス幅 [バスはば] /(n) bus width/
+バスマウス /(n) bus mouse/
+バスマスター /(n) bus master/
+パソコン通信サービス [パソコンつうしんサービス] /(n) personal computer communications service/
+破損クラスタ [はそんクラスタ] /(n) lost cluster/
+バッカス記法 [バッカスきほう] /(n) Backus Normal Form (BNF)/
+ハッキング /(n) hacking/
+ハック /(n) hack/
+バックアップコピー /(n) backup copy/
+バックグラウンド /(n) background/
+バックグラウンド印刷 [バックグラウンドいんさつ] /(n) background printing/
+バックスクロール /(n) back-scroll/
+バックドア /(n) back door/
+バックライト /(n) backlight/
+パッケージソフト /(n) packaged software/
+発行と引用 [はっこうといんよう] /(n) publish and subscribe/
+ハッシュ /(n) hash/
+ハッシュトータル /(n) hash total/
+バッチ /(n) batch/
+ハッチング /(n) hatching/
+バッテリバックアップ /(n) battery backup/
+バッファリング /(n) buffering/
+バナー広告 [バナーこうこく] /(n) ad banner/
+花子 [はなこ] /(n) HANAKO/
+パニック画面 [パニックがめん] /(n) panic screen/
+ハノイの塔 [ハノイのとう] /(n) tower of Hanoi/
+パフォーマンス /(n) performance/
+ハフマン符号 [ハフマンふごう] /(n) Huffman code/
+パブリックドメインソフト /(n) public domain software (PDS)/
+バブル記憶装置 [バブルきおくそうち] /(n) bubble memory/
+バブルジェットプリンタ /(n) bubble jet printer/
+バブルソート /(n) bubble sort/
+バブルメモリー /(n) bubble memory/
+ハミングコード /(n) Hamming code/
+パラレルインターフェース /(n) parallel interface/
+パラレルコンピュータ /(n) parallel computer/
+パラレル転送 [パラレルてんそう] /(n) parallel transfer/
+バルーンヘルプ /(n) balloon help/
+パルスダイアル /(n) pulse dial/
+ハレーション /(n) halation/
+パワーPC /(n) PowerPC/
+パワーオンキー /(n) power-on key/
+パワーマネージメント機能 [パワーマネージメントきのう] /(n) power management function/
+パワーユーザー /(n) power user/
+半角文字 [はんかくもじ] /(n) half size character/
+バンクメモリー /(n) bank memory/
+版下 [はんした] /(n) block copy/
+パンチカード /(n) punch card/
+ハンディスキャナ /(n) handy scanner/
+ハンドシェイク /(n) handshake/
+ハンドヘルドPC /(n) handheld Personal Computer (HPC)/
+半二重通信 [はんにじゅうつうしん] /(n) half-duplex communications/
+パンニング /(n) panning/
+バンプ /(n) bump/
+バンプマッピング /(n) bump mapping/
+汎用機 [はんようき] /(n) general-purpose computer/
+汎用コンピュータ [はんようコンピュータ] /(n) general purpose computer/
+ヒープ領域 [ヒープりょういき] /(n) heap area/
+ビーム /(n) beam/
+非可逆圧縮 [ひかぎゃくあっしゅく] /(n) lossy compression/
+光コンピュータ [ひかりコンピュータ] /(n) optical computer/
+光造形システム [ひかりぞうけいシステム] /(n) rapid prototyping (RP)/
+光ファイバ [ひかりファイバ] /(n) optical fiber/
+引き込みケーブル [ひきこみケーブル] /(n) drop cable/
+引(き)数 [ひきすう] /(n) argument/
+ピコ /(n) pico-/
+ピザボックス型 [ピザボックスがた] /(n) pizza pox type/
+ビジネスシヨウ /(n) Businessshow/
+被写界深度 [ひしゃかいしんど] /(n) depth of field/
+ビジュアルシェル /(n) visual shell/
+ヒストリ /(n) history/
+歪み [ひずみ] /(n) distortion/
+左手座標系 [ひだりてざひょうけい] /(n) left-handed cordinate system/
+ビッグエンディアン /(n) big-endian/
+ビッグブルー /(n) Big Blue/
+ピッチシフター /(n) pitch shifter/
+ビット演算 [ビットえんざん] /(n) bit operation/
+ヒット数 [ヒットすう] /(n) hit poit/
+ビット/秒 [ビット/びょう] /(n) bits per second (bps)/
+ビットマスク /(n) bit mask/
+必要メモリ [ひつようメモリ] /(n) required memory size/
+ビデオCD /(n) video CD/
+ビデオRAM /(n) video random access memory (VRAM)/
+ビデオアダプタ /(n) video adapter/
+ビデオオーバーレイ /(n) video overlay/
+ビデオカード /(n) video card/
+ビデオキャプチャ /(n) video capture/
+ビデオキャプチャーボード /(n) video capture board/
+ビデオサーバー /(n) video server/
+ビデオディスク /(n) video disk (VD)/
+ビデオテックス /(n) videotex/
+ビデオプリンタ /(n) video printer/
+ビデオヘッド /(n) video head/
+ビデオボード /(n) video board/
+非ノイマン型コンピュータ [ひノイマンがたコンピュータ] /(n) non Von Neumann type computer/
+ピピンアットマーク /(n) Pippin ATMARK/
+秘密鍵暗号方式 [ひみつかぎあんごうほうしき] /(n) secret key cryptosystem/
+秘密保持契約 [ひみつほじけいやく] /(n) Non-Disclosure Agreement (NDA)/
+ビューア /(n) viewer/
+ビューイング変換 [ビューイングへんかん] /(n) viewing transformation/
+ヒューマンインターフェース /(n) human interface/
+標準MIDIファイル [ひょうじゅんMIDIファイル] /(n) Standard MIDI File (SMF)/
+標準入出力 [ひょうじゅんにゅうしゅつりょく] /(n) standard input/output/
+表色系 [ひょうしょくけい] /(n) color system/
+開く [ひらく] /(n) open/
+ビルゲイツ /(n) William H. Gates/
+ビルトイン /(n) built-in/
+拾い読み [ひろいよみ] /(n) blousing/
+ピンジャック /(n) pin jack/
+ピント送り [ピントおくり] /(n) rack focus/
+ファイバオプティックス /(n) fiber optics/
+ファイバチャネル /(n) Fibre Channel/
+ファイバツーザカーブ /(n) fiber to the curb (FTTC)/
+ファイバツーザホーム /(n) fiber to the home (FTTH)/
+ファイラ /(n) filer/
+ファイル拡張子 [ファイルかくちょうし] /(n) file extension/
+ファイルコンバータ /(n) file converter/
+ファイルサーバー /(n) file server/
+ファイルシェアリング /(n) file sharing/
+ファイルスロット /(n) file-slot/
+ファインダ /(n) finder/
+ファクシミリ /(n) facsimile/
+ファクシミリアダプタ /(n) facsimile adapter/
+ファクトリオートメーション /(n) factory automation (FA)/
+ファジーロジック /(n) fuzzy logic/
+ファシリティマネージメント /(n) facility management/
+ファックスモデム /(n) FAX modem/
+ファミリーコンピュータ /(n) family computer/
+ファンアウト /(n) fan-out/
+フィルタリング /(n) filtering/
+フィルム感度 [フィルムかんど] /(n) film sensitivity/
+フィルムスキャナ /(n) film scanner/
+フィルムレコーダ /(n) film recorder/
+風景画書式 [ふうけいがしょしき] /(n) landscape format/
+ブートセクター /(n) boot sector/
+フェイスマーク /(n) face mark/
+フェードアウト /(n) fade out (FO)/
+フェードイン /(n) fade in (FI)/
+フォアグラウンド /(n) foreground/
+フォーク /(n) fork/
+フォーマッタ /(n) formatter/
+フォーム /(n) form/
+フォームファクタ /(n) form factor/
+フォールトトレランス /(n) fault tolerance/
+フォトCD /(n) Photo CD/
+フォトリアリスティック /(n) photo realistic/
+フォトレタッチ /(n) photo retouching/
+フォトレタッチソフト /(n) photo-retouching software/
+フォローパン /(n) follow pan/
+フォンシェーディング /(n) Phong shading/
+フォントエディタ /(n) font editor/
+フォントメトリック /(n) font metric/
+不揮発性メモリー [ふきはつせいメモリー] /(n) nonvolatile memory/
+袋綴(じ) [ふくろとじ] /(n) dual page/
+袋文字 [ふくろもじ] /(n) open face/
+物理フォーマット [ぶつりフォーマット] /(n) physical format/
+浮動小数点コプロセッサ [ふどうしょうすうてんコプロセッサ] /(n) floatingpoint coprocessor/
+歩留(ま)り [ぶどまり] /(n) yield/
+不要情報 [ふようじょうほう] /(n) garbage/
+フライトシミュレータ /(n) flight simulator/
+プライベートアドレス /(n) private address/
+プライムタイム /(n) prime time/
+ブラインドタッチ /(n) blind touch/
+ブラウジング /(n) blousing/
+ブラウズ /(n) browse/
+フラグメンテーション /(n) fragmentation/
+フラグメント /(n) fragment/
+プラズマディスプレイパネル /(n) plasma display panel (PDP)/
+ブラックホール /(n) black hole/
+フラッシュROM /(n) flash ROM/
+フラッシュメモリー /(n) flash memory/
+フラットアドレス空間 [フラットアドレスくうかん] /(n) flat address space/
+フラットシェーディング /(n) flat shading/
+フラットベッドスキャナ /(n) flatbed scanner/
+プラットホーム /(n) platform/
+ブランクディスク /(n) blank disk/
+フリーズ /(n) freeze/
+フリーソフト /(n) free software/
+フリーソフトウェアファウンデーション /(n) Free Software Foundation Inc. (FSF)/
+ブリーフケース /(n) briefcase/
+プリエンプティブマルチタスク /(n) preemptive multitasking/
+フリッカフリー /(n) flicker free/
+プリフェッチ /(n) prefetch/
+プリプロセッサ /(n) preprocessor/
+不良セクター [ふりょうセクター] /(n) bad sector/
+プリンタ制御コード [プリンタせいぎょコード] /(n) printer control code/
+プリンタバッファ /(n) printer buffer/
+プリントサーバー /(n) print server/
+プリントスプーラ /(n) print spooler/
+プリントマネージャ /(n) Print Manager/
+ブルータ /(n) brouter/
+ブルックの法則 [ブルックのほうそく] /(n) Brooks's Law/
+フルデュプレックス /(n) full-duplex/
+フルパス /(n) full path/
+フルページディスプレイ /(n) full-page display/
+フレアー /(n) flare/
+プレイステーション /(n) PlayStation/
+プレインストール /(n) preinstall/
+ブレーク /(n) break/
+ブレーク信号 [ブレークしんごう] /(n) break signal/
+フレーム同期方式 [フレームどうきほうしき] /(n) frame synchronous communication/
+プレゼンテーションソフト /(n) presentation software/
+プレゼンテーションソフトウェア /(n) presentation software/
+プレゼンテーションマネージャ /(n) presentation manager (PM)/
+プレビュー /(n) preview/
+プレマスタリング /(n) premastering/
+ブレンド /(n) blend/
+フローティングパレット /(n) floating palette/
+ブロードキャストストーム /(n) broadcast storm/
+プロキシサーバー /(n) proxy server/
+プログラムマネージャ /(n) program manager/
+プログレッシブJPEG /(n) progressive Joint Photographic Expert Group/
+プロジェクト管理ソフト [プロジェクトかんりソフト] /(n) project managemnet software/
+プロセスカラー /(n) process color/
+プロダクションシステム /(n) production system/
+フロッピー /(n) floppy/
+フロッピーディスクコントローラ /(n) Floppy Disk Controller (FDC)/
+フロッピーディスクドライブ /(n) floppy disk drive (FDD)/
+プロテクト /(n) protect/
+プロテクトメモリー /(n) protected memory/
+プロファイル /(n) profile/
+プロフィール /(n) profile/
+プロポーショナルフォント /(n) proportional font/
+フロントエンドコンピュータ /(n) front-end computer/
+分割バー [ぶんかつバー] /(n) division bar/
+分岐予測 [ぶんきよそく] /(n) branch prediction/
+分散型データベース [ぶんさんがたデータベース] /(n) distributed database/
+分散コンピューティング [ぶんさんコンピューティング] /(n) distributed computing/
+分散コンピューティング環境 [ぶんさんコンピューティングかんきょう] /(n) Distributed Computing Environment (DCE)/
+平均シーク時間 [へいきんシークじかん] /(n) average of seek time/
+平均修復時間 [へいきんしゅうふくじかん] /(n) mean time to repair (MTTR)/
+米国規格協会 [べいこくきかくきょうかい] /(n) American National Standards Institute (ANSI)/
+ヘイズATコマンド /(n) Hayes AT command/
+ヘイズ互換 [ヘイズごかん] /(n) Hayes compatible/
+ペイテレビ /(n) pay television/
+ペイパービュー /(n) pay per view (PPV)/
+並列転送 [へいれつてんそう] /(n) parallel transfer/
+ペイント /(n) paint/
+ペイントソフト /(n) paint software/
+ページモード /(n) page mode/
+ベータ版 [ベータばん] /(n) beta version/
+ベーパーウェア /(n) vaporware/
+ベクター /(n) vector/
+ベクターグラフィックス /(n) vector graphics/
+ベクターフォント /(n) vector font/
+ベクトルフォント /(n) vector font/
+ベクトルプロセッサ /(n) vector processor/
+ベジェ /(n) Bezier/
+ペタ /(n) peta-/
+ペタバイト /(n) petabyte/
+ヘッドマウントディスプレイ /(n) head mounted display (HMD)/
+ベビーAT /(n) Baby AT/
+ヘリカルスキャン /(n) helical scan/
+ヘルパーアプリケーション /(n) helper application/
+ペンコンピュータ /(n) pen computer/
+ボイスメール /(n) voice mail/
+方向キー [ほうこうキー] /(n) cursor key/
+暴走 [ぼうそう] /(n) hang up/
+放送衛星 [ほうそうえいせい] /(n) Broadcasting Satellite (BS)/
+ポータビリティ /(n) portability/
+ポーティング /(n) porting/
+ボード /(n) board/
+ボード /(n) board/
+ポートリプリケータ /(n) port replicator/
+ポートレート /(n) portrait/
+ホームディレクトリ /(n) home directory/
+ホームバンキング /(n) home banking/
+ポーランド記法 [ポーランドきほう] /(n) Polish notation/
+ボールド体 [ボールドたい] /(n) boldface/
+ボクセル /(n) voxel/
+ポケットコンピュータ /(n) pocket computer (PC)/
+ポケットベル /(n) pager/
+ポケットモデム /(n) pocket modem/
+補助漢字 [ほじょかんじ] /(n) Hojo kanji (JIS X 0212)/
+補色 [ほしょく] /(n) complementary colors/
+ボックス /(n) box/
+ホットスタート /(n) hot start/
+ホットスポット /(n) hot spot/
+ホットリンク /(n) hotlink/
+ボトルネック /(n) bottleneck/
+ボム /(n) bomb/
+ポリゴン /(n) polygon/
+ボリュームレンダリング /(n) volume rendering/
+ボルト /(n) volt (V)/
+ホログラム /(n) hologram/
+ホワイトバランス /(n) white balance/
+翻訳ソフトウェア [ほんやくソフトウェア] /(n) compiler/
+マークアップ言語 [マークアップげんご] /(n) markup language/
+マージン /(n) margin/
+マイクロカーネル /(n) microkernel/
+マイクロチップ /(n) microchip/
+マイクロチャネル /(n) Micro Channel/
+マイクロドライ /(n) Micro Dry/
+マイクロフロッピーディスク /(n) microfloppy disk/
+まいとーく /(n) MYTALK/
+マウスカーソル /(n) mouse cursor/
+マウスポインタ /(n) mouse pointer/
+マクロ機能 [マクロきのう] /(n) macro-function/
+マクロ言語 [マクロげんご] /(n) macro language/
+マシン /(n) machine/
+マスキング /(n) masking/
+マスクROM /(n) mask read only memory (MROM)/
+マスターディスク /(n) original disk/
+マスターページ /(n) master page/
+マスタリング /(n) mastering/
+待ち状態 [まちじょうたい] /(n) waiting state/
+マッチング /(n) matching/
+マッハバンド /(n) mach band/
+マッピング /(n) mapping/
+丸漢フォント [まるかんフォント] /(n) Marukan font/
+マルチウィンドウ /(n) multiwindow/
+マルチキャスト /(n) multicast/
+マルチキャストバックボーン /(n) multicast backbone (Mbone)/
+マルチシンクモニター /(n) multisync monitor/
+マルチスキャン /(n) multiscan/
+マルチスキャンディスプレイ /(n) multi-scan display/
+マルチスキャンモニター /(n) multi-scan monitor/
+マルチスレッド /(n) multithreading/
+マルチセッション /(n) multi-session/
+マルチタスキング /(n) multitasking/
+マルチタスクOS /(n) multitasking Operation System/
+マルチバンクDRAM /(n) multibank Dynamic Random Access Memory (MDRAM)/
+マルチファインダ /(n) MultiFinder/
+マルチフォント /(n) multi-font/
+マルチプレキシング /(n) multiplexing/
+マルチメディアエクステンション /(n) multimedia extension (MMX)/
+マルチメディア通信 [マルチメディアつうしん] /(n) multimedia communication/
+マルチメディアデータベース /(n) multimedia database (MDB)/
+マルチメディアパソコン /(n) multimedia personal computer/
+マルチユーザー /(n) multi-user/
+マルチユーザーシステム /(n) multi-user system/
+マンセル表色系 [マンセルひょうしょくけい] /(n) Munsell color system/
+マンデルブロー集合 [マンデルブローしゅうごう] /(n) Mandelbrot set/
+マンマシンインターフェース /(n) Man Machine Interface (MMI)/
+右手座標系 [みぎてざひょうけい] /(n) right-handed cordinate system/
+ミッキー /(n) mickey/
+ミッションクリティカル /(n) mission critical/
+ミップマッピング /(n) Multum In Parvo mapping (MIP mapping, MIPMAP)/
+未読 [みどく] /(n) to be read/
+ミニタワー /(n) mini tower/
+ミニチュアカード /(n) Miniture Card/
+ミニフロッピーディスク /(n) minifloppy disk/
+ミラー /(n) mirror/
+ミラーサーバー /(n) mirror server/
+ミラーリング /(n) mirroring/
+明朝体 [みんちょうたい] /(n) Mincho/
+ムーアの法則 [ムーアのほうそく] /(n) Moore's Law/
+ムービー /(n) movies/
+無限遠点 [むげんえんてん] /(n) infinity/
+無線LAN [むせんLAN] /(n) wireless LAN/
+無停電電源 [むていでんでんげん] /(n) uninterruptible power supply (UPS)/
+無変換 [むへんかん] /(n) impossible conversion/
+明度 [めいど] /(n) lightness/
+メインボード /(n) main board/
+メインメモリー /(n) main memory/
+メールサーバー /(n) mail server/
+メール爆弾 [メールばくだん] /(n) mail bomb/
+メガビット /(n) megabit/
+メソッド /(n) method/
+メタ言語 [メタげんご] /(n) metalanguage/
+メタデータ /(n) metadata/
+メタファ /(n) metaphor/
+メタボール /(n) metaball/
+メタメディア /(n) metamedia/
+メタモルフォーゼ /(n) metamorphose/
+メディアプロセッサ /(n) media processor/
+メディア変換 [メディアへんかん] /(n) media conversion/
+メディアラボ /(n) Media Laboratory/
+メモリー /(n) memory/
+メモリーカード /(n) memory card/
+メモリー管理 [メモリーかんり] /(n) memory management/
+メモリー効果 [メモリーこうか] /(n) memory effect/
+メモリースイッチ /(n) memory switch/
+メモリーマップ /(n) memory map/
+メルトダウン /(n) meltdown/
+メンバー関数 [メンバーかんすう] /(n) member function/
+モアレ /(n) moire/
+モーションJPEG /(n) motion JPEG/
+モーションキャプチャ /(n) motion captur/
+モーションブラー /(n) motion blur/
+モーダル /(n) modal/
+モービルコンピューティング /(n) mobile computing/
+文字落ち [もじおち] /(n) missing character/
+文字修飾 [もじしゅうしょく] /(n) character decoration/
+文字多重放送 [もじたじゅうほうそう] /(n) teletext/
+文字化け [もじばけ] /(n) illegal character/
+文字放送 [もじほうそう] /(n) teletext/
+モジュラケーブル /(n) modular cable/
+モジュラジャック /(n) modular jack/
+モジュロ /(n) modulo/
+モデムカード /(n) modem card/
+モデレータ /(n) moderator/
+モノスペースフォント /(n) monospace font/
+モノリシックIC /(n) monolithic integrated circuit/
+モバイルコンピューティング /(n) mobile computing/
+モンテカルロ法 [モンテカルロほう] /(n) Monte Carlo method/
+有効桁 [ゆうこうけた] /(n) significant digit/
+ユーザー /(n) user/
+ユーザーID /(n) user IDentification (user id)/
+ユーザーアカウント /(n) user account/
+ユーザーインターフェース /(n) user interface (UI)/
+ユーザー辞書 [ユーザーじしょ] /(n) user dictionary/
+ユーザー登録 [ユーザーとうろく] /(n) user registration/
+ユーザーフレンドリ /(n) user-friendly/
+ユーザー名 [ユーザーめい] /(n) username/
+ユースウェア /(n) useware/
+ユーティリティ /(n) utility/
+ユニフォームリソースロケータ /(n) Uniform Resource Locator (URL)/
+溶融型熱転写プリンタ [ようゆうがたねつてんしゃプリンタ] /(n) phase change printer/
+ヨーロッパ放送協会 [ヨーロッパほうそうきょうかい] /(n) European Broadcasting Union (EBU)/
+横倍角 [よこばいかく] /(n) double width size/
+呼(び)出(し)時間 [よびだしじかん] /(n) access time/
+読み込み [よみこみ] /(n) read in/
+ライザーカード /(n) raiser card/
+ライティング /(n) lighting/
+ライトスルーキャッシュ /(n) write-through cache/
+ライトバックキャッシュ /(n) write-back cache/
+ライトプロテクト /(n) write protect/
+ライブウェア /(n) liveware/
+ラウンドロビンアルゴリズム /(n) round-robin algorithm/
+ラジオシティ /(n) radiosity/
+ラジオシティ法 [ラジオシティほう] /(n) radiosity method/
+ラスター /(n) raster/
+ラスターイメージプロセッサ /(n) raster image processor (RIP)/
+ラスターグラフィックス /(n) raster graphics/
+ラスタースキャン /(n) raster scan/
+ラスタースキャンディスプレイ /(n) raster scan display/
+ラスタライザ /(n) rasterrizer/
+ラスタライズ /(n) rasterize/
+ラック /(n) rack/
+ラックマウント /(n) rack-mounted/
+ランタイムライブラリ /(n) run-time library/
+ランダムアクセスメモリー /(n) random access memory (RAM)/
+ランダムドットステレオグラム /(n) random dot stereogram (RDS)/
+ランディングゾーン /(n) landing zone (LZ)/
+ランドスケープ /(n) landscape/
+ランレングス法 [ランレングスほう] /(n) run length method/
+リアルタイムOS /(n) real-time Operating System/
+リアルタイム処理 [リアルタイムしょり] /(n) real-time processing/
+リードオンリー /(n) read-only (RO)/
+リエンジニアリング /(n) re-engineering/
+リカーシブ /(n) recursive/
+リスタート /(n) restart/
+リストア /(n) restore/
+リセットスイッチ /(n) reset switch/
+リソースファイル /(n) resource file/
+リソースフォーク /(n) resource fork/
+リダイヤル /(n) redialing/
+リチウムイオン電池 [リチウムイオンでんち] /(n) lithium-ion battery/
+リチウムポリマー電池 [リチウムポリマーでんち] /(n) lithium polymer battery/
+リッチテキストフォーマット /(n) rich text format (RTF)/
+リドゥ /(n) redo/
+リトラクト /(n) retract/
+リトルエンディアン /(n) little-endian/
+リバース /(n) reverse/
+リバーブ /(n) reverberation/
+リビジョン /(n) revision (Rev)/
+リプレース /(n) replace/
+リフレクションマッピング /(n) refraction mapping/
+リフレッシュレート /(n) refresh rate/
+リミッタ /(n) limiter/
+リムーバブルディスク /(n) removable disk/
+リムーバブルハードディスク /(n) removable hard disk/
+リモートアクセスサービス /(n) Remote Access Services (RAS)/
+リモート管理 [リモートかんり] /(n) remote administration/
+リモートセンシング /(n) remote sensing/
+リモートホスト /(n) remote host/
+領域確保 [りょういきかくほ] /(n) partitioning/
+リリース /(n) release/
+リレーション /(n) relation/
+リロケータブル /(n) relocatable/
+リング型接続 [リングがたせつぞく] /(n) ring-shaped connection/
+ルーター /(n) router/
+ルーティング /(n) routing/
+ルーラー /(n) ruler/
+ルックアップテーブル /(n) look-up table (LUT)/
+ルックアンドフィール /(n) look and feel/
+レイアウト表示 [レイアウトひょうじ] /(n) layout display/
+例外処理 [れいがいしょり] /(n) exception handling/
+レイテンシ /(n) latency/
+レイトレーシング /(n) ray tracing/
+レイヤー /(n) layer/
+レーザー /(n) Light Amplification by Stimulated Emission of Radiation (laser)/
+レーザー印字装置 [レーザーいんじそうち] /(n) laser printer/
+レーザープリンタ /(n) laser printer/
+レジストリ /(n) registry/
+レジストレーション /(n) registration/
+レジューム /(n) resume/
+レジューム機能 [レジュームきのう] /(n) resume functions/
+レターサイズ /(n) letter size/
+レッドブック /(n) Red Book/
+レンダリング /(n) rendering/
+連文節変換 [れんぶんせつへんかん] /(n) group paragraph conversion/
+ローダー /(n) loader/
+ローパスフィルタ /(n) low pass filter (LPF)/
+ローマ字入力 [ローマじにゅうりょく] /(n) Romaji input/
+ロールプレイングゲーム /(n) Role-Playing Game (RPG)/
+ログファイル /(n) logfile/
+ロジック爆弾 [ロジックばくだん] /(n) logic bomb/
+ロジックボード /(n) logic board/
+ロボット /(n) robot/
+ロボティクス /(n) robotics/
+ロングファイルネーム /(n) long file name/
+論理エラー [ろんりエラー] /(n) logical error/
+論理シフト [ろんりシフト] /(n) logical shift/
+論理爆弾 [ろんりばくだん] /(n) logic bomb/
+論理フォーマット [ろんりフォーマット] /(n) logical format/
+ワーキングディレクトリ /(n) working directory/
+ワークエリア /(n) work area/
+ワークシート /(n) worksheet/
+ワードプロセッサ /(n) word processor/
+ワードプロセッシング /(n) word processing/
+ワードラップ /(n) word wrap/
+ワープロ /(n) word processor/
+ワープロ通信 [ワープロつうしん] /(n) word processor communication/
+ワーム /(n) worm/
+ワールド座標系 [ワールドざひょうけい] /(n) world coordinate system/
+ワールドワイドウェブ /(n) World Wide Web (WWW)/
+ワイドエリアネットワーク /(n) wide area network (WAN)/
+ワイプ /(n) wype/
+ワイヤード /(n) wired/
+ワイヤードロジック /(n) wired loigc/
+ワイヤーフレーム /(n) wire frame model/
+ワイヤーフレームモデル /(n) wireframe model/
+ワイヤレスLAN /(n) wireless LAN/
+ワイルドカード文字 [ワイルドカードもじ] /(n) wildcard character/
+ワクチン /(n) vaccine/
+ワット /(n) watt (W)/
+割り当て [わりあて] /(n) allocation/
+割(り)込(み) [わりこみ] /(n) interruption/
+割り付け [わりつけ] /(n) layout/
+ワンタイムパスワード /(n) ontime password/
+ワンチップマイクロコンピュータ /(n) one-chip microcomputer/

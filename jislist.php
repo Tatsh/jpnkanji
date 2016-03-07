@@ -23,7 +23,6 @@ $mtime = filemtime('jislist.php');
 #}
 header('Last-Modified: '. gmdate('D, d M Y H:i:s', $mtime).' GMT');
 
-include_once 'gzcompress.php';
 #include 'japcharset.php';
 include_once 'smallcache.php';
 include_once 'kanjisqlfun.php';
@@ -171,7 +170,7 @@ if(!$c->DumpOrLog())
     if($loppu >= $size)$loppu = $size-1;
     $maara = $loppu-$alku+1;
     
-    echo "[ Sivu ", ($sivu+1), " / ", $sivuja, ' ]<br>';
+    echo "[ Page ", ($sivu+1), " / ", $sivuja, ' ]<br>';
     
     $space = (int)($maara / $sara);
     $len   = (int)($maara / $space + ($space-1));
@@ -214,4 +213,3 @@ $c->_Cache();
 unset($c);
 
 #CharSetEnd('euc-jp', 'iso-8859-1');
-GzCompressEnd();

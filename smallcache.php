@@ -2,7 +2,7 @@
 /* This file is maintained in ~/src/japkanji/ - do not modify otherwhere */
 
 /*** Bisqwit's subcaching class
- *   Version 1.0.3
+ *   Version 1.0.4
  *   Copyright (C) 1992,2002 Bisqwit (http://bisqwit.iki.fi/)
  *
  * Usage example:
@@ -23,13 +23,17 @@ class Cache
 {
   var $filename;
   var $active = 0;
-  var $filepath = '/tmp/phpcache/kanjidict/';
+  var $filepath = '/dev/shm/smallcache/';
   var $newversion = 0;
   var $oldversion = 0;
   var $fp = 0;
   function _TryOpen()
   {
-    $this->fp = @fopen($this->filename, 'rb+');
+    $this->fp = null;
+    if(file_exists($this->filename))
+    {
+      $this->fp = @fopen($this->filename, 'rb+');
+    }
     if(!$this->fp)
     {
       $this->fp = @fopen($this->filename, 'wb');

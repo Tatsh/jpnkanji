@@ -1,6 +1,8 @@
 <?php
 
-include 'konvertfun.php';
+error_reporting  (E_ERROR | E_WARNING | E_PARSE);
+
+include_once 'konvertfun.php';
 
 function Table($s)
 {
@@ -270,6 +272,7 @@ while(($s = fgets($fp, 4096)))
 fclose($fp);
 EntryFlush();
 
+/* Copied from radgen.php */
 $fp = fopen('radkfile', 'r');
 if($fp)
 {
@@ -313,3 +316,12 @@ mysql_background_end();
 
 mysql_query('update '.Table('japkanji').' set freqorder=frequency');
 mysql_query('update '.Table('japkanji').' set freqorder=9999 where frequency=0');
+
+/* Copied from partcounts.php */
+$SQL = 'select jiscode jis,count(distinct partcode)c from '.Table('kanjiparts').' group by jiscode';
+$tmp = mysql_query($SQL);
+while(($tmp2 = mysql_fetch_array($tmp)))
+{
+  $SQL = 'update japkanji set partcount='.$tmp2['c'].' where jiscode='.$tmp2['jis'];
+  mysql_query($SQL);
+}

@@ -43,7 +43,7 @@ function verbcategory($sana)
     
     /*
  Exceptions to the general verb classifications
- (source: http://www.geom.umn.edu/~burchard/nihongo/notes.html )
+ (source: http://www.geom.uiuc.edu/~burchard/nihongo/notes.html )
 
    +---------------------------------------------------+
    |       Class-[I]       |        Class-[II]         |
@@ -98,7 +98,7 @@ function joinverb($sana, $liite)
     
       if($last == 'ik')         return $first.'it'.$liite; // iku -> itte, not iite
       if(ereg('[trw]$', $last)) return substr($body, 0, strlen($body)-1) . 't'  . $liite;
-      if(ereg(    'k$', $last)) return substr($body, 0, strlen($body)-1) . 'i'  . $liite;
+      if(ereg(    'k$', $last)) return substr($body, 0, strlen($body)-1) . 'ki'  . $liite;
       if(ereg(    's$', $last)) return substr($body, 0, strlen($body)-1) . 'si' . $liite;
       if(ereg('[mnb]$', $last)) return substr($body, 0, strlen($body)-1) . 'nd' . substr($liite, 1);
       if(ereg(    'g$', $last)) return substr($body, 0, strlen($body)-1) . 'id' . substr($liite, 1);
@@ -177,6 +177,37 @@ function konditionaaliksi($s)
 {
   return joinverb($s, 'taru');
 }
+
+function konditionaali_pos_tara($s)
+{
+  $first = makepast($s);
+  return $first . 'ra';
+  // e.g., iku -> itta -> ittara
+}
+
+function konditionaali_pos_eba($s)
+{
+  $stem =  substr($s, 0, strlen($s)-1);
+  return $stem . 'eba';
+  // works also for the irregular ones: kuru -> kureba, suru -> sureba
+}
+
+function konditionaali_neg_tara($s)
+{
+  $stmp = $s . ' desu';
+  $stmp = negaksi($s);
+  return makepast($stmp) . 'ra';
+}
+
+function konditionaali_neg_eba($s)
+{
+  $first = negaksi($s);
+  $stem = substr($first, 0, strlen($first)-1);
+  return $stem . 'kereba';
+  // e.g., suru -> shinai -> shinakereba
+}
+
+
 
 # Muuttaa verbin perus- tai kohteliaan muodon negatiiviseksi.
 # Adjektiivin perusmuoto muutetaan negatiiviseksi lisäämällä
@@ -534,6 +565,37 @@ function DoVerb($s)
   echo '</table>';
 }
 
+function DoConditional($s)
+{
+  $table = array();
+  
+  echo '<p><b>Conditional forms: (I) - plain, (II) - provisional, plain</b><p>';
+
+  echo '<table border=><tr><th></th>';
+  echo '<th class=jpoz>Positive</th>',
+       '<th class=jpoz>Negative</th>';
+  echo '</tr>';
+
+  foreach(array('I','II') as $cond)
+  { 
+  
+    echo '<tr><th class=jpoz>Conditional ('.$cond.')</th>';
+    foreach(array(1,0) as $nega)
+    {
+      if($cond == 'I' && $nega) $stmp = konditionaali_pos_tara($s);
+      if($cond == 'I' && !$nega) $stmp = konditionaali_neg_tara($s);
+      if($cond == 'II' && $nega) $stmp = konditionaali_pos_eba($s);
+      if($cond == 'II' && !$nega) $stmp = konditionaali_neg_eba($s);
+    
+      $line = '<td class=jpdat></span> <b><span class=result>'.
+                debugprint($stmp).'</span></b></td>';     
+      echo hoida($line);
+      if(!$nega) echo '</tr>';
+    }
+  }
+  echo '</table>';
+}
+
 /* Make sure the expression only contains valid syllables. */
 $s = str_replace('û', 'uu',
      str_replace('ê', 'ee',
@@ -605,17 +667,19 @@ if($s)
     
     $hiragana = '';
     DoVerb($s);
+    DoConditional($s);
     
     print '<p><b>An adjective formed from the verb, giving an [un]desired action:</b><br>';
     $hiragana = '';
     DoAdjective(makedesirative($s));
-    
+/*
     print '<p>If you want conditional, try conjugating ';
     $hiragana='';
     $bar = konditionaaliksi($s);
     $foo = debugprint($bar);
     dohiragana();echo '<a href="verb=',rawurlencode($bar),'">',hoida($foo),'</a>';
     print '.<br>';
+*/
   }
   else
   {
@@ -627,8 +691,11 @@ if($s)
 }
 
 ?>
-<p><small>Written by Bisqwit (<a href="http://bisqwit.iki.fi/">http://bisqwit.iki.fi/</a>)</small>
-<p>See also: <a href="http://www.geom.umn.edu/~burchard/nihongo/">Paul Burchard's verb tables</a>
+<p><small>Written by Bisqwit (<a href="http://bisqwit.iki.fi/">http://bisqwit.iki.fi/</a>)
+<br>and Aarno Hohti
+</small>
+
+<p>See also: <a href="http://www.geom.uiuc.edu/~burchard/nihongo/">Paul Burchard's verb tables</a>
 <?
 Epilogue();
 

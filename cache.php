@@ -1,7 +1,7 @@
 <?php
 
 /*** Bisqwit's caching and compressing php output filter
- *   Version 1.0.5
+ *   Version 1.0.6
  *   Copyright (C) 1992,2003 Bisqwit (http://iki.fi/bisqwit/)
  *
  * Example of usage:
@@ -27,8 +27,8 @@
  *
  * Of course you only want to cache pages which take loads of time to load.
  *
- * The data is cached under /dev/shm/, /tmp/phpcache/ or /tmp/,
- * depending on which of them exists and is writable.
+ * The data is cached under /dev/shm/phpcache/, /dev/shm/, /tmp/phpcache/
+ * or /tmp/, depending on which of them exists and is writable.
  *
  * Distributed under the following terms:
  *   No warranty. You are free to modify this source and to
@@ -288,7 +288,7 @@ function cache_filename__($hashkey)
   global $cache_dirname;
   if(!$cache_dirname)
   {
-    $dirs = array('/dev/shm/', '/tmp/phpcache/', '/tmp/');
+    $dirs = array('/dev/shm/phpcache/', '/dev/shm/', '/tmp/phpcache/', '/tmp/');
     /* Pass 1: Try finding a writable directory. */
     foreach($dirs as $dir)
       if(file_exists($dir) && is_dir($dir) && is_writable($dir))

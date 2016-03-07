@@ -4,7 +4,7 @@
 # The same program is used in many different projects to create
 # a diff file version history (patches).
 #
-# makediff.php version 3.0.4
+# makediff.php version 3.0.5
 
 # Copyright (C) 2000,2002 Bisqwit (http://bisqwit.iki.fi/)
 
@@ -19,12 +19,14 @@ function ShellFix($s)
   return "'".str_replace("'", "'\''", $s)."'";
 }
 
-if($REMOTE_ADDR)
+if(isset($REMOTE_ADDR))
 {
   header('Content-type: text/plain');
   readfile($PHP_SELF);
   exit;
 }
+
+error_reporting(E_ALL & ~E_NOTICE);
 
 ob_implicit_flush(true);
 
@@ -180,9 +182,9 @@ function MakeDiff($dir1, $dir2, $patchname)
   */
   
   /* Gather up inode numbers. */
-  chdir($dir1); $data1 = FindInodes('.');
-  chdir('../'.$dir2); $data2 = FindInodes('.');
-  chdir('..');
+  
+  $data1 = FindInodes($dir1);
+  $data2 = FindInodes($dir2);
   
   $era1 = Array();
   $era2 = Array();
@@ -249,10 +251,16 @@ function MakeDiff($dir1, $dir2, $patchname)
 }
 function FindInodes($directory)
 {
-  $fp = @opendir($directory);
-  if(!$fp)
+  for($try = 0; $try < 10; $try++)
   {
-    print "OPENDIR $directory failed!\n";
+    $fp = @opendir($directory);
+    if($fp) break;
+    print "OPENDIR $directory failed (cwd=".getcwd()."), retrying\n";
+    sleep(1);
+  }
+  if($try == 10)
+  {
+    print "OPENDIR $directory failed (cwd=".getcwd().")!\n";
     exit;
   }
   
