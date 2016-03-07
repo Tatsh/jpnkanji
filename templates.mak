@@ -15,11 +15,14 @@ attrlist.txt: edict_doc.txt enamdict_doc.txt
 	echo "'masc' => 'male term or language'," >> "$@"
 	rm -f tmp2
 
+# TO BE DOCUMENTED:
+#   Why on earth does this swap the target and source ???
+
 japkanji.php.in: japkanji.php attrlist.txt
-	rm -f tmp2 && sed 's!@ATTRLIST@!'"`cat attrlist.txt|tr '\012' @`"'!' <"$<"|tr @ '\012' >tmp2 && mv -f tmp2 "$<"
+	rm -f tmp2 && sed 's!@ATTRLIST@!'"`cat attrlist.txt|tr '\012' @`"'!' <"$@"|tr @ '\012' >tmp2 && mv -f tmp2 "$<"
 	touch -r"$@" "$<" && chmod a-wx "$<"
 konverto.php.in: konverto.php attrlist.txt
-	rm -f tmp2 && sed 's!@ATTRLIST@!'"`cat attrlist.txt|tr '\012' @`"'!' <"$<"|tr @ '\012' >tmp2 && mv -f tmp2 "$<"
+	rm -f tmp2 && sed 's!@ATTRLIST@!'"`cat attrlist.txt|tr '\012' @`"'!' <"$@"|tr @ '\012' >tmp2 && mv -f tmp2 "$<"
 	touch -r"$@" "$<" && chmod a-wx "$<"
 settings.mak.in: settings.mak
 	touch -r"$@" "$<" && chmod a-wx "$<"

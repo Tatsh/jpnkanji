@@ -69,8 +69,10 @@ CREATE TABLE dictlog
   # Search type
   stype    VARCHAR(16) NOT NULL,
   
-  date     INT(11) NOT NULL, KEY date(date),
+  date     INT(11) NOT NULL,
   hostname VARCHAR(255) NOT NULL
+  
+  , KEY date(date)
 );
 
 # KANJI DATABASE PART
@@ -181,8 +183,8 @@ CREATE TABLE kanjikorea
   
   romaji  VARCHAR(6) NOT NULL
 
-  #, KEY jiscode(jiscode)
-  #, KEY romaji(romaji(5))
+  , KEY jiscode(jiscode)
+  , KEY romaji(romaji(5))
 );
 
 # Note: Max 7 per japkanji (appears so)

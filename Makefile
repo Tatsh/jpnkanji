@@ -26,7 +26,7 @@ ARCHFILES=$(DICTFILES) kanjidic radkfile simgen.php \
           settings.mak.in templates.mak \
           japkanji.css jislist.php \
           session.php masu.php unicodemrk.php \
-          $(SEARCHMODULES)
+          $(SEARCHFILES)
 
 INSTALL=install
 DEPFUN_INSTALL=not

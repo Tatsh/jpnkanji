@@ -23,7 +23,7 @@ for zipfile in classical ediclsd3 lawgledt stardict aviation \
 done
 
 for s in aviation classical compdic concrete ediclsd3 findic \
-         geodic lawgledt mktdic pandpgls; do
+         geodic lawgledt mktdic pandpdic; do
 
   unzip -o "$s".zip.new "$s" '*.txt' '*.html' '*.euc' '*.doc' '*.inf' \
      && rm -f "$s".zip.new
