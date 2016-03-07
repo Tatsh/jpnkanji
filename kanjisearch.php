@@ -10,7 +10,7 @@ if(!$REMOTE_ADDR)
 }
 
 /* Register globals (I know, this is not a good thing) */
-foreach($HTTP_GET_VARS as $var=>$value)
+foreach($_GET as $var=>$value)
   $$var = $value;
 
 if(!$outset)
@@ -141,8 +141,7 @@ function ShowSimilars($SQL)
 
 function IsPrinting()
 {
-  global $HTTP_GET_VARS;
-  return (int)$HTTP_GET_VARS['print'];
+  return (int)$_GET['print'];
 }
 
 class SearchMethod
@@ -153,12 +152,10 @@ class SearchMethod
   function DisplayForm() {}
   function DisplayResults()
   {
-    global $HTTP_GET_VARS;
-
     $vars = array_unique($this->GetVars());
     $s = '';
     foreach($vars as $varname)
-      $s .= sprintf('%08X%08X', crc32($varname), crc32($HTTP_GET_VARS[$varname]));
+      $s .= sprintf('%08X%08X', crc32($varname), crc32($_GET[$varname]));
 
     $s .= sprintf('%02X', IsPrinting());
 
@@ -326,12 +323,12 @@ class SearchMethod
       print '<ul>';
        echo '<li><a href="search?print=1';
        foreach($vars as $varname)
-         echo htmlspecialchars('&'.$varname.'='.urlencode($HTTP_GET_VARS[$varname]));
+         echo htmlspecialchars('&'.$varname.'='.urlencode($_GET[$varname]));
        echo '">Print the above results as a table</a>';
        echo '</li>';
        echo '<li><a href="search?print=1&outset=euc-jp';
        foreach($vars as $varname)
-         echo htmlspecialchars('&'.$varname.'='.urlencode($HTTP_GET_VARS[$varname]));
+         echo htmlspecialchars('&'.$varname.'='.urlencode($_GET[$varname]));
        echo '">Print, also works when your printer does not quite support unicode</a>',
         ' (thanks <a href="http://web.lfw.org/shodouka/">Shodouka</a>!)';
        echo '</li>';
@@ -608,7 +605,7 @@ if(IsPrinting() > 0)
 
 foreach($searchmethods as $param => $array)
 {
-  if($HTTP_GET_VARS['search'] == $param)
+  if($_GET['search'] == $param)
   {
     $pagetitle .= ' - ' . $array['obj']->FormTitle();
     echo '<h2>', $array['obj']->FormTitle(), '</h2>';

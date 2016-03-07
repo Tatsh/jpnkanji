@@ -380,13 +380,19 @@ while(($fn = readdir($fp)))
     // tab[2] = version
     // tab[3] = archive type (tar.gz, tar.bz2, zip, rar)
     
+    #print "$fn:\n";
+    #print_r($tab);
+    
     $progname = $tab[1];
     $version  = calcversion($tab[2]);
     $archtype = $tab[3];
     
-    # print "prog {$tab[1]} vers {$tab[2]} comp {$tab[3]}\n";
-    
-    $progs[$progname]['v'][$version][$archtype] = $archtype;
+    if($archtype != 'zip' && $archtype != 'rar')
+    {
+      # print "prog {$tab[1]} vers {$tab[2]} comp {$tab[3]}\n";
+      
+      $progs[$progname]['v'][$version][$archtype] = $archtype;
+    }
   }
 }
 closedir($fp);
