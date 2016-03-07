@@ -4,6 +4,11 @@
 
 include_once '/WWW/slowloading.php';
 
+$s = $_GET['s'];
+$dump = $_GET['dump'];
+$nofull = $_GET['nofull'];
+$fails = $_GET['fails'];
+$nodict = $_GET['nodict'];
 if($dump)AddHTTPheader('Content-type: text/html; charset='.$dump);
 
 #$omitmenu=1;

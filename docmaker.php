@@ -21,8 +21,8 @@
 #   $title
 #   $progname
 
-$archivename = $argv[1];
-$docmodulefn = $argv[2];
+@$archivename = $argv[1];
+@$docmodulefn = $argv[2];
 $docformatfn = '/WWW/document.php';
 
 if(!$docmodulefn) $docmodulefn = 'progdesc.php';

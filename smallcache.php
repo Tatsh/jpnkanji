@@ -1,12 +1,9 @@
 <?php
-/* This file is maintained in ~/src/japkanji/ - do not modify otherwhere */
-
 /*** Bisqwit's subcaching class
- *   Version 1.0.4
- *   Copyright (C) 1992,2002 Bisqwit (http://bisqwit.iki.fi/)
+ *   Copyright (C) 1992,2006 Bisqwit (http://bisqwit.iki.fi/)
+ *   Now using Memcached
  *
  * Usage example:
- *
  *   $version = 1;
  *   $s = sprintf('%08X%08X', crc32($parameter1), crc32($parameter2));
  *   $c = new Cache($s, $version);
@@ -19,121 +16,108 @@
  *
  */
 
+function GetCacheObj()
+{
+  static $obj;
+  if(!$obj)
+  {
+    $obj = new Memcache;
+    $obj->addserver('127.0.0.1',   11211, true, 50);
+    #$obj->addserver('10.104.4.83', 11211, true, 10);
+    #$obj->addserver('10.104.4.85', 11211, true,  1);
+    #$obj->setCompressThreshold(20000, 0.2);
+  }
+  return $obj;
+}
+
+function CacheDelete($key)
+{
+  $c = GetCacheObj();
+  $c->delete($key);
+}
+
+define('SMALLCACHE_IDLE', 0);
+define('SMALLCACHE_SAVE_PRINT', 1); // DumpOrLog() + _Cache()
+define('SMALLCACHE_SAVE_DATA',  2); // LoadOrLog() + Save()
+define('SMALLCACHE_SAVE_HIDE',  3); // LoadOrLog() + _Cache()
+
 class Cache
 {
-  var $filename;
-  var $active = 0;
-  var $filepath = '/dev/shm/smallcache/';
-  var $newversion = 0;
-  var $oldversion = 0;
-  var $fp = 0;
-  function _TryOpen()
+  private $key;
+  private $ver;
+  private $save;
+  private $maxage;
+  private $obj;
+  
+  function Cache($key, $initversion=0, $maxage = 86400)
   {
-    $this->fp = null;
-    if(file_exists($this->filename))
-    {
-      $this->fp = @fopen($this->filename, 'rb+');
-    }
-    if(!$this->fp)
-    {
-      $this->fp = @fopen($this->filename, 'wb');
-      if(!$this->fp)
-      {
-        return;
-      }
-      $this->oldversion = -1;
-    }
-    else
-    {
-      $this->oldversion = hexdec(fread($this->fp, 8));
-    }
-  }
-  function _Close()
-  {
-    if($this->fp) fclose($this->fp);
-    $this->fp = 0;
-  }
-  /* Use this function to invalidate cache
-   * keys which will never be generated again!
-   */
-  function Invalidate($obsoletekey)
-  {
-    @unlink($this->filepath . md5($obsoletekey));
-  }
-  function InvalidateOlderThan($timestamp)
-  {
-    $dir = opendir($this->filepath);
-    while(($fn = readdir($dir)))
-      if($fn!='.' && $fn!='..')
-      if(filemtime($this->filepath.$fn) < $timestamp)
-        unlink($this->filepath.$fn);
-    closedir($dir);
-  }
-  function Cache($key, $initversion=0)
-  {
-    $this->filename = $this->filepath . md5($key);
-    $this->SetVersion($initversion);
+    $this->key    = $key;
+    $this->ver    = $initversion;
+    $this->save   = SMALLCACHE_IDLE;
+    $this->maxage = $maxage;
+    $this->obj = GetCacheObj();
   }
   function _Cache()
   {
-    $this->EndAndSave();
-    $this->_Close();
-  }
-  function SetVersion($number)
-  {
-    $this->newversion = (int)$number;
+    if(!$this->save) return;
+    
+    $data = ob_get_contents();
+    if($this->save == SMALLCACHE_SAVE_DATA) $this->save = SMALLCACHE_SAVE_HIDE;
+    $this->Save($data);
   }
   function DumpOrLog()
   {
-    if($this->Have()) { $this->Dump(); return 1; }
-    $this->Start();
-    return 0;
-  }
-  function Have()
-  {
-    if(!$this->fp)
-    {
-      $this->_TryOpen();
-      if(!$this->fp)return 0;
-    }
-    if($this->newversion > $this->oldversion)
-      return 0;
+    if($this->save) return;
     
-    return 1;
-  }
-  function Dump()
-  {
-    if(!$this->fp)$this->_TryOpen();
-    print fread($this->fp, filesize($this->filename) - 8);
-    $this->_Close();
-  }
-  function Start()
-  {
-    ob_start();
-    $this->active = 1;
-  }
-  function EndAndSave()
-  {
-    if($this->active)
+    $content = $this->obj->get($this->key);
+    if($content === false
+    || ($this->ver !== false && $content[0] != $this->ver))
     {
-      $s = ob_get_contents();
-      ob_end_flush();
-      
-      $this->active = 0;
-      if(!$this->fp)$this->_TryOpen();
-      rewind($this->fp);
-      fwrite($this->fp, sprintf('%08X', $this->newversion));
-      fwrite($this->fp, $s);
-      ftruncate($this->fp, strlen($s) + 8);
-      $this->_Close();
+      ob_start();
+      $this->save = SMALLCACHE_SAVE_PRINT;
+      return false;
     }
+    print $content[1];
+    return true;
+  }
+  function LoadOrLog()
+  {
+    if($this->save) return;
+    
+    $content = $this->obj->get($this->key);
+    if($content === false
+    || ($this->ver !== false && $content[0] != $this->ver))
+    {
+      ob_start();
+      $this->save = SMALLCACHE_SAVE_DATA;
+      return false;
+    }
+    return $content[1];
+  }
+  function Save($data)
+  {
+    if($this->save == 0) return;
+    
+    $content = Array($this->ver, $data);
+    
+    if($this->save == SMALLCACHE_SAVE_HIDE)
+      ob_end_clean();
+    else
+      ob_end_flush();
+    
+    $this->obj->add($this->key, $content, 0, time() + $this->maxage);
+    $this->save = 0;
+  }
+  
+  function Found() { return !$this->save; }
+  
+  function GetKey() { return $this->key; }
+};
+
+class BinKeyCache extends Cache
+{
+  function BinKeyCache($key, $initversion=0, $maxage = 86400)
+  {
+    return Cache::Cache(md5($key), $initversion, $maxage);
   }
 };
-function CacheInvalidateOlds()
-{
-  $c = new Cache('');
-  $c->InvalidateOlderThan(time() - 3600*24);
-  $c->_Cache();
-  unset($c);
-}
-CacheInvalidateOlds();

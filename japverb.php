@@ -2,6 +2,9 @@
 
 /* This file is maintained in ~/src/japkanji/ - do not modify otherwhere */
 
+$s = $_GET['s'];
+$dump = $_GET['dump'];
+
 if($dump)header('Content-type: text/html; charset='.$dump);
 include '/WWW/cache.php';
 cache_init(0);

@@ -1,6 +1,5 @@
-AC_INIT(japkanji,1.7.0,bisqwit@iki.fi)
-
-AC_SUBST(VERSION,"$PACKAGE_VERSION")
+AC_INIT(japkanji,1.7.1,bisqwit@iki.fi)
+AC_SUBST(VERSION,1.7.1)
 
 #AC_CONFIG_SRCDIR(tables.sql)
 AC_PROG_CPP

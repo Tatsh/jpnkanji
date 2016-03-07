@@ -31,7 +31,7 @@ CREATE TABLE japdata
   , KEY kanji(kanji(8)), KEY kanjir(kanjir(10))
   , KEY kana(kana(16)), KEY kanar(kanar(9))
   
-  ,FOREIGN KEY(dict_id)REFERENCES japdict(id)ON DELETE CASCADE ON UPDATE CASCADE
+  #,FOREIGN KEY(dict_id)REFERENCES japdict(id)ON DELETE CASCADE ON UPDATE CASCADE
 ) type=innodb;
 
 # Translations for each dictionary line
@@ -48,7 +48,7 @@ CREATE TABLE japtrans
   , KEY trans_id(trans_id)
   , KEY name(name(12))
   
-  ,FOREIGN KEY(trans_id)REFERENCES japdata(id)ON DELETE CASCADE ON UPDATE CASCADE
+  #,FOREIGN KEY(trans_id)REFERENCES japdata(id)ON DELETE CASCADE ON UPDATE CASCADE
 ) type=innodb;
 
 # Attributes of translation
@@ -65,7 +65,7 @@ CREATE TABLE japattr
   , KEY trans_id(trans_id)
   , KEY name(name)
   
-  ,FOREIGN KEY(trans_id)REFERENCES japdata(id)ON DELETE CASCADE ON UPDATE CASCADE
+  #,FOREIGN KEY(trans_id)REFERENCES japdata(id)ON DELETE CASCADE ON UPDATE CASCADE
 ) type=innodb;
 
 # KANJI DATABASE PART
@@ -149,7 +149,7 @@ CREATE TABLE kanjiparts
   ,KEY jiscode(jiscode)
   ,KEY partcode(partcode)
 
-  ,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+  #,FOREIGN KEY(jiscode)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
 ) type=innodb;
 
 CREATE TABLE kanjiradstrokes
@@ -170,10 +170,12 @@ CREATE TABLE kanjisimilarity
   ,PRIMARY KEY(jiscode1,jiscode2)
   ,KEY jiscode2(jiscode2)
   ,KEY unsimilarity(unsimilarity)
+  
+  # Do not make this table InnoDB - it'll eat 400 MB of space!!! MyISAM takes 97 MB.
 
-  ,FOREIGN KEY(jiscode1)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
-  ,FOREIGN KEY(jiscode2)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
-) type=innodb;
+  #,FOREIGN KEY(jiscode1)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+  #,FOREIGN KEY(jiscode2)REFERENCES japkanji(jiscode)ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 # Note: Max 3 per japkanji (appears so)
 CREATE TABLE kanjikorea

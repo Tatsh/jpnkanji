@@ -99,7 +99,7 @@ function kanjilinkprint($s)
         )
       {
         $l = $k;
-        $eucjp = recode_string('utf8..eucjp', $l);
+        $eucjp = iconv('utf8', 'eucjp', $l);
         if($eucjp)$l = sprintf('%02X%02X', ord($eucjp[0])-128, ord($eucjp[1])-128);
         $res .= '<a href="';
         $res .= urlencode($l);
@@ -304,13 +304,22 @@ function kanjiresultsorter(&$a, &$b)
   return 0;
 }
 
+function BeautifyRomaji($s)
+{
+  $s = str_replace(
+     Array('a^', 'i^', 'u^', 'e^', 'o^'),
+     Array('ā', 'ī', 'ū', 'ē', 'ō'),
+     $s);
+  return $s;
+}
+
 function ShowResults(&$results, $max)
 {
   global $noromaji; // Option (false/true)
   
   $numshown = 0;
   
-  print '<table border=1>';
+  print '<table border=1 class=dictres>';
   
   $keys = Array();
   $oldkey = '';
@@ -335,11 +344,11 @@ function ShowResults(&$results, $max)
         {
           print '<tr>';
           /* Display the kanji/kana */
-          echo '<td valign=top>', $k, '</td>';
+          echo '<td valign=top class=dictkana>', $k, '</td>';
           if(!$c)
           {
             /* Display the translations */
-            echo '<td';
+            echo '<td class=dicttrans';
             if(count($keys) > 1)echo ' rowspan=', count($keys);
             echo ' valign=top>', $translationtext, '</td>';
             $c++;
@@ -377,50 +386,57 @@ function ShowResults(&$results, $max)
     $keytext = '';
     
     ## $keytext .= '<small>'.$result['id'].')</small>';
-    if($noromaji)
+    
+    $verblink = $conjugatable ? verblink($result['kanar']) : '';
+    $verblink1 = empty($verblink) ? '' : '<a href="'.htmlspecialchars($verblink).'" title="conjugate">';
+    $verblink0 = empty($verblink) ? '' : '</a>';
+    
+    $dictlink = 'find='.urlencode($result['kanjir']);
+    $dictlink1 = $dir == 'japeng' ? '' : '<a href="'.htmlspecialchars($dictlink).'">';
+    $dictlink0 = $dir == 'japeng' ? '' : '</a>';
+    
+    if(strlen($result['kanji']))
     {
-      if(strlen($result['kanji']))
-        $keytext .= '<span class=kanjires>' . kanjilinkprint($result['kanji']) . '</span> (';
-
-      if($conjugatable)
-      {
-        $keytext .=
-          '<a href="'.htmlspecialchars(verblink($result['kanar'])).'" title="conjugate">';
-      }
-      
+      // rbc: kanji, rtc: hiragana [, rtc: romaji]
+      $keytext .= '<ruby>';
+       $keytext .= '<rbc><rb><span class=kanjires>';
+       $keytext .= kanjilinkprint($result['kanji']);
+       $keytext .= '</span></rb></rbc>';
+       $keytext .= '<rp><br> (</rp><rtc><rt><span class=kanares>';
+        $keytext .= $verblink1;
+        $keytext .= '<span class=kanares> '. $result['kana'] . '</span>';
+        $keytext .= $verblink0;
+       $keytext .= '</span></rt></rtc><rp>) </rp>';
+       if(!$noromaji)
+       {
+         $keytext .= '<rp> (</rp><rtc><rt>';
+          $keytext .= BeautifyRomaji($result['kanar']);
+         $keytext .= '</rt></rtc><rp>) </rp>';
+       }
+      $keytext .= '</ruby>';
+    }
+    elseif($noromaji)
+    {
+      // hiragana
+      $keytext .= $verblink1;
       $keytext .= '<span class=kanares> '. $result['kana'] . '</span>';
-      if($conjugatable)
-        $keytext .= '</a>';
-      if(strlen($result['kanji']))
-        $keytext .= ')';
+      $keytext .= $verblink0;
     }
     else
     {
-      if(strlen($result['kanji']))
-      {
-        $keytext .= '<span class=kanjires>' . kanjilinkprint($result['kanji']) . '</span> (';
-        if($dir != 'japeng')
-        {
-          $keytext .= MakeDictLink2($result['kanjir']);
-        }
-        else
-        {
-          $keytext .= $result['kanjir'];
-        }
-        $keytext .= ')<br>';
-      }
-      $keytext .= '<span class=kanares> '. $result['kana'] . '</span>';
-      $keytext .= ' (';
-      if($conjugatable)
-      {
-        $keytext .=
-          '<a href="'.htmlspecialchars(verblink($result['kanar'])).'" title="conjugate">';
-      }
-      $keytext .= $result['kanar'];
-      if($conjugatable)
-        $keytext .= '</a>';
-      $keytext .= ')';
+      // rbc: hiragana, rtc: romaji
+      $keytext .= '<ruby>';
+       $keytext .= '<rbc><rb>';
+        $keytext .= '<span class=kanares> '. $result['kana'] . '</span>';
+       $keytext .= '</rb></rbc>';
+       $keytext .= '<rp> (</rp><rtc><rt>';
+        $keytext .= $verblink1;
+        $keytext .= BeautifyRomaji($result['kanar']);
+        $keytext .= $verblink0;
+       $keytext .= '</rt></rtc><rp>) </rp>';
+      $keytext .= '</ruby>';
     }
+    
     foreach($result['attrs'] as $name)
     {
       $keytext .= ' (<a href="#d' . $name . '">' . $name . '</a>)';
@@ -734,12 +750,8 @@ elseif($max > 250)$max = 250;
 
 
 /* Define the static array of explanatios of all attributes */
-$attrs = array
-(
-@ATTRLIST@
-  'loc' => 'location',
-  'city'=> 'city'
-);
+require_once 'attrlist.php';
+$attrs = $GLOBALS['attrlist'];
 
 /* Unless "no dialogs" was requested, generate the query box */
 if(!$nodialog)

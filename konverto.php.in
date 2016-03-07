@@ -32,12 +32,8 @@ $dicts = array
  #'compverb'  => 'Compound verbs'
  # All of them are already in EDICT 
 );
-$terms = array
-(
-@ATTRLIST@
-  'loc' => 'location',
-  'city'=> 'city'
-);
+require_once 'attrlist.php';
+$terms = $GLOBALS['attrlist'];
 
 function Table($s)
 {

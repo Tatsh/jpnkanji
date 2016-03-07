@@ -56,6 +56,7 @@ table a {text-decoration:none;color:black;background:white}
 body {background:white;color:black}
 --></style><?
 
+$all=$_GET['all'];
 $c = new Cache('jislist'.$all, $mtime);
 if(!$c->DumpOrLog())
 {

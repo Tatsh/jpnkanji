@@ -128,8 +128,7 @@ include_once 'smallcache.php';
 
 function ShowSimilars($SQL)
 {
-  $c = new Cache($SQL);
-  $c->SetVersion(1);
+  $c = new BinKeyCache($SQL, 1);
   if($c->DumpOrLog())return;
   
   $array = mysql_fetch_all(mysql_query($SQL));
@@ -153,7 +152,7 @@ class SearchMethod
   function FormTitle() {}
   function ResultsTitle() {}
   function DisplayForm() {}
-  function DisplayResults()
+  function GetCacheKey()
   {
     $vars = array_unique($this->GetVars());
     $s = '';
@@ -161,19 +160,27 @@ class SearchMethod
       $s .= sprintf('%08X%08X', crc32($varname), crc32($_GET[$varname]));
 
     $s .= sprintf('%02X', IsPrinting());
-
-    if(strlen($s))
-    {
-      #print 'Testing cache key "'.$s.'"';
-      $cache = new Cache($s, 3);
-      if($cache->DumpOrLog())return;
-    }
-    
+    return $s;
+  }
+  function GetFullSQL()
+  {
     global $preferences;
     $orderby = $preferences['searchorder'].',jiscode';
 
-    $SQL = 'select jiscode,utf8kanji,mnemonic from japkanji where '
-         . $this->GetSQL() . ' order by ' . $orderby;
+    return 'select jiscode,utf8kanji,mnemonic from japkanji where '
+           . $this->GetSQL() . ' order by ' . $orderby;
+  }
+  function DisplayResults()
+  {
+    $s = $this->GetCacheKey();
+    if(strlen($s))
+    {
+      #print 'Testing cache key "'.$s.'"';
+      $cache = new BinKeyCache($s, 3);
+      if($cache->DumpOrLog())return;
+    }
+
+    $SQL = $this->GetFullSQL();
 
     $data = array();
     if(IsPrinting() > 0)
@@ -324,14 +331,10 @@ class SearchMethod
     if(IsPrinting() == 0)
     {
       print '<ul>';
-       echo '<li><a href="search?print=1';
-       foreach($vars as $varname)
-         echo htmlspecialchars('&'.$varname.'='.urlencode($_GET[$varname]));
+       echo '<li><a href="'.htmlspecialchars('search?'.$_SERVER['QUERY_STRING'].'&print=1');
        echo '">Print the above results as a table</a>';
        echo '</li>';
-       echo '<li><a href="search?print=1&outset=euc-jp';
-       foreach($vars as $varname)
-         echo htmlspecialchars('&'.$varname.'='.urlencode($_GET[$varname]));
+       echo '<li><a href="'.htmlspecialchars('search?'.$_SERVER['QUERY_STRING'].'&print=1&outset=euc-jp');
        echo '">Print, also works when your printer does not quite support unicode</a>',
         ' (thanks <a href="http://web.lfw.org/shodouka/">Shodouka</a>!)';
        echo '</li>';
@@ -362,6 +365,7 @@ include 'searchmodules/kanjiinput.php';
 include 'searchmodules/fourcorner.php';
 include 'searchmodules/criter.php';
 include 'searchmodules/customize.php';
+include 'searchmodules/component.php';
 
 function SelectSearch()
 {

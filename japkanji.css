@@ -41,6 +41,22 @@ TD.kana {font-family:ms mincho,watanabe,serif}
 TD.romaji {font-size:110%}
 TD.type {font-weight:bold}
 
+TABLE.dictres
+{
+  border-collapse:collapse;
+  margin-left:2px;
+}
+TD.dictkana
+{
+  padding:1px;
+  background:#E8E8E8; color:#000;
+}
+TD.dicttrans
+{
+  padding:1px;
+  background:#F0F0F0; color:#000;
+}
+
 DIV.right {float:right;clear:right}
 DIV.left {float:left;clear:left}
 

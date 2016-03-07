@@ -9,7 +9,8 @@ SEARCHFILES= \
           searchmodules/kanjiinput.php \
           searchmodules/skip.php \
           searchmodules/strokecount.php \
-          searchmodules/customize.php
+          searchmodules/customize.php \
+          searchmodules/component.php
 
 UTILITYINCLUDES= \
           headers.php cache.php gzcompress.php \
@@ -22,7 +23,7 @@ ARCHFILES=$(DICTFILES) kanjidic radkfile simgen.php \
 	  \
 	  $(UTILITYINCLUDES) \
           \
-          deconjfun.php \
+          deconjfun.php attrlist.php \
           makediff.php progdesc.php \
           tables.sql COPYING edict_license.html \
           configure configure.in updatescript \
@@ -55,18 +56,18 @@ sql: templatechecks tables.sql $(MYSQL)
 	#echo use "$(SQLBASE);" `sed 's/#.*//'<tables.sql|grep .`|tr ';' '\012'|"$(PERL)" -pe 's/CREATE TABLE/ALTER TABLE/;s/PRIMARY KEY/foo/;s/\(.*?KEY/KEY/;s/KEY/ADD INDEX/g;s/\)$$/;/' | $(RUNSQL)
 	#-(echo use "$(SQLBASE);";cat tables.sql) | $(RUNSQL)
 
-data: FORCE templatechecks konverto.php konvertfun.php $(PHP)
+data: templatechecks konverto.php konvertfun.php $(PHP) FORCE
 	@echo Hmm.
 	$(PHP) -q konverto.php
 
-kanjidata: FORCE templatechecks kanjikonverto.php konvertfun.php $(PHP)
+kanjidata: templatechecks kanjikonverto.php konvertfun.php $(PHP) FORCE
 	@echo Hmm.
 	$(PHP) -q kanjikonverto.php
 
 Unihan.txt: FORCE
 	wget "ftp://ftp.unicode.org/Public/UNIDATA/Unihan.txt"
 
-install: templatechecks masut.php
+install: templatechecks
 	@echo '*** There is no installation method provided.'
 	@echo '***   Try "$(MAKE)" to see what you should do / have done first.'
 	@echo '***   When it is done, you can copy these files to a directory'
@@ -95,7 +96,7 @@ updatereally: cancelwait
 	@echo 'Please wait.'
 	./updatescript
 
-deinstall uninstall: FORCE tables.sql $(MYSQL) uninstnote uninstallreally
+deinstall uninstall: tables.sql $(MYSQL) uninstnote uninstallreally FORCE
 
 uninstnote: warning
 	@echo '*** Dropping everything that has been created in tables.sql.'
@@ -136,14 +137,10 @@ bisqinstall: bisqinstallchecks $(BISQINSTFILES)
 	for s in $(BISQINSTUTILS);do ln -sf /WWW/"$$s" $(BISQINSTALLDIR)/;done
 	rm -f /protemp/phpcache/kanjidict/*
 
-settings.mak: configure
-	@echo;echo;echo Run ./configure first.;echo;echo && false
-
 include templates.mak
 include depfun.mak
 
-FORCE: ;
-.PHONY: FORCE default all sql data kanjidata install \
+.PHONY: default all sql data kanjidata install \
         warning cancelwait templatechecks bisqinstall \
         deinstall uninstall uninstnote uninstallreally \
-        update updatenote updatereally bisqinstallchecks
+        update updatenote updatereally bisqinstallchecks FORCE
