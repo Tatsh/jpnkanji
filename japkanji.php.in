@@ -61,6 +61,8 @@ if($jaen)$title .= ' (JA->EN)';
 Headers($title);
 echo '<h1>', str_replace('-&gt;', '&rarr;', htmlspecialchars($title)), '</h1>';
 
+$headertexts = str_replace('<BODY', '<BODY onload="document.f.s.focus();" ', $headertexts);
+
 NavBar('');
 
 #print '<h1>WARNING: SERVICE BREAKOUTS DUE TO DEVELOPMENT</h1>';
@@ -97,8 +99,8 @@ function kanjilinkprint($s)
            | ((ord($k[1]) & 63) << 6)
            | ((ord($k[0]) & 31) << 12);
       
-      if( ($val >= 0x3400 && $val <= 0x9FFF)
-       || ($val >= 0xF900 && $val <= 0xFAFF)
+      if( ($val >= 0x3400 && $val <= 0x9FFF) // CJK unified
+       || ($val >= 0xF900 && $val <= 0xFAFF) // CJK extension
         )
       {
         $l = $k;
@@ -131,7 +133,7 @@ function DictSelect()
   $tmp = mysql_query('select id,name,description from japdict');
   $dictlist = mysql_fetch_all($tmp);
   #print '<pre>';print_r($dictlist);print '</pre>';
-  echo '<form method=GET action="' . targetscript() . '" style="margin:0px">';
+  echo '<form method=GET name=f action="' . targetscript() . '" style="margin:0px">';
   print '<table cellspacing=0 cellpadding=0>';
   echo '<tr><td align=right valign=top>', txtusedict(), ':</td>';
   $c=0;
@@ -354,7 +356,18 @@ function ShowResults(&$results, $max)
       
       $translationtext = '';
       foreach($result['trans'] as $translation)
-        $translationtext .= '- '. htmlspecialchars($translation) . '<br>';
+      {
+        $translationtext .= '- ';
+        if($dir != 'engjap')
+        {
+          $translationtext .= MakeDictLink2($translation);
+        }
+        else
+        {
+          $translationtext .= htmlspecialchars($translation);
+        }
+        $translationtext .= '<br>';
+      }
       
       $oldkey = $key;
       $keys = Array();
@@ -388,7 +401,15 @@ function ShowResults(&$results, $max)
       if(strlen($result['kanji']))
       {
         $keytext .= '<span class=kanjires>' . kanjilinkprint($result['kanji']) . '</span> (';
-        $keytext .= $result['kanjir'] . ')<br>';
+        if($dir != 'japeng')
+        {
+          $keytext .= MakeDictLink2($result['kanjir']);
+        }
+        else
+        {
+          $keytext .= $result['kanjir'];
+        }
+        $keytext .= ')<br>';
       }
       $keytext .= '<span class=kanares> '. $result['kana'] . '</span>';
       $keytext .= ' (';
@@ -664,6 +685,11 @@ if(substr($s, 0, 4) == "\33\$(B")
 {
   $inset = 'iso-2022-jp';
   $s = "\33\$B" . substr($s, 4);
+}
+elseif(substr($s, 0, 4) == "\33\$(A")
+{
+  $inset = 'iso-2022-jp';
+  $s = "esc\$(A uhh? -" . substr($s, 4);
 }
 elseif(ereg('&#[0-9]', $s))
 {

@@ -26,6 +26,12 @@ RewriteRule ^(...)$ /japtools/kanjisearch.php?skanji=$1
 # Example: http://kanjidict.stc.cx/find=tora
 RewriteRule ^find=(.*) /japtools/japkanji.php?s=$1&noexact=1
 
+# Deconjugator
+RewriteRule ^japverb3$ /japtools/japverb3.php
+
+# Conjugator
+RewriteRule ^japverb$ /japtools/japverb.php
+
 # Dictionary main page
 # Example: http://kanjidict.stc.cx/dict
 RewriteRule ^dict$ /japtools/japkanji.php

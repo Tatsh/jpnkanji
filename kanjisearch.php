@@ -23,9 +23,10 @@ require 'gzcompress.php';
 require 'kanjisqlfun.php';
 require 'unique2.php';
 
+include '/WWW/headers.php';
+
 $hdrs .= '<meta http-equiv="Content-Type" content="text-html; charset=utf-8">'.
          '<meta name="robots" content="nofollow">';
-include '/WWW/headers.php';
 
 $pagetitle = 'Kanjisearch';
 
@@ -424,7 +425,7 @@ function Show($tmp2)
      'Halpern index' =>     '@indexh',
      'Nelson index' =>      '@indexn',
      'Haig index' =>        '@indexv',
-     'Henshall index' =>    '@indexe',
+     'Henshall index' =>    '<a href="http://www.joyo96.org/cgi-bin/henshall.pl?hen=@indexe">@indexe</a>',
      'Gakken index' =>      '@indexk',
      'Heisig index' =>      '@indexl',
      'O\'Neill index' =>    '@indexo',

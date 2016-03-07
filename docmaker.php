@@ -6,7 +6,7 @@
 #
 # docmaker.php version 1.0.8
 
-# Copyright (C) 2000,2003 Bisqwit (http://bisqwit.iki.fi/)
+# Copyright (C) 2000,2003 Bisqwit (http://iki.fi/bisqwit/)
 
 foreach(array('progdesc.php', '/WWW/document.php') as $fn)
   if(!file_exists($fn))
@@ -54,7 +54,7 @@ SMALL    {font-size:70%}
   This is the documentation of <?=htmlspecialchars($argv[1])?>.
 <?
 
-$url = 'http://bisqwit.iki.fi/source/'.rawurlencode($progname).'.html';
+$url = 'http://iki.fi/bisqwit/source/'.rawurlencode($progname).'.html';
 $k = '
    The official home page of '.htmlspecialchars($progname).'
    is at <a href="'.htmlspecialchars($url).'">'.htmlspecialchars($url).'</a>.<br>

@@ -1,4 +1,4 @@
-AC_INIT(japkanji,1.6.2,bisqwit@iki.fi)
+AC_INIT(japkanji,1.6.3,bisqwit@iki.fi)
 
 AC_SUBST(VERSION,"$PACKAGE_VERSION")
 

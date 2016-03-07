@@ -2,15 +2,24 @@
 
 function PickLink($jiscode)
 {
-  return dechex($jiscode);
+  return strtoupper(dechex($jiscode));
 }
 
 function makedictlink($s)
 {
+  // used in romaji list in kanjisearch
+  // removes "-. " because those are shown for stems
   $s = ereg_replace('[-. ]', '', $s);
 
   $url = 'find='.urlencode($s);
   return '<a href="'.htmlspecialchars($url).'">'.$s.'</a>';
+}
+
+function MakeDictLink2($s)
+{
+  // used by japkanji to make backlinks as DonOlli/#go.fi wanted
+  $url = 'find='.urlencode($s);
+  return '<a href="'.htmlspecialchars($url).'">'.htmlspecialchars($s).'</a>';
 }
 
 function verblink($s)

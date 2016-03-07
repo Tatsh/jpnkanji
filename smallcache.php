@@ -2,7 +2,7 @@
 /* This file is maintained in ~/src/japkanji/ - do not modify otherwhere */
 
 /*** Bisqwit's subcaching class
- *   Version 1.0.2
+ *   Version 1.0.3
  *   Copyright (C) 1992,2002 Bisqwit (http://bisqwit.iki.fi/)
  *
  * Usage example:
@@ -60,6 +60,7 @@ class Cache
   {
     $dir = opendir($this->filepath);
     while(($fn = readdir($dir)))
+      if($fn!='.' && $fn!='..')
       if(filemtime($this->filepath.$fn) < $timestamp)
         unlink($this->filepath.$fn);
     closedir($dir);
